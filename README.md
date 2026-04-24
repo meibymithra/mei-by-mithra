@@ -6,8 +6,9 @@ Portfolio-cum-operations website for Mithra Krishnamoorthy, with Mei by Mithra a
 
 - Next.js App Router + TypeScript
 - Tailwind CSS
-- Prisma + PostgreSQL
+- Prisma + PostgreSQL on Supabase
 - Supabase Auth
+- Vercel-hosted frontend, API routes, and server actions
 - Resend for transactional email
 - Calendly booking embed + webhook endpoint
 
@@ -25,11 +26,17 @@ npm install
 - `DIRECT_URL`
 - `NEXT_PUBLIC_SUPABASE_URL`
 - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- `SUPABASE_SERVICE_ROLE_KEY`
 - `RESEND_API_KEY`
 - `RESEND_FROM_EMAIL`
 - `SITE_URL`
+- `ADMIN_EMAILS`
 - `ADMIN_SEED_PASSWORD`
+- `ADMIN_RECOVERY_EMAIL`
 - `CALENDLY_EVENT_TYPE_URL` or `NEXT_PUBLIC_CALENDLY_URL`
+- `CALENDLY_WEBHOOK_SECRET`
+- `RAZORPAY_PAYMENT_LINK`
+- `STRIPE_PAYMENT_LINK`
 
 3. Seed the admin account:
 
@@ -71,9 +78,11 @@ npm run dev
 
 ## Deployment
 
-- Deploy the app to Vercel.
+- Deploy the whole app to Vercel. It hosts the frontend and backend routes.
 - Use Supabase for PostgreSQL and Auth.
-- Set all environment variables in Vercel before production traffic.
+- Follow [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) for the exact Vercel env checklist.
+- See [`docs/SUPABASE.md`](docs/SUPABASE.md) for the linked project and Prisma/Supabase workflow.
+- Set all runtime environment variables in Vercel before production traffic.
 
 ## Notes
 

@@ -18,6 +18,7 @@ The public site does three jobs:
 - Prisma ORM
 - PostgreSQL on Supabase
 - Supabase Auth for admin login
+- Vercel-hosted frontend, API routes, and server actions
 - Resend for transactional email
 - Calendly for booking
 
@@ -70,6 +71,11 @@ Required:
 - `RESEND_FROM_EMAIL`
 - `SITE_URL`
 
+Supabase connection pattern:
+
+- `DATABASE_URL` should point to the Supabase pooler endpoint for app runtime.
+- `DIRECT_URL` should point to the direct database endpoint for migrations and `prisma migrate`.
+
 Booking:
 
 - `CALENDLY_EVENT_TYPE_URL`
@@ -104,8 +110,9 @@ Payments:
 ## Deployment notes
 
 - Deploy on Vercel.
+- Vercel runs the full app layer, including the backend routes and webhook handlers.
 - Connect Supabase PostgreSQL and Supabase Auth.
-- Set all env vars in Vercel before production traffic.
+- Use [`docs/DEPLOYMENT.md`](DEPLOYMENT.md) for the exact runtime and seed-only environment variable split.
 - Run Prisma migrations on deploy:
 
 ```bash
