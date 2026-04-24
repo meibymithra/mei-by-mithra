@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { prisma } from "@/server/db";
 import { SectionHeading } from "@/components/site/section-heading";
 import { TemplateEditor } from "@/components/admin/template-editor";
