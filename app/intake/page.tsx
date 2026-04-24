@@ -17,10 +17,10 @@ export default async function IntakePage({
           <SectionHeading
             eyebrow="Intake"
             title="Share the context before your session"
-            description="This form is required after booking or through the email link. It is stored in PostgreSQL and routed to admin email."
+            description="This form helps tailor the conversation to you. It is required after booking and is stored securely for review."
           />
           <div className="rounded-3xl border border-border bg-card p-6 text-sm leading-7 text-muted-foreground">
-            Your answers help structure the session and reduce back-and-forth.
+            Your answers help structure the session, reduce back-and-forth, and keep the experience focused.
           </div>
         </div>
         <div className="surface rounded-3xl p-6">

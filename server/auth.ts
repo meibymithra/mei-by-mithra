@@ -1,9 +1,10 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { createServerClient } from "@supabase/ssr";
-import { prisma } from "@/server/db";
+import { hasSupabaseConfig } from "@/lib/config";
 
 export async function getSupabaseServerClient() {
+  if (!hasSupabaseConfig()) return null;
   const cookieStore = cookies();
 
   return createServerClient(
@@ -27,17 +28,19 @@ export async function getSupabaseServerClient() {
 
 export async function requireAdmin() {
   const admin = await getCurrentAdmin();
-  if (!admin) redirect("/admin/login");
+  if (!admin) redirect("/admin/login?missing=config");
   return admin;
 }
 
 export async function getCurrentAdmin() {
   const supabase = await getSupabaseServerClient();
+  if (!supabase) return null;
   const {
     data: { user }
   } = await supabase.auth.getUser();
   if (!user) return null;
 
+  const { prisma } = await import("@/server/db");
   const admin = await prisma.adminUser.findUnique({
     where: { supabaseUserId: user.id }
   });

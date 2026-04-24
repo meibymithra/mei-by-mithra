@@ -11,8 +11,8 @@ export async function getPublicTestimonials() {
   return testimonials.length
     ? testimonials
     : [
-        { id: "1", name: "Parent", quote: "The sessions were structured, calm, and usable.", rating: 5, featured: true },
-        { id: "2", name: "Teacher", quote: "The guidance was specific and practical.", rating: 5, featured: false }
+        { id: "1", name: "Parent", quote: "The conversation felt calm, thoughtful, and immediately usable.", rating: 5, featured: true },
+        { id: "2", name: "Educator", quote: "The guidance was specific, respectful, and easy to act on.", rating: 5, featured: false }
       ];
 }
 

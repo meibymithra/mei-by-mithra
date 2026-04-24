@@ -22,7 +22,17 @@ export default async function CmsPage() {
           contentKey="hero"
           title="Hero"
           initialTitle={hero?.title ?? "Hero"}
-          initialContent={JSON.stringify(hero?.content ?? { heading: "Structured support", description: "Premium coaching workflows." }, null, 2)}
+          initialContent={JSON.stringify(
+            hero?.content ?? {
+              eyebrow: "Calm, confidential support",
+              headline: "Mithra Krishnamoorthy with the human touch behind Mei by Mithra",
+              description:
+                "A grounded support practice for parents, teachers, adults, and young people who want clarity, structure, and practical next steps.",
+              ctas: ["Book a Session", "View Playbooks"]
+            },
+            null,
+            2
+          )}
         />
         <ContentEditor
           contentKey="faqs"

@@ -19,11 +19,11 @@ type StoreCopy = {
 export default async function StorePage() {
   const products = await getPublicProducts();
   const content = (await getSiteSection("store", {
-    eyebrow: "Digital store",
-    title: "Playbooks and resources",
+    eyebrow: "Digital resources",
+    title: "Practical playbooks for home, classroom, and growth",
     description:
-      "Admin-managed digital products for teachers, parents, and kids. Payment can be manual or link-based, with email delivery after confirmation.",
-    note: "Store content is editable from the admin dashboard."
+      "Clear, usable guides for teachers, parents, and young people. Purchase by payment link or request a manual invoice if needed.",
+    note: "All listings can be edited from the admin dashboard."
   })) as StoreCopy;
 
   return (
@@ -31,7 +31,7 @@ export default async function StorePage() {
       <main className="container-wide space-y-8 py-10">
         <SectionHeading
           eyebrow={content.eyebrow}
-          title={content.title ?? "Playbooks and resources"}
+          title={content.title ?? "Practical playbooks"}
           description={content.description}
         />
         <div className="rounded-[2rem] border border-border bg-card p-5 text-sm text-muted-foreground">
@@ -46,7 +46,7 @@ export default async function StorePage() {
                 <p className="text-sm leading-7 text-muted-foreground">{product.description}</p>
                 <p className="text-lg font-semibold">{formatCurrency(Number(product.price), product.currency ?? "INR")}</p>
                 <Button asChild className="w-full">
-                  <Link href={`/products/${product.slug}`}>Open product</Link>
+                  <Link href={`/products/${product.slug}`}>View details</Link>
                 </Button>
               </CardContent>
             </Card>

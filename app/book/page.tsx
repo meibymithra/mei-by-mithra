@@ -11,8 +11,8 @@ export default function BookPage() {
       <main className="container-wide space-y-8 py-10">
         <SectionHeading
           eyebrow="Booking"
-          title="Choose a time that fits your schedule"
-          description="Calendly is embedded directly here. Booking triggers the backend webhook so intake and admin workflows can follow automatically."
+          title="Choose a time that fits your day"
+          description="Pick a slot in your timezone, book through Calendly, and you’ll receive the next-step email with intake and session details."
         />
         <CalendlyEmbed calendlyUrl={calendlyUrl} />
       </main>

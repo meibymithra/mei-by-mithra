@@ -24,7 +24,7 @@ const body = localFont({
 export const metadata: Metadata = {
   title: "Mithra Krishnamoorthy | Mei by Mithra",
   description:
-    "Portfolio-cum-operations website for Mithra Krishnamoorthy with coaching, therapy, booking, intake, invoices, and admin workflows."
+    "Mei by Mithra is the public brand and support practice for Mithra Krishnamoorthy, with calm booking, intake, and digital resources."
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

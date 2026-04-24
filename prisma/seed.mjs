@@ -218,16 +218,125 @@ async function main() {
     update: {
       title: "Hero",
       content: {
-        headline: "Mithra Krishnamoorthy with Mei by Mithra as the operating layer",
-        description: "Portfolio-first and operations-ready."
+        eyebrow: "Calm, confidential support",
+        headline: "Mithra Krishnamoorthy with the human touch behind Mei by Mithra",
+        description:
+          "A grounded support practice for parents, teachers, adults, and young people who want clarity, structure, and practical next steps.",
+        ctas: ["Book a Session", "View Playbooks"]
       }
     },
     create: {
       key: "hero",
       title: "Hero",
       content: {
-        headline: "Mithra Krishnamoorthy with Mei by Mithra as the operating layer",
-        description: "Portfolio-first and operations-ready."
+        eyebrow: "Calm, confidential support",
+        headline: "Mithra Krishnamoorthy with the human touch behind Mei by Mithra",
+        description:
+          "A grounded support practice for parents, teachers, adults, and young people who want clarity, structure, and practical next steps.",
+        ctas: ["Book a Session", "View Playbooks"]
+      }
+    }
+  });
+
+  await prisma.siteContent.upsert({
+    where: { key: "services" },
+    update: {
+      title: "Services",
+      content: [
+        {
+          title: "1:1 support",
+          description: "For emotional regulation, relationship clarity, parenting questions, and overwhelm."
+        },
+        {
+          title: "Purpose coaching",
+          description: "For people who want direction, structure, and a grounded way forward."
+        },
+        {
+          title: "Sexuality education",
+          description: "For schools, colleges, and communities that need clear, respectful facilitation."
+        }
+      ]
+    },
+    create: {
+      key: "services",
+      title: "Services",
+      content: [
+        {
+          title: "1:1 support",
+          description: "For emotional regulation, relationship clarity, parenting questions, and overwhelm."
+        },
+        {
+          title: "Purpose coaching",
+          description: "For people who want direction, structure, and a grounded way forward."
+        },
+        {
+          title: "Sexuality education",
+          description: "For schools, colleges, and communities that need clear, respectful facilitation."
+        }
+      ]
+    }
+  });
+
+  await prisma.siteContent.upsert({
+    where: { key: "faqs" },
+    update: {
+      title: "FAQs",
+      content: [
+        {
+          question: "How does booking work?",
+          answer: "Book a slot, complete the intake form, and wait for the next-step email."
+        },
+        {
+          question: "Is this confidential?",
+          answer: "Yes. The intake and follow-up process is designed to be private and secure."
+        },
+        {
+          question: "Can I buy a playbook instead of booking?",
+          answer: "Yes. The store offers practical resources for teachers, parents, and children."
+        }
+      ]
+    },
+    create: {
+      key: "faqs",
+      title: "FAQs",
+      content: [
+        {
+          question: "How does booking work?",
+          answer: "Book a slot, complete the intake form, and wait for the next-step email."
+        },
+        {
+          question: "Is this confidential?",
+          answer: "Yes. The intake and follow-up process is designed to be private and secure."
+        },
+        {
+          question: "Can I buy a playbook instead of booking?",
+          answer: "Yes. The store offers practical resources for teachers, parents, and children."
+        }
+      ]
+    }
+  });
+
+  await prisma.siteContent.upsert({
+    where: { key: "store" },
+    update: {
+      title: "Store",
+      content: {
+        eyebrow: "Digital resources",
+        title: "Practical playbooks for daily life",
+        description:
+          "Clear guides for teachers, parents, and young people. Purchase directly or request a manual invoice.",
+        note: "These listings can be edited from the admin dashboard."
+      }
+    },
+    create: {
+      key: "store",
+      title: "Store",
+      content: {
+        eyebrow: "Digital resources",
+        title: "Practical playbooks for daily life",
+        description:
+          "Clear guides for teachers, parents, and young people. Purchase directly or request a manual invoice.",
+        note: "These listings can be edited from the admin dashboard."
       }
     }
   });

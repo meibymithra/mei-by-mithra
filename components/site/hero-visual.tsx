@@ -75,10 +75,10 @@ export function HeroVisual() {
         transition={{ delay: 0.2, duration: 0.6 }}
         className="absolute -left-3 top-5 hidden w-44 rounded-3xl border border-border bg-card/95 p-4 shadow-soft backdrop-blur md:block"
       >
-        <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Operations</p>
+        <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Brand note</p>
         <p className="mt-2 text-sm font-semibold">Mei by Mithra</p>
         <p className="mt-1 text-xs leading-6 text-muted-foreground">
-          Booking, intake, invoices, testimonials, and digital products.
+          Calm, confidential, and easy to navigate.
         </p>
       </motion.div>
     </motion.div>

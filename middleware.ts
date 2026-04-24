@@ -1,8 +1,13 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createServerClient } from "@supabase/ssr";
+import { hasSupabaseConfig } from "@/lib/config";
 
 export async function middleware(request: NextRequest) {
   const response = NextResponse.next();
+
+  if (!hasSupabaseConfig()) {
+    return response;
+  }
 
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,

@@ -1,13 +1,30 @@
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
-import { prisma } from "@/server/db";
-import { getAdminMetrics } from "@/server/metrics";
+import { hasDatabaseConfig } from "@/lib/config";
+import { requireAdmin } from "@/server/auth";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { SectionHeading } from "@/components/site/section-heading";
 
 export default async function AdminHomePage() {
+  await requireAdmin();
+
+  if (!hasDatabaseConfig()) {
+    return (
+      <div className="space-y-6">
+        <SectionHeading eyebrow="Dashboard" title="Database connection missing" description="Set `DATABASE_URL` and `DIRECT_URL` in Vercel to load admin data." />
+        <Card>
+          <CardContent className="p-5 text-sm leading-7 text-muted-foreground">
+            The admin shell is working, but the database connection is not configured. Add the Supabase Postgres URLs in Vercel, then reload this page.
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
+  const { getAdminMetrics } = await import("@/server/metrics");
   const metrics = await getAdminMetrics();
+  const { prisma } = await import("@/server/db");
   const recentBookings = await prisma.booking.findMany({
     include: { client: true },
     orderBy: { createdAt: "desc" },

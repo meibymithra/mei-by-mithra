@@ -8,7 +8,7 @@ export function Footer() {
         <div>
           <p className="font-semibold text-foreground">{brand.name}</p>
           <p className="mt-2 max-w-sm text-muted-foreground">
-            Mobile-first, admin-managed booking and intake for coaching and therapy services.
+            Calm, confidential support for parenting, teaching, relationships, and personal growth.
           </p>
         </div>
         <div className="space-y-2 text-muted-foreground">

@@ -1,6 +1,6 @@
 # Mei by Mithra
 
-Portfolio-cum-operations website for Mithra Krishnamoorthy, with Mei by Mithra as the coaching/therapy service layer.
+Portfolio and support practice website for Mithra Krishnamoorthy, with Mei by Mithra as the customer-facing brand layer.
 
 ## Stack
 
