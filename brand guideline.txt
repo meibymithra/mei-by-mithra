@@ -1,0 +1,161 @@
+Here’s a clean, structured breakdown of everything in your **brand identity document**:
+
+---
+
+# **Mei by Mithra — Brand Identity Details**
+
+## **1. Brand Elements**
+
+* **Brand Name:** Mei by Mithra
+* **Submark:**
+
+  * A minimal line-art logo (appears to represent a feminine/organic form with a base line, possibly symbolic of balance or grounding).
+  * Comes in:
+
+    * Primary (rust color on light background)
+    * Inverted/light version (white on muted green background)
+
+---
+
+## **2. Color Palette**
+
+### **Primary Colors**
+
+1. **Rust Red**
+
+   * RGB: 183, 46, 9
+   * HEX: #B72E09
+   * CMYK: 0, 75, 95, 28
+
+2. **Soft Cream**
+
+   * RGB: 245, 238, 220
+   * HEX: #F5EEDC
+   * CMYK: 0, 3, 10, 4
+
+3. **Muted Sage Green**
+
+   * RGB: 132, 161, 143
+   * HEX: #84A18F
+   * CMYK: 18, 0, 11, 37
+
+---
+
+### **Secondary Colors**
+
+4. **Muted Brown**
+
+   * RGB: 137, 108, 104
+   * HEX: #896C68
+   * CMYK: 0, 21, 24, 46
+
+5. **Soft Yellow / Sand**
+
+   * RGB: 244, 221, 167
+   * HEX: #F4DDA7
+   * CMYK: 0, 9, 32, 4
+
+6. **Coral / Peach**
+
+   * RGB: 237, 141, 117
+   * HEX: #ED8D75
+   * CMYK: 0, 41, 51, 7
+
+7. **Light Beige**
+
+   * RGB: 234, 201, 170
+   * HEX: #EAC9AA
+   * CMYK: 0, 14, 27, 8
+
+---
+
+## **3. Typography**
+
+### **Primary Fonts**
+
+* **Heading Font:** Bantayog
+* **Subheading / Body Font:** Playpen Sans
+
+### **Usage Example**
+
+* Heading: *“Your heading here (Heading font)”*
+* Subheading: *“Your subheading here (sub heading)”*
+* Body text: Standard paragraph (clean, readable, soft tone)
+
+---
+
+## **4. Brand Tone / Keywords**
+
+The document highlights these core values:
+
+* **Rights**
+* **Respect**
+* **Responsibility**
+* **Educate**
+
+These suggest the brand is:
+
+* Purpose-driven
+* Ethical / socially aware
+* Likely wellness, education, or advocacy-focused
+
+---
+
+## **5. Visual Style (Moodboard Insights)**
+
+*(From the images on page 1)* 
+
+The moodboard shows:
+
+* Warm, earthy tones (yellows, reds, greens)
+* Natural textures and minimal setups
+* Soft lighting and calm compositions
+* Lifestyle-oriented visuals (hands, objects, subtle human presence)
+
+### **Interpretation**
+
+* Clean but not sterile
+* Emotional but controlled
+* Feminine without being overly decorative
+* Premium but grounded
+
+---
+
+## **6. Design Direction Summary**
+
+### **Overall Feel**
+
+* Earthy + minimal
+* Calm + intentional
+* Modern + human-centered
+
+### **Visual Identity Signals**
+
+* Organic curves (seen in logo)
+* Muted palette (no harsh contrast)
+* Editorial-style layouts
+* Soft typography pairing (playful + structured)
+
+---
+
+## **7. Practical Usage Notes (What this actually means)**
+
+* Use **rust red** sparingly → for emphasis (CTAs, logo, highlights)
+* Base UI/background → cream + sage green
+* Accent sections → coral / sand tones
+* Keep layouts **airy**, not crowded
+* Avoid sharp edges → lean into rounded / fluid design
+* Typography hierarchy:
+
+  * Bantayog = strong identity (headlines)
+  * Playpen Sans = approachable readability
+
+---
+
+If you want, I can turn this into:
+
+* A **complete website design system**
+* A **Figma-ready style guide**
+* Or a **dev prompt (with tech stack + UI rules)** for building the actual site
+
+Just say the direction.
