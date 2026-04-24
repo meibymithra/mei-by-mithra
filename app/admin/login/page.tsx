@@ -3,6 +3,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { SectionHeading } from "@/components/site/section-heading";
 import { hasSupabaseConfig } from "@/lib/config";
 
+export const dynamic = 'force-dynamic';
+
 export default function AdminLoginPage() {
   const configReady = hasSupabaseConfig();
   return (

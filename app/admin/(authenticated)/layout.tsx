@@ -3,6 +3,8 @@ import { brand } from "@/lib/constants";
 import { requireAdmin } from "@/server/auth";
 import { Separator } from "@/components/ui/separator";
 
+export const dynamic = 'force-dynamic';
+
 const nav = [
   { href: "/admin", label: "Dashboard" },
   { href: "/admin/store", label: "Store" },
