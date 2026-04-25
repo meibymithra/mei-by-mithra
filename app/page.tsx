@@ -62,19 +62,19 @@ const pathwayCards = [
 const ecosystemCards = [
   {
     title: "Book with clarity",
-    text: "Cal.com handles scheduling in the visitor's local timezone while preserving Mithra's fixed India-based availability.",
+    text: "Booking handles scheduling in your local timezone while preserving availability in India.",
     href: "/book",
     icon: CalendarDays
   },
   {
     title: "Begin with context",
-    text: "The intake flow arrives after booking so the first conversation starts with useful, respectful context rather than paperwork up front.",
+    text: "The intake form arrives after booking so the first conversation starts with useful context rather than paperwork up front.",
     href: "/terms",
     icon: HeartHandshake
   },
   {
     title: "Continue with support",
-    text: "Sessions, packages, invoices, and playbooks sit inside one calm client journey rather than separate disconnected steps.",
+    text: "Sessions, packages, invoices, and resources sit inside one connected journey.",
     href: "/practice",
     icon: Users
   }

@@ -25,13 +25,13 @@ const purchaseSteps = [
     icon: BookOpen
   },
   {
-    title: "Pay by link or invoice",
-    text: "Products can use direct payment links or a manual invoice workflow when needed.",
+    title: "Pay securely",
+    text: "Products offer direct payment links or manual invoices where needed.",
     icon: CreditCard
   },
   {
-    title: "Use it independently or alongside support",
-    text: "The store works as a stand-alone entry point or as follow-through after a session.",
+    title: "Use independently or alongside support",
+    text: "Resources work as a stand-alone entry point or as follow-through after a session.",
     icon: Users
   }
 ];

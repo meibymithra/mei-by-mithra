@@ -27,8 +27,8 @@ export function Footer() {
           <Link className="block" href="/store">Store</Link>
         </div>
         <div className="space-y-2 text-muted-foreground">
-          <p className="font-medium text-foreground">Client Journey</p>
-          <Link className="block" href="/intake">Client Intake</Link>
+          <p className="font-medium text-foreground">Next Steps</p>
+          <Link className="block" href="/intake">Intake</Link>
           <Link className="block" href="/terms">Terms</Link>
           <Link className="block" href={contact.resumeUrl} target="_blank">
             Resume

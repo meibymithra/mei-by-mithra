@@ -73,7 +73,7 @@ export function HeroVisual() {
           </div>
           <div className="mt-3 grid gap-3 sm:grid-cols-3">
             {[
-              { label: "Session flow", value: "Book, complete intake, then begin with context" },
+              { label: "How it works", value: "Book a time, complete intake, begin" },
               { label: "Resource layer", value: "Playbooks for parents, teachers, and children" },
               { label: "Practice stance", value: "Rights, respect, responsibility, and education" }
             ].map((item) => (

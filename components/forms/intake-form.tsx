@@ -137,7 +137,7 @@ export function IntakeForm({
             ))}
           </Select>
           <p className="mt-2 text-xs leading-6 text-muted-foreground">
-            Sessions are pre-booked. Packages are useful when the client wants ongoing support with multiple sessions.
+            Sessions are pre-booked. Packages are useful when you want ongoing support.
           </p>
         </Field>
         <Field label="Requested package size" error={form.formState.errors.packageSessions?.message as string | undefined}>
@@ -203,14 +203,14 @@ export function IntakeForm({
       <div className="grid gap-3 rounded-[1.75rem] border border-border bg-muted/30 p-4">
         <label className="flex items-start gap-3 text-sm">
           <Checkbox {...form.register("confidentialityAccepted")} />
-          <span>I understand that my details are confidential and used only for service delivery, safeguarding, and administrative follow-up.</span>
+          <span>I understand that my details are confidential and used only for service delivery and safeguarding.</span>
         </label>
         <label className="flex items-start gap-3 text-sm">
           <Checkbox {...form.register("termsAccepted")} />
-          <span>I accept the pre-booking workflow, follow-up emails, and the terms described on the website.</span>
+          <span>I accept the booking process, session terms, and follow-up emails.</span>
         </label>
         <p className="text-xs leading-6 text-muted-foreground">
-          Completing this intake does not replace emergency support. If there is immediate risk, contact local emergency services.
+          This intake does not replace emergency support. If there is immediate risk, contact local emergency services.
         </p>
       </div>
 

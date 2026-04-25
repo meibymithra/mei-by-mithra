@@ -6,15 +6,15 @@ import { Card, CardContent } from "@/components/ui/card";
 const terms = [
   {
     title: "Booking and preparation",
-    text: "Sessions are pre-booked. After a booking is made, the intake form is sent automatically by email and should be completed before the session wherever possible."
+    text: "Sessions are pre-booked. After you book, the intake form arrives by email and should be completed before your session wherever possible."
   },
   {
     title: "Packages and session credits",
-    text: "Clients may request multiple sessions. Package preference can be indicated in intake and is confirmed through the invoice workflow."
+    text: "You can request multiple sessions. Package preference can be indicated in the intake form and is confirmed through the invoice."
   },
   {
     title: "Confidentiality",
-    text: "Personal information is used only for service delivery, scheduling, safeguarding, and operational follow-up. This site is not an emergency service."
+    text: "Personal information is used only for service delivery, scheduling, and safeguarding. This site is not an emergency service."
   },
   {
     title: "Feedback and testimonials",
@@ -22,7 +22,7 @@ const terms = [
   },
   {
     title: "Payments",
-    text: "Payments can be handled through invoice links or manual invoicing, depending on the service, region, and client context."
+    text: "Payments can be handled through secure invoice links or manual invoices, depending on the service, region, and your context."
   }
 ];
 
@@ -32,7 +32,7 @@ export default function TermsPage() {
       <main className="container-wide space-y-8 py-10 pb-24 md:pb-10">
         <SectionHeading
           eyebrow="Terms"
-          title="Service expectations for booking, intake, confidentiality, and payment"
+          title="Service expectations"
           description="Clear boundaries and processes so you know exactly how sessions, packages, confidentiality, feedback, and payment work."
         />
         <div className="grid gap-4 md:grid-cols-2">

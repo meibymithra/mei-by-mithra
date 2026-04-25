@@ -22,22 +22,22 @@ type PracticeCopy = {
 const supportNotes = [
   {
     title: "Pre-booked sessions",
-    text: "Sessions begin with booking first and intake second, so the public journey stays structured and calm.",
+    text: "Sessions are scheduled ahead of time so both parties come prepared.",
     icon: CalendarDays
   },
   {
     title: "Package support",
-    text: "Clients may indicate interest in multiple sessions and session bundles can be invoiced accordingly.",
+    text: "You can request multiple sessions or a package depending on your needs.",
     icon: Users
   },
   {
-    title: "Invoice-led payment",
-    text: "The system supports payment links and manual invoicing rather than hard-coded checkout assumptions.",
+    title: "Flexible payment",
+    text: "Payment can be made through secure links or invoices.",
     icon: CircleDollarSign
   },
   {
-    title: "Store as support layer",
-    text: "Playbooks exist for clients who need practical resources before, after, or instead of direct sessions.",
+    title: "Resources available",
+    text: "Practical playbooks are available for independent use or alongside sessions.",
     icon: BookOpen
   }
 ];
@@ -81,8 +81,8 @@ export default async function PracticePage() {
               <CardContent className="space-y-5 p-6">
                 <SectionHeading
                   eyebrow="Process"
-                  title="How the practice operates"
-                  description="A transparent view of the workflow from booking through follow-up, so you understand each step."
+                  title="How it works"
+                  description="A straightforward view of how sessions begin and continue."
                 />
                 <div className="space-y-3">
                   {(content.process ?? practicePageFallback.process).map((item, index) => (

@@ -20,8 +20,8 @@ export default function BookPage() {
         <section className="grid gap-6 lg:grid-cols-[1fr_.95fr] lg:items-end">
           <SectionHeading
             eyebrow="Booking"
-            title="Choose a time, then move into a clear next-step workflow"
-            description="Pick a slot in your timezone, book through Cal.com, and receive the intake email automatically so the first conversation begins with context."
+            title="Choose a time that works"
+            description="Pick a slot in your timezone and complete your booking. The intake form arrives by email automatically."
           />
           <div className="grid gap-3 sm:grid-cols-3">
             <Card className="surface">
@@ -44,7 +44,7 @@ export default function BookPage() {
               <CardContent className="space-y-2 p-5">
                 <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">After booking</p>
                 <p className="text-sm leading-7 text-muted-foreground">
-                  Intake arrives by email, followed by invoicing or package follow-through as needed.
+                  The intake form arrives by email, followed by invoicing or package details as needed.
                 </p>
               </CardContent>
             </Card>
