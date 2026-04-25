@@ -57,8 +57,8 @@ export default async function AdminCalendlyPage({
   return (
     <div className="space-y-6">
       <SectionHeading
-        eyebrow="Calendly"
-        title="Calendly operations"
+        eyebrow="Scheduling"
+        title="Cal.com operations"
         description="Track webhook traffic, upcoming sessions, and booking processing state."
       />
       <div className="grid gap-4 md:grid-cols-3">

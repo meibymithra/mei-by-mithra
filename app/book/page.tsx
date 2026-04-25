@@ -7,7 +7,12 @@ import { Card, CardContent } from "@/components/ui/card";
 import { schedule } from "@/lib/constants";
 
 export default function BookPage() {
-  const calendlyUrl = process.env.CALENDLY_EVENT_TYPE_URL ?? process.env.NEXT_PUBLIC_CALENDLY_URL ?? "";
+  const calendlyUrl =
+    process.env.CAL_BOOKING_URL ??
+    process.env.NEXT_PUBLIC_CAL_BOOKING_URL ??
+    process.env.CALENDLY_EVENT_TYPE_URL ??
+    process.env.NEXT_PUBLIC_CALENDLY_URL ??
+    "";
 
   return (
     <SiteShell>
@@ -16,7 +21,7 @@ export default function BookPage() {
           <SectionHeading
             eyebrow="Booking"
             title="Choose a time, then move into a clear next-step workflow"
-            description="Pick a slot in your timezone, book through Calendly, and receive the intake email automatically so the first conversation begins with context."
+            description="Pick a slot in your timezone, book through Cal.com, and receive the intake email automatically so the first conversation begins with context."
           />
           <div className="grid gap-3 sm:grid-cols-3">
             <Card className="surface">
@@ -30,7 +35,7 @@ export default function BookPage() {
               <CardContent className="space-y-2 p-5">
                 <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Timezone handling</p>
                 <p className="text-sm leading-7 text-muted-foreground">
-                  Calendly should render in the visitor's local timezone while preserving Mithra's fixed India-based
+                  Cal.com should render in the visitor's local timezone while preserving Mithra's fixed India-based
                   availability.
                 </p>
               </CardContent>

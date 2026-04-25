@@ -336,7 +336,7 @@ async function main() {
           }
         ],
         process: [
-          "Choose a session slot through Calendly using fixed India-based availability rendered in your local timezone.",
+          "Choose a session slot through Cal.com using fixed India-based availability rendered in your local timezone.",
           "Receive the intake form automatically after booking so the first conversation begins with context.",
           "Proceed as a single session or indicate package preference if ongoing support is needed.",
           "Receive an invoice or payment link, followed by session or resource delivery as appropriate."
@@ -366,7 +366,7 @@ async function main() {
           }
         ],
         process: [
-          "Choose a session slot through Calendly using fixed India-based availability rendered in your local timezone.",
+          "Choose a session slot through Cal.com using fixed India-based availability rendered in your local timezone.",
           "Receive the intake form automatically after booking so the first conversation begins with context.",
           "Proceed as a single session or indicate package preference if ongoing support is needed.",
           "Receive an invoice or payment link, followed by session or resource delivery as appropriate."
@@ -382,7 +382,7 @@ async function main() {
       content: [
         {
           question: "How does booking work?",
-          answer: "Book through Calendly, complete the intake form from the follow-up email, and then receive the next payment or preparation step."
+          answer: "Book through Cal.com, complete the intake form from the follow-up email, and then receive the next payment or preparation step."
         },
         {
           question: "Is this confidential?",
@@ -400,7 +400,7 @@ async function main() {
       content: [
         {
           question: "How does booking work?",
-          answer: "Book through Calendly, complete the intake form from the follow-up email, and then receive the next payment or preparation step."
+          answer: "Book through Cal.com, complete the intake form from the follow-up email, and then receive the next payment or preparation step."
         },
         {
           question: "Is this confidential?",

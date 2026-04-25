@@ -26,9 +26,9 @@ Set these in Vercel Project Settings. Use the same names in local `.env.local`.
 
 ### Booking and intake
 
-- `CALENDLY_EVENT_TYPE_URL`
-- `NEXT_PUBLIC_CALENDLY_URL`
-- `CALENDLY_WEBHOOK_SECRET`
+- `CAL_BOOKING_URL`
+- `NEXT_PUBLIC_CAL_BOOKING_URL`
+- `CAL_WEBHOOK_SECRET`
 
 ### Payments
 
@@ -75,9 +75,9 @@ Set these in the Vercel Production scope:
 - `RESEND_API_KEY`
 - `SITE_URL`
 - `ADMIN_EMAILS`
-- `CALENDLY_EVENT_TYPE_URL`
-- `NEXT_PUBLIC_CALENDLY_URL`
-- `CALENDLY_WEBHOOK_SECRET`
+- `CAL_BOOKING_URL`
+- `NEXT_PUBLIC_CAL_BOOKING_URL`
+- `CAL_WEBHOOK_SECRET`
 - `RAZORPAY_PAYMENT_LINK`
 - `STRIPE_PAYMENT_LINK`
 
@@ -122,9 +122,9 @@ Use this as the Vercel checklist. `Required` means the app needs it to function 
 | `RESEND_API_KEY` | real Resend key | optional | optional | No | Email sending |
 | `SITE_URL` | production domain | preview domain | `http://localhost:3000` | Yes | Absolute email links |
 | `ADMIN_EMAILS` | comma-separated admin emails | same | same | No | Admin notification list |
-| `CALENDLY_EVENT_TYPE_URL` | production Calendly URL | preview/testing URL | local testing URL | No | Booking embed |
-| `NEXT_PUBLIC_CALENDLY_URL` | fallback Calendly URL | fallback Calendly URL | fallback URL | No | Booking embed fallback |
-| `CALENDLY_WEBHOOK_SECRET` | webhook secret | same or test secret | local secret | No | Calendly webhook auth |
+| `CAL_BOOKING_URL` | production Cal.com URL | preview/testing URL | local testing URL | No | Booking embed |
+| `NEXT_PUBLIC_CAL_BOOKING_URL` | fallback Cal.com URL | fallback Cal.com URL | fallback URL | No | Booking embed fallback |
+| `CAL_WEBHOOK_SECRET` | webhook secret | same or test secret | local secret | No | Cal.com webhook auth |
 | `RAZORPAY_PAYMENT_LINK` | live payment link | test link | test link | No | India payments |
 | `STRIPE_PAYMENT_LINK` | live payment link | test link | test link | No | International fallback |
 | `WHATSAPP_API_KEY` | optional | optional | optional | No | Future integration |
@@ -149,9 +149,9 @@ RESEND_API_KEY="[RESEND_API_KEY]"
 SITE_URL="https://[YOUR-PRODUCTION-DOMAIN]"
 
 ADMIN_EMAILS="meibymithra@gmail.com"
-CALENDLY_EVENT_TYPE_URL="[CALENDLY_EVENT_TYPE_URL]"
-NEXT_PUBLIC_CALENDLY_URL="[NEXT_PUBLIC_CALENDLY_URL]"
-CALENDLY_WEBHOOK_SECRET="[CALENDLY_WEBHOOK_SECRET]"
+CAL_BOOKING_URL="[CAL_BOOKING_URL]"
+NEXT_PUBLIC_CAL_BOOKING_URL="[NEXT_PUBLIC_CAL_BOOKING_URL]"
+CAL_WEBHOOK_SECRET="[CAL_WEBHOOK_SECRET]"
 
 RAZORPAY_PAYMENT_LINK="[RAZORPAY_PAYMENT_LINK]"
 STRIPE_PAYMENT_LINK="[STRIPE_PAYMENT_LINK]"
@@ -200,13 +200,13 @@ npm run prisma:verify-admin
 - Vercel: public site, admin dashboard, API routes, webhook handlers, and server actions.
 - Supabase: Postgres database and admin authentication.
 - Resend: transactional email.
-- Calendly, Razorpay, Stripe: external integrations called by the app.
+- Cal.com, Razorpay, Stripe: external integrations called by the app.
 - See [`docs/SUPABASE.md`](SUPABASE.md) for the linked project ref and Prisma workflow.
 
-## Calendly
+## Cal.com
 
-- `CALENDLY_EVENT_TYPE_URL` or `NEXT_PUBLIC_CALENDLY_URL` powers the booking embed.
-- `CALENDLY_WEBHOOK_SECRET` should match the value configured in Calendly webhooks.
+- `CAL_BOOKING_URL` or `NEXT_PUBLIC_CAL_BOOKING_URL` powers the booking embed.
+- `CAL_WEBHOOK_SECRET` should match the value configured in Cal.com webhooks.
 
 ## Common failure points
 

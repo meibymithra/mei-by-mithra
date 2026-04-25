@@ -14,7 +14,7 @@ export default async function BookingsPage() {
 
   return (
     <div className="space-y-6">
-      <SectionHeading eyebrow="Bookings" title="Booking management" description="Tag session status, reschedule notes, and keep booking records aligned with Calendly." />
+      <SectionHeading eyebrow="Bookings" title="Booking management" description="Tag session status, reschedule notes, and keep booking records aligned with Cal.com." />
       <Card>
         <CardContent className="overflow-x-auto p-0">
           <Table>

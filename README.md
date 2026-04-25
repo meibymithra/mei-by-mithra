@@ -7,7 +7,7 @@ This repository supports:
 - a professional public brand website
 - dedicated About and Practice pages
 - a digital store for playbooks
-- Calendly booking
+- Cal.com booking
 - automatic intake follow-up
 - invoice-based service flow
 - feedback and testimonial moderation
@@ -21,7 +21,7 @@ This repository supports:
 - Prisma + PostgreSQL on Supabase
 - Supabase Auth
 - Resend
-- Calendly webhook integration
+- Cal.com webhook integration
 
 ## Local setup
 
@@ -46,8 +46,8 @@ npm install
 - `ADMIN_EMAILS`
 - `ADMIN_SEED_PASSWORD`
 - `ADMIN_RECOVERY_EMAIL`
-- `CALENDLY_EVENT_TYPE_URL` or `NEXT_PUBLIC_CALENDLY_URL`
-- `CALENDLY_WEBHOOK_SECRET`
+- `CAL_BOOKING_URL` or `NEXT_PUBLIC_CAL_BOOKING_URL`
+- `CAL_WEBHOOK_SECRET`
 - `RAZORPAY_PAYMENT_LINK`
 - `STRIPE_PAYMENT_LINK`
 

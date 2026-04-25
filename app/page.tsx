@@ -62,7 +62,7 @@ const pathwayCards = [
 const ecosystemCards = [
   {
     title: "Book with clarity",
-    text: "Calendly handles scheduling in the visitor's local timezone while preserving Mithra's fixed India-based availability.",
+    text: "Cal.com handles scheduling in the visitor's local timezone while preserving Mithra's fixed India-based availability.",
     href: "/book",
     icon: CalendarDays
   },

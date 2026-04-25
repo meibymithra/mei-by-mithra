@@ -5,55 +5,86 @@ import { sendTransactionalEmail, sendTemplateEmail } from "@/server/services/ema
 import { getAdminEmails } from "@/server/recipients";
 import { hashValue } from "@/server/security";
 
-function findQuestionAnswer(resource: any, patterns: string[]) {
-  const answers = resource?.questions_and_answers;
-  if (!Array.isArray(answers)) return "";
+function verifyCalSignature(rawBody: string, signature: string | null, secret: string) {
+  if (!signature) return false;
+  const digest = crypto.createHmac("sha256", secret).update(rawBody).digest("hex");
 
-  const match = answers.find((item: any) =>
-    patterns.some((pattern) => item?.question?.toLowerCase?.().includes(pattern))
-  );
-
-  return typeof match?.answer === "string" ? match.answer.trim() : "";
+  try {
+    return crypto.timingSafeEqual(Buffer.from(signature, "hex"), Buffer.from(digest, "hex"));
+  } catch {
+    return false;
+  }
 }
 
-function extractInvitee(payload: any) {
-  const resource = payload?.payload ?? payload?.data ?? payload?.event ?? payload;
-  const eventUri = resource?.event?.uri ?? resource?.event ?? payload?.event_uri ?? payload?.eventUri;
-  const inviteeEmail =
-    resource?.invitee?.email ||
-    resource?.email ||
-    findQuestionAnswer(resource, ["email"]) ||
-    "";
-  const inviteeName =
-    resource?.invitee?.name ||
-    resource?.name ||
-    findQuestionAnswer(resource, ["name"]) ||
-    "";
-  const inviteeUri = resource?.invitee?.uri ?? resource?.uri ?? payload?.uri ?? payload?.event_uuid ?? null;
-  const eventTime = resource?.event?.start_time ?? resource?.start_time ?? resource?.created_at ?? null;
-  const phone =
-    resource?.invitee?.phone_number ||
-    findQuestionAnswer(resource, ["phone", "mobile", "whatsapp", "contact"]);
-  const timezone = resource?.invitee?.timezone ?? resource?.timezone ?? null;
-  return { eventUri, inviteeEmail, inviteeName, inviteeUri, eventTime, timezone, phone, resource };
+function getResponseValue(responses: any, keys: string[]) {
+  if (!responses || typeof responses !== "object") return "";
+
+  for (const [responseKey, responseValue] of Object.entries(responses)) {
+    const normalizedKey = responseKey.toLowerCase();
+    if (!keys.some((key) => normalizedKey.includes(key))) continue;
+
+    const value =
+      typeof responseValue === "object" && responseValue !== null && "value" in responseValue
+        ? (responseValue as { value?: unknown }).value
+        : responseValue;
+
+    if (typeof value === "string" && value.trim()) return value.trim();
+  }
+
+  return "";
 }
 
-function normalizeEventType(value: unknown) {
-  const input = String(value ?? "").toLowerCase();
-  if (input.includes("cancel")) return "invitee.canceled";
-  if (input.includes("create")) return "invitee.created";
-  return input || "invitee.created";
+function extractCalBooking(payload: any) {
+  const resource = payload?.payload ?? payload;
+  const attendee = Array.isArray(resource?.attendees) ? resource.attendees[0] : null;
+  const responses = resource?.responses ?? {};
+  const eventUid = resource?.uid ? String(resource.uid) : "";
+  const bookingId = resource?.bookingId ?? resource?.id ?? null;
+  const eventUri = eventUid || (bookingId ? `cal-booking:${bookingId}` : "");
+  const inviteeEmail = attendee?.email ?? getResponseValue(responses, ["email"]);
+  const inviteeName = attendee?.name ?? getResponseValue(responses, ["name"]);
+  const phone = attendee?.phoneNumber ?? getResponseValue(responses, ["phone", "mobile", "whatsapp", "contact"]);
+  const timezone = attendee?.timeZone ?? resource?.user?.timeZone ?? null;
+  const eventTime = resource?.startTime ?? null;
+
+  return {
+    eventUri,
+    bookingId,
+    inviteeEmail,
+    inviteeName,
+    inviteeUri: bookingId ? String(bookingId) : null,
+    eventTime,
+    timezone,
+    phone,
+    resource
+  };
+}
+
+function normalizeTriggerEvent(value: unknown) {
+  const input = String(value ?? "").toUpperCase();
+  return input || "BOOKING_CREATED";
 }
 
 export async function POST(request: Request) {
-  const payload = await request.json().catch(() => ({}));
-  const headerSecret = request.headers.get("x-calendly-webhook-secret");
-  if (process.env.CALENDLY_WEBHOOK_SECRET && headerSecret !== process.env.CALENDLY_WEBHOOK_SECRET) {
+  const rawBody = await request.text();
+  let payload: any = {};
+  try {
+    payload = rawBody ? JSON.parse(rawBody) : {};
+  } catch {
+    return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
+  }
+  const webhookSecret = process.env.CAL_WEBHOOK_SECRET ?? process.env.CALENDLY_WEBHOOK_SECRET;
+
+  if (
+    webhookSecret &&
+    !verifyCalSignature(rawBody, request.headers.get("x-cal-signature-256"), webhookSecret)
+  ) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const { eventUri, inviteeEmail, inviteeName, inviteeUri, eventTime, timezone, phone, resource } = extractInvitee(payload);
-  const eventType = normalizeEventType(resource?.event_type ?? resource?.action ?? payload?.event_type ?? payload?.event);
+  const { eventUri, inviteeEmail, inviteeName, inviteeUri, eventTime, timezone, phone, resource } =
+    extractCalBooking(payload);
+  const eventType = normalizeTriggerEvent(payload?.triggerEvent);
   const eventKey = crypto
     .createHash("sha256")
     .update(
@@ -63,7 +94,8 @@ export async function POST(request: Request) {
         inviteeEmail,
         inviteeName,
         eventType,
-        eventTime
+        eventTime,
+        updatedAt: resource?.updatedAt ?? null
       })
     )
     .digest("hex");
@@ -105,12 +137,12 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true, ignored: true });
   }
 
-  if (eventType === "invitee.canceled") {
+  if (eventType === "BOOKING_CANCELLED") {
     await prisma.booking.updateMany({
       where: { calendlyEventUri: eventUri },
       data: {
         status: "CANCELLED",
-        rescheduleNote: "Cancelled in Calendly"
+        rescheduleNote: "Cancelled in Cal.com"
       }
     });
 
@@ -182,7 +214,7 @@ export async function POST(request: Request) {
   if (admins.length) {
     await sendTransactionalEmail({
       to: admins,
-      subject: `Calendly booking received: ${booking.client.fullName}`,
+      subject: `Booking received from Cal.com: ${booking.client.fullName}`,
       html: `<p>New booking for <strong>${client.fullName}</strong>.</p>`,
       templateKey: "custom",
       metadata: { bookingId: booking.id }

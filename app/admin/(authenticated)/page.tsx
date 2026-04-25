@@ -71,7 +71,7 @@ export default async function AdminHomePage() {
         {calendlyStatusCounts.map((item) => (
           <Card key={item.status}>
             <CardContent className="p-5">
-              <p className="text-sm text-muted-foreground">Calendly {item.status}</p>
+              <p className="text-sm text-muted-foreground">Scheduling {item.status}</p>
               <p className="mt-2 text-3xl font-semibold">{item._count._all}</p>
             </CardContent>
           </Card>

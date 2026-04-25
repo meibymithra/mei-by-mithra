@@ -30,7 +30,7 @@ The public site and admin are one product, but they serve different audiences.
 - About: profile, philosophy, and brand background
 - Portfolio: work experience, qualifications, and institutional credibility
 - Practice: services, process, and operating model
-- Book: Calendly booking flow
+- Book: Cal.com booking flow
 - Intake: booking-linked structured intake
 - Store: digital resource storefront
 - Product pages: product details and payment intent
@@ -47,7 +47,7 @@ The public site and admin are one product, but they serve different audiences.
 - CMS
 - Store management
 - Email templates
-- Calendly logs
+- Scheduling logs
 
 ## Business rules captured in the app
 
@@ -59,11 +59,11 @@ The public site and admin are one product, but they serve different audiences.
 
 ### Booking
 
-- Booking is handled in Calendly
+- Booking is handled in Cal.com
 - Availability is fixed to:
   - Mon-Sat `7:30 PM - 8:30 PM` IST
   - Sun `8:30 AM - 8:30 PM` IST
-- The booking surface is meant to work for Indians living abroad by allowing Calendly to render in the visitor's timezone
+- The booking surface is meant to work for Indians living abroad by allowing Cal.com to render in the visitor's timezone
 
 ### Intake
 
@@ -82,7 +82,7 @@ The public site and admin are one product, but they serve different audiences.
   - timezone
   - confidentiality acceptance
   - terms acceptance
-- Intake is the first automatic email triggered after a Calendly booking
+- Intake is the first automatic email triggered after a Cal.com booking
 
 ### Sessions and packages
 
@@ -112,7 +112,7 @@ The public site and admin are one product, but they serve different audiences.
 - `/practice`: service and process page
 - `/store`: public storefront
 - `/products/[slug]`: individual playbook page
-- `/book`: Calendly booking
+- `/book`: Cal.com booking
 - `/intake`: structured intake
 - `/feedback/[token]`: feedback page
 - `/terms`: public terms
@@ -126,7 +126,7 @@ Stores core contact info, notes, tags, and relationships to bookings, invoices, 
 
 ### Booking
 
-Stores Calendly linkage, scheduled time, status, intake token, feedback token, and session type.
+Stores scheduler linkage, scheduled time, status, intake token, feedback token, and session type.
 
 ### IntakeForm
 
@@ -152,8 +152,8 @@ Stores product metadata, pricing, payment link, and delivery URL.
 
 ### Booking to intake
 
-1. Visitor books through Calendly
-2. Calendly webhook is received
+1. Visitor books through Cal.com
+2. Cal.com webhook is received
 3. Webhook log is written
 4. Client record is created or updated
 5. Booking record is created or updated
@@ -193,7 +193,7 @@ Stores product metadata, pricing, payment link, and delivery URL.
 - `app/intake/page.tsx`
 - `app/feedback/[token]/page.tsx`
 - `app/terms/page.tsx`
-- `app/api/webhooks/calendly/route.ts`
+- `app/api/webhooks/cal/route.ts`
 - `app/api/intake/route.ts`
 - `app/api/feedback/route.ts`
 - `app/api/admin/invoices/route.ts`

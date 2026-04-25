@@ -19,18 +19,18 @@ export function CalendlyEmbed({ calendlyUrl }: { calendlyUrl?: string }) {
         {calendlyUrl ? (
           <div className="min-h-[720px]">
             <iframe
-              title="Calendly booking"
-              src={`${calendlyUrl}?hide_gdpr_banner=1&text_color=2b211d&primary_color=b72e09`}
+              title="Cal.com booking"
+              src={calendlyUrl}
               className="h-[780px] w-full"
             />
           </div>
         ) : (
           <div className="space-y-3 p-6">
             <p className="text-sm text-muted-foreground">
-              Booking is temporarily unavailable on this page because the Calendly event URL has not been configured yet.
+              Booking is temporarily unavailable on this page because the Cal.com booking URL has not been configured yet.
             </p>
             <p className="text-sm">
-              Once connected, this flow will handle the booking, intake email, and follow-up steps automatically.
+              Once connected, this flow will handle booking, intake email, and follow-up steps automatically.
             </p>
           </div>
         )}

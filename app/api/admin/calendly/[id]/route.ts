@@ -10,7 +10,7 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
   const { id } = await params;
   const body = await request.json();
   const parsed = calendlyLogUpdateSchema.safeParse(body);
-  if (!parsed.success) return NextResponse.json({ error: "Invalid Calendly log update" }, { status: 400 });
+  if (!parsed.success) return NextResponse.json({ error: "Invalid scheduling log update" }, { status: 400 });
 
   const { status, notes } = parsed.data;
 
