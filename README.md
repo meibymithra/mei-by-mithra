@@ -1,26 +1,39 @@
 # Mei by Mithra
 
-Portfolio and support practice website for Mithra Krishnamoorthy, with Mei by Mithra as the customer-facing brand layer.
+Production-oriented brand website and operations platform for `Mithra Krishnamoorthy`.
+
+This repository supports:
+
+- a professional public brand website
+- dedicated About and Practice pages
+- a digital store for playbooks
+- Calendly booking
+- automatic intake follow-up
+- invoice-based service flow
+- feedback and testimonial moderation
+- an admin CMS and store backend
 
 ## Stack
 
 - Next.js App Router + TypeScript
 - Tailwind CSS
+- Framer Motion
 - Prisma + PostgreSQL on Supabase
 - Supabase Auth
-- Vercel-hosted frontend, API routes, and server actions
-- Resend for transactional email
-- Calendly booking embed + webhook endpoint
+- Resend
+- Calendly webhook integration
 
 ## Local setup
 
-1. Install dependencies:
+1. Install dependencies
 
 ```bash
 npm install
 ```
 
-2. Copy `.env.example` to `.env.local` and fill in:
+2. Copy `.env.example` to `.env.local`
+
+3. Fill in runtime values:
 
 - `DATABASE_URL`
 - `DIRECT_URL`
@@ -38,54 +51,66 @@ npm install
 - `RAZORPAY_PAYMENT_LINK`
 - `STRIPE_PAYMENT_LINK`
 
-3. Seed the admin account:
+4. Seed the admin account
 
 ```bash
 npm run prisma:seed
 ```
 
-4. Generate Prisma client:
-
-```bash
-npx prisma generate
-```
-
-5. Run the app:
+5. Run the app
 
 ```bash
 npm run dev
 ```
 
-## Database
+## Admin credentials model
 
-- Prisma schema: `prisma/schema.prisma`
-- Initial migration: `prisma/migrations/0001_init/migration.sql`
+The seeded admin email is fixed:
 
-## Admin auth
+- `meibymithra@gmail.com`
 
-- Supabase Auth handles email/password sign-in.
-- The seeded admin email is fixed and the password is provided via `ADMIN_SEED_PASSWORD`.
-- The signed-in user must also exist in the `AdminUser` table to unlock `/admin/*`.
+The password is never committed to source control and must be supplied through:
 
-## Main surfaces
+- `ADMIN_SEED_PASSWORD`
 
-- [`/`](app/page.tsx): portfolio-style homepage for Mithra Krishnamoorthy
-- [`/store`](app/store/page.tsx): canonical storefront for playbooks
-- [`/book`](app/book/page.tsx): Calendly embed
-- [`/intake`](app/intake/page.tsx): structured intake
-- [`/admin/store`](app/admin/store/page.tsx): store and product controls
-- [`/admin/calendly`](app/admin/calendly/page.tsx): webhook and booking tracking
+The recovery email is controlled by:
 
-## Deployment
+- `ADMIN_RECOVERY_EMAIL`
 
-- Deploy the whole app to Vercel. It hosts the frontend and backend routes.
-- Use Supabase for PostgreSQL and Auth.
-- Follow [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) for the exact Vercel env checklist.
-- See [`docs/SUPABASE.md`](docs/SUPABASE.md) for the linked project and Prisma/Supabase workflow.
-- Set all runtime environment variables in Vercel before production traffic.
+## Public routes
+
+- `/`
+- `/about`
+- `/practice`
+- `/store`
+- `/products/[slug]`
+- `/book`
+- `/intake`
+- `/feedback/[token]`
+- `/terms`
+
+## Admin routes
+
+- `/admin/login`
+- `/admin`
+- `/admin/cms`
+- `/admin/store`
+- `/admin/clients`
+- `/admin/bookings`
+- `/admin/invoices`
+- `/admin/feedback`
+- `/admin/calendly`
+
+## Docs
+
+- [docs/SYSTEM.md](C:/Users/Sudhakar%20-%20PC/Desktop/Mithra/docs/SYSTEM.md)
+- [docs/BRAND.md](C:/Users/Sudhakar%20-%20PC/Desktop/Mithra/docs/BRAND.md)
+- [docs/CMS.md](C:/Users/Sudhakar%20-%20PC/Desktop/Mithra/docs/CMS.md)
+- [docs/DEPLOYMENT.md](C:/Users/Sudhakar%20-%20PC/Desktop/Mithra/docs/DEPLOYMENT.md)
+- [docs/SUPABASE.md](C:/Users/Sudhakar%20-%20PC/Desktop/Mithra/docs/SUPABASE.md)
 
 ## Notes
 
-- Local development can fall back to a no-op mock when `DATABASE_URL` is absent.
-- Production requires a real `DATABASE_URL`; the app now fails fast if it is missing.
-- Seed and operational details live in [`docs/SYSTEM.md`](docs/SYSTEM.md).
+- Local development can still run with the mock Prisma layer if `DATABASE_URL` is absent.
+- Production requires a real database and proper Supabase configuration.
+- Public content is split into dedicated pages and managed through the CMS plus seed fallbacks.

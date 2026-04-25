@@ -14,7 +14,7 @@ export function CalendlyEmbed({ calendlyUrl }: { calendlyUrl?: string }) {
     <Card className="overflow-hidden">
       <CardContent className="space-y-4 p-0">
         <div className="border-b border-border bg-muted/30 px-4 py-3 text-sm text-muted-foreground">
-          Availability is shown in <strong className="text-foreground">{timezone}</strong>. Mon-Sat 7:30 PM - 8:30 PM and Sunday 8:30 AM - 8:30 PM.
+          Availability is shown in <strong className="text-foreground">{timezone}</strong>. Mithra's base availability is Mon-Sat 7:30 PM - 8:30 PM IST and Sunday 8:30 AM - 8:30 PM IST.
         </div>
         {calendlyUrl ? (
           <div className="min-h-[720px]">

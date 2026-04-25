@@ -92,7 +92,17 @@ export async function POST(request: Request) {
       emergencyContactPhone: sanitizeText(input.emergencyContactPhone),
       concern: sanitizeText(input.concern),
       goals: input.goals,
-      goalsNote: sanitizeText(input.goalsNote || "") || null,
+      goalsNote:
+        sanitizeText(
+          [
+            input.goalsNote || "",
+            `Support format: ${input.sessionType}`,
+            input.sessionType === "package" ? `Requested package sessions: ${input.packageSessions}` : "",
+            input.timezone ? `Timezone: ${input.timezone}` : ""
+          ]
+            .filter(Boolean)
+            .join("\n")
+        ) || null,
       priorExperience: input.priorExperience === "yes",
       priorExperienceDetails: sanitizeText(input.priorExperienceDetails || "") || null,
       confidentialityAccepted: input.confidentialityAccepted,
@@ -102,7 +112,10 @@ export async function POST(request: Request) {
 
   await prisma.booking.update({
     where: { id: booking.id },
-    data: { status: "BOOKED" }
+    data: {
+      status: "BOOKED",
+      sessionType: input.sessionType
+    }
   });
 
   const admins = await getAdminEmails();
@@ -110,7 +123,11 @@ export async function POST(request: Request) {
     await sendTransactionalEmail({
       to: admins,
       subject: `New intake submitted: ${client.fullName}`,
-      html: `<p>New intake has been submitted for <strong>${client.fullName}</strong>.</p><p>Concern: ${sanitizeText(input.concern)}</p>`,
+      html: `<p>New intake has been submitted for <strong>${client.fullName}</strong>.</p><p>Support format: <strong>${sanitizeText(
+        input.sessionType
+      )}</strong>${input.sessionType === "package" ? ` (${sanitizeText(input.packageSessions)} sessions requested)` : ""}</p><p>Concern: ${sanitizeText(
+        input.concern
+      )}</p>`,
       templateKey: "custom",
       metadata: { intakeId: intake.id, clientId: client.id }
     });

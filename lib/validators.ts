@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { goalOptions } from "@/lib/constants";
+import { packageOptions, goalOptions, sessionTypes } from "@/lib/constants";
 
 const phoneSchema = z
   .string()
@@ -19,6 +19,9 @@ export const intakeSchema = z.object({
   concern: z.string().trim().min(15, "Describe the concern in a few words").max(3000),
   goals: z.array(z.enum(goalOptions)).min(1, "Choose at least one goal"),
   goalsNote: z.string().trim().max(1000).optional().or(z.literal("")),
+  sessionType: z.enum(sessionTypes.map((item) => item.value) as [string, ...string[]]),
+  packageSessions: z.enum(packageOptions.map((item) => item.value) as [string, ...string[]]).default("1"),
+  timezone: z.string().trim().max(120).optional().or(z.literal("")),
   priorExperience: z.enum(["yes", "no"]),
   priorExperienceDetails: z.string().trim().max(2000).optional().or(z.literal("")),
   confidentialityAccepted: z.literal(true, {
@@ -32,8 +35,14 @@ export const intakeSchema = z.object({
 export const feedbackSchema = z.object({
   token: z.string().min(8),
   rating: z.coerce.number().int().min(1).max(5),
-  feedback: z.string().trim().min(10).max(4000),
-  consentToTestimonial: z.boolean()
+  experienceType: z.enum(["session", "package", "playbook", "workshop"]),
+  whatHelped: z.string().trim().min(10).max(1200),
+  whatCouldImprove: z.string().trim().max(1200).optional().or(z.literal("")),
+  testimonialSnippet: z.string().trim().max(600).optional().or(z.literal("")),
+  consentToTestimonial: z.boolean(),
+  termsAccepted: z.literal(true, {
+    errorMap: () => ({ message: "Terms acceptance is required" })
+  })
 });
 
 export const adminInvoiceSchema = z.object({

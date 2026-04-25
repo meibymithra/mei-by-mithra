@@ -8,7 +8,11 @@ import { ClientNoteEditor } from "@/components/admin/client-note-editor";
 
 export default async function ClientsPage() {
   const clients = await prisma.client.findMany({
-    include: { intakeForms: { orderBy: { submittedAt: "desc" }, take: 1 }, bookings: { orderBy: { createdAt: "desc" }, take: 3 } },
+    include: {
+      intakeForms: { orderBy: { submittedAt: "desc" }, take: 1 },
+      bookings: { orderBy: { createdAt: "desc" }, take: 3 },
+      invoices: true
+    },
     orderBy: { updatedAt: "desc" }
   });
 
@@ -22,6 +26,7 @@ export default async function ClientsPage() {
               <TR>
                 <TH>Name</TH>
                 <TH>Contact</TH>
+                <TH>Session volume</TH>
                 <TH>Intake</TH>
                 <TH>Notes</TH>
               </TR>
@@ -36,6 +41,12 @@ export default async function ClientsPage() {
                   <TD>
                     <p>{client.email}</p>
                     <p className="text-xs text-muted-foreground">{client.phone}</p>
+                  </TD>
+                  <TD>
+                    <p className="font-medium">{client.invoices.reduce((sum, invoice) => sum + invoice.sessionCount, 0)} sessions invoiced</p>
+                    <p className="text-xs text-muted-foreground">
+                      {client.bookings.map((booking) => booking.sessionType).join(", ") || "No bookings yet"}
+                    </p>
                   </TD>
                   <TD>
                     <details>

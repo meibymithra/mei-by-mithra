@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { brand, owner } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
+import { BrandAtmosphere } from "@/components/site/brand-atmosphere";
 
 export function SiteShell({
   children,
@@ -12,15 +13,36 @@ export function SiteShell({
 }) {
   return (
     <div className="min-h-screen">
+      <BrandAtmosphere />
       <header className="sticky top-0 z-40 border-b border-border/70 bg-background/90 backdrop-blur">
         <div className="container-wide flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center gap-3">
             <Image src="/brand/logomark.png" alt={`${brand.name} logo`} width={28} height={28} />
-            <span className="text-sm font-semibold tracking-[0.2em] text-primary uppercase">{owner.name}</span>
+            <div>
+              <span className="block text-sm font-semibold uppercase tracking-[0.2em] text-primary">{owner.name}</span>
+              <span className="hidden text-xs text-muted-foreground sm:block">{brand.name}</span>
+            </div>
           </Link>
-          <div className="flex items-center gap-2">
-            <Link href="/store" className="hidden text-sm font-medium sm:inline-flex">
-              Playbooks
+          <div className="flex items-center gap-5">
+            <nav className="hidden items-center gap-5 text-sm text-muted-foreground lg:flex">
+              <Link href="/about" className="transition-colors hover:text-foreground">
+                About
+              </Link>
+              <Link href="/practice" className="transition-colors hover:text-foreground">
+                Practice
+              </Link>
+              <Link href="/store" className="transition-colors hover:text-foreground">
+                Store
+              </Link>
+              <Link href="/book" className="transition-colors hover:text-foreground">
+                Book
+              </Link>
+              <Link href="/intake" className="transition-colors hover:text-foreground">
+                Intake
+              </Link>
+            </nav>
+            <Link href="/about" className="hidden text-sm font-medium sm:inline-flex lg:hidden">
+              About
             </Link>
             <Button asChild>
               <Link href={ctaHref}>Book a Session</Link>
@@ -29,12 +51,6 @@ export function SiteShell({
         </div>
       </header>
       {children}
-      <footer className="border-t border-border/70 bg-card/70">
-        <div className="container-wide flex flex-col gap-3 py-8 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
-          <p>{owner.summary}</p>
-          <p>{brand.name}</p>
-        </div>
-      </footer>
     </div>
   );
 }

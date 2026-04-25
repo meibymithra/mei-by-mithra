@@ -1,10 +1,10 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { intakeSchema } from "@/lib/validators";
-import { goalOptions } from "@/lib/constants";
+import { goalOptions, packageOptions, sessionTypes } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -12,7 +12,26 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Select } from "@/components/ui/select";
 
-type IntakeValues = typeof intakeSchema._output;
+type IntakeValues = {
+  bookingId?: string | null;
+  token?: string;
+  fullName: string;
+  age: number;
+  phone: string;
+  email: string;
+  emergencyContactName: string;
+  emergencyContactPhone: string;
+  concern: string;
+  goals: (typeof goalOptions)[number][];
+  goalsNote: string;
+  sessionType: "single" | "package";
+  packageSessions: "1" | "3" | "5" | "8";
+  timezone: string;
+  priorExperience: "yes" | "no";
+  priorExperienceDetails: string;
+  confidentialityAccepted: boolean;
+  termsAccepted: boolean;
+};
 
 export function IntakeForm({
   bookingId,
@@ -37,6 +56,9 @@ export function IntakeForm({
       concern: "",
       goals: [] as IntakeValues["goals"],
       goalsNote: "",
+      sessionType: "single" as const,
+      packageSessions: "1" as const,
+      timezone: "",
       priorExperience: "no" as const,
       priorExperienceDetails: "",
       confidentialityAccepted: false,
@@ -51,10 +73,16 @@ export function IntakeForm({
   });
 
   const goals = form.watch("goals");
+  const sessionType = form.watch("sessionType");
+
+  useEffect(() => {
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+    form.setValue("timezone", timezone, { shouldDirty: false });
+  }, [form]);
 
   return (
     <form
-      className="space-y-5"
+      className="space-y-6"
       onSubmit={form.handleSubmit(async (values) => {
         setLoading(true);
         setMessage(null);
@@ -70,42 +98,74 @@ export function IntakeForm({
           return;
         }
         setMessage(data.message ?? "Submitted successfully.");
-        form.reset(defaultValues as never);
+        form.reset(
+          {
+            ...defaultValues,
+            timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || ""
+          } as never
+        );
       })}
     >
       <div className="grid gap-4 sm:grid-cols-2">
-        <Field label="Full Name" error={form.formState.errors.fullName?.message as string | undefined}>
+        <Field label="Full name" error={form.formState.errors.fullName?.message as string | undefined}>
           <Input {...form.register("fullName")} placeholder="Your full name" />
         </Field>
         <Field label="Age" error={form.formState.errors.age?.message as string | undefined}>
           <Input type="number" {...form.register("age")} placeholder="Age" />
         </Field>
-        <Field label="Phone" error={form.formState.errors.phone?.message as string | undefined}>
-          <Input {...form.register("phone")} placeholder="Mobile number" />
+        <Field label="Mobile number" error={form.formState.errors.phone?.message as string | undefined}>
+          <Input {...form.register("phone")} placeholder="Primary mobile number" />
         </Field>
         <Field label="Email" error={form.formState.errors.email?.message as string | undefined}>
           <Input type="email" {...form.register("email")} placeholder="Email address" />
         </Field>
         <Field label="Emergency contact name" error={form.formState.errors.emergencyContactName?.message as string | undefined}>
-          <Input {...form.register("emergencyContactName")} placeholder="Name" />
+          <Input {...form.register("emergencyContactName")} placeholder="Emergency contact name" />
         </Field>
-        <Field label="Emergency contact phone" error={form.formState.errors.emergencyContactPhone?.message as string | undefined}>
-          <Input {...form.register("emergencyContactPhone")} placeholder="Phone" />
+        <Field label="Emergency contact number" error={form.formState.errors.emergencyContactPhone?.message as string | undefined}>
+          <Input {...form.register("emergencyContactPhone")} placeholder="Emergency contact mobile number" />
         </Field>
       </div>
 
-      <Field label="Basic concern" error={form.formState.errors.concern?.message as string | undefined}>
-        <Textarea {...form.register("concern")} placeholder="Briefly describe what you need help with" />
+      <div className="grid gap-4 md:grid-cols-[1fr_.8fr_.8fr]">
+        <Field label="Preferred support format" error={form.formState.errors.sessionType?.message as string | undefined}>
+          <Select {...form.register("sessionType")}>
+            {sessionTypes.map((item) => (
+              <option key={item.value} value={item.value}>
+                {item.label}
+              </option>
+            ))}
+          </Select>
+          <p className="mt-2 text-xs leading-6 text-muted-foreground">
+            Sessions are pre-booked. Packages are useful when the client wants ongoing support with multiple sessions.
+          </p>
+        </Field>
+        <Field label="Requested package size" error={form.formState.errors.packageSessions?.message as string | undefined}>
+          <Select {...form.register("packageSessions")} disabled={sessionType !== "package"}>
+            {packageOptions.map((item) => (
+              <option key={item.value} value={item.value}>
+                {item.label}
+              </option>
+            ))}
+          </Select>
+        </Field>
+        <Field label="Current timezone" error={form.formState.errors.timezone?.message as string | undefined}>
+          <Input {...form.register("timezone")} placeholder="For Indians living abroad" />
+        </Field>
+      </div>
+
+      <Field label="What brings you here?" error={form.formState.errors.concern?.message as string | undefined}>
+        <Textarea {...form.register("concern")} placeholder="Briefly describe what you need help with and what feels most urgent right now." />
       </Field>
 
-      <Field label="Goals" error={form.formState.errors.goals?.message as string | undefined}>
+      <Field label="Goals for support" error={form.formState.errors.goals?.message as string | undefined}>
         <div className="grid gap-2 sm:grid-cols-2">
           {goalOptions.map((goal) => {
             const checked = goals?.includes(goal);
             return (
               <label
                 key={goal}
-                className="flex items-center gap-3 rounded-2xl border border-border bg-background px-4 py-3 text-sm"
+                className="flex items-center gap-3 rounded-[1.25rem] border border-border bg-background px-4 py-3 text-sm"
               >
                 <Checkbox
                   checked={checked}
@@ -121,26 +181,37 @@ export function IntakeForm({
             );
           })}
         </div>
-        <Textarea className="mt-3" {...form.register("goalsNote")} placeholder="Optional notes about your goals" />
+        <Textarea
+          className="mt-3"
+          {...form.register("goalsNote")}
+          placeholder="Add context if you are booking for a package, school, family, or a specific support need."
+        />
       </Field>
 
-      <Field label="Prior experience" error={form.formState.errors.priorExperience?.message as string | undefined}>
+      <Field label="Have you taken support before?" error={form.formState.errors.priorExperience?.message as string | undefined}>
         <Select {...form.register("priorExperience")}>
           <option value="no">No</option>
           <option value="yes">Yes</option>
         </Select>
-        <Textarea className="mt-3" {...form.register("priorExperienceDetails")} placeholder="If yes, share what you tried before" />
+        <Textarea
+          className="mt-3"
+          {...form.register("priorExperienceDetails")}
+          placeholder="If yes, share what kind of support or sessions you have already tried."
+        />
       </Field>
 
-      <div className="grid gap-3 rounded-3xl border border-border bg-muted/30 p-4">
+      <div className="grid gap-3 rounded-[1.75rem] border border-border bg-muted/30 p-4">
         <label className="flex items-start gap-3 text-sm">
           <Checkbox {...form.register("confidentialityAccepted")} />
-          <span>I understand that my details are confidential and used only for service delivery.</span>
+          <span>I understand that my details are confidential and used only for service delivery, safeguarding, and administrative follow-up.</span>
         </label>
         <label className="flex items-start gap-3 text-sm">
           <Checkbox {...form.register("termsAccepted")} />
-          <span>I accept the terms of service and administrative email workflow.</span>
+          <span>I accept the pre-booking workflow, follow-up emails, and the terms described on the website.</span>
         </label>
+        <p className="text-xs leading-6 text-muted-foreground">
+          Completing this intake does not replace emergency support. If there is immediate risk, contact local emergency services.
+        </p>
       </div>
 
       <Button type="submit" className="w-full" disabled={loading}>

@@ -46,6 +46,18 @@ Set these in Vercel Project Settings. Use the same names in local `.env.local`.
 
 These are used by `npm run prisma:seed` and do not need to exist for normal app runtime unless you are re-seeding.
 
+## Admin seed model
+
+The seeded admin email is fixed in the seed script:
+
+- `meibymithra@gmail.com`
+
+Only the password should be provided through environment variables:
+
+- `ADMIN_SEED_PASSWORD`
+
+Do not commit any actual password into the repository, `.env.example`, docs, or CMS.
+
 ## Vercel env checklist
 
 ### Production

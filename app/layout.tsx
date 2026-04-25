@@ -21,10 +21,30 @@ const body = localFont({
   variable: "--font-body"
 });
 
+const siteUrl = process.env.SITE_URL ?? "https://meibymithra.com";
+
 export const metadata: Metadata = {
-  title: "Mithra Krishnamoorthy | Mei by Mithra",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "Mithra Krishnamoorthy | Mei by Mithra",
+    template: "%s | Mithra Krishnamoorthy"
+  },
   description:
-    "Mei by Mithra is the public brand and support practice for Mithra Krishnamoorthy, with calm booking, intake, and digital resources."
+    "Professional brand website for Mithra Krishnamoorthy, featuring counselling, sexuality education, facilitation work, bookings, intake, and digital playbooks.",
+  openGraph: {
+    title: "Mithra Krishnamoorthy | Mei by Mithra",
+    description:
+      "Portfolio, practice, store, and booking experience for Mithra Krishnamoorthy.",
+    url: siteUrl,
+    siteName: "Mei by Mithra",
+    type: "website"
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Mithra Krishnamoorthy | Mei by Mithra",
+    description:
+      "Portfolio, practice, store, and booking experience for Mithra Krishnamoorthy."
+  }
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

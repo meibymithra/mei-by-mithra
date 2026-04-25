@@ -31,6 +31,9 @@ export function InvoiceCreateForm({ clients }: { clients: { id: string; fullName
       </Select>
       <Input className="md:col-span-2" value={paymentLink} onChange={(e) => setPaymentLink(e.target.value)} placeholder="Razorpay or Stripe payment link" />
       <Input className="md:col-span-2" value={notes} onChange={(e) => setNotes(e.target.value)} placeholder="Notes" />
+      <p className="md:col-span-2 text-xs leading-6 text-muted-foreground">
+        Use session count greater than `1` for bulk bookings or packages per client. Payment can still be handled by invoice even if a direct link is not available yet.
+      </p>
       <Button
         type="button"
         className="md:col-span-2"

@@ -7,7 +7,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, React.InputHTMLAttrib
       ref={ref}
       type="checkbox"
       className={cn(
-        "h-4 w-4 rounded border-border text-primary focus:ring-2 focus:ring-ring",
+        "mt-1 h-4 w-4 rounded border-border bg-background text-primary focus:ring-2 focus:ring-ring",
         className
       )}
       {...props}

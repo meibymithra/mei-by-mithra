@@ -16,7 +16,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid feedback submission" }, { status: 400 });
   }
 
-  const { token, rating, feedback, consentToTestimonial } = parsed.data;
+  const { token, rating, experienceType, whatHelped, whatCouldImprove, testimonialSnippet, consentToTestimonial } = parsed.data;
   const booking = await prisma.booking.findUnique({
     where: { feedbackToken: token },
     include: { client: true }
@@ -37,7 +37,16 @@ export async function POST(request: Request) {
       bookingId: booking.id,
       token,
       rating,
-      feedback: sanitizeText(feedback),
+      feedback: sanitizeText(
+        [
+          `Type: ${experienceType}`,
+          `What helped: ${whatHelped}`,
+          whatCouldImprove ? `What could improve: ${whatCouldImprove}` : "",
+          testimonialSnippet ? `Suggested testimonial: ${testimonialSnippet}` : ""
+        ]
+          .filter(Boolean)
+          .join("\n\n")
+      ),
       consentToTestimonial
     }
   });
@@ -47,7 +56,9 @@ export async function POST(request: Request) {
     await sendTransactionalEmail({
       to: admins,
       subject: `New feedback received from ${booking.client.fullName}`,
-      html: `<p>Rating: ${rating}/5</p><p>${sanitizeText(feedback)}</p>`,
+      html: `<p>Rating: ${rating}/5</p><p><strong>Type:</strong> ${sanitizeText(experienceType)}</p><p><strong>What helped:</strong> ${sanitizeText(
+        whatHelped
+      )}</p>${whatCouldImprove ? `<p><strong>What could improve:</strong> ${sanitizeText(whatCouldImprove)}</p>` : ""}`,
       templateKey: "custom",
       metadata: { feedbackId: record.id, bookingId: booking.id }
     });

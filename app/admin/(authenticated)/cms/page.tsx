@@ -7,28 +7,70 @@ import { ContentEditor } from "@/components/admin/content-editor";
 import { ProductEditor } from "@/components/admin/product-editor";
 
 export default async function CmsPage() {
-  const [faqs, hero, services, products] = await Promise.all([
+  const [faqs, homeHero, aboutPage, practicePage, products] = await Promise.all([
     prisma.siteContent.findUnique({ where: { key: "faqs" } }),
-    prisma.siteContent.findUnique({ where: { key: "hero" } }),
-    prisma.siteContent.findUnique({ where: { key: "services" } }),
+    prisma.siteContent.findUnique({ where: { key: "homeHero" } }),
+    prisma.siteContent.findUnique({ where: { key: "aboutPage" } }),
+    prisma.siteContent.findUnique({ where: { key: "practicePage" } }),
     prisma.product.findMany({ orderBy: { createdAt: "desc" } })
   ]);
 
   return (
     <div className="space-y-6">
-      <SectionHeading eyebrow="CMS" title="Content management" description="Edit FAQs, hero content, service blocks, and playbook listings." />
+      <SectionHeading
+        eyebrow="CMS"
+        title="Content management"
+        description="Edit homepage, About page, Practice page, FAQs, and playbook listings from the admin dashboard."
+      />
       <div className="grid gap-4">
         <ContentEditor
-          contentKey="hero"
-          title="Hero"
-          initialTitle={hero?.title ?? "Hero"}
+          contentKey="homeHero"
+          title="Homepage hero"
+          initialTitle={homeHero?.title ?? "Homepage Hero"}
           initialContent={JSON.stringify(
-            hero?.content ?? {
-              eyebrow: "Calm, confidential support",
-              headline: "Mithra Krishnamoorthy with the human touch behind Mei by Mithra",
+            homeHero?.content ?? {
+              eyebrow: "Mithra Krishnamoorthy",
+              title: "A professional brand website for counselling, sexuality education, and practical support.",
               description:
-                "A grounded support practice for parents, teachers, adults, and young people who want clarity, structure, and practical next steps.",
-              ctas: ["Book a Session", "View Playbooks"]
+                "Mei by Mithra presents Mithra Krishnamoorthy's practice, portfolio, and digital resources through a calm, premium experience designed for individuals, parents, educators, and institutions.",
+              primaryCtaLabel: "Book a Session",
+              primaryCtaHref: "/book",
+              secondaryCtaLabel: "Explore the Store",
+              secondaryCtaHref: "/store"
+            },
+            null,
+            2
+          )}
+        />
+        <ContentEditor
+          contentKey="aboutPage"
+          title="About page"
+          initialTitle={aboutPage?.title ?? "About Page"}
+          initialContent={JSON.stringify(
+            aboutPage?.content ?? {
+              eyebrow: "About",
+              title: "Mithra Krishnamoorthy",
+              description:
+                "Mithra Krishnamoorthy works across counselling psychology, sexuality education, facilitation, and practical support design. Her work combines academic grounding with human-centered clarity.",
+              highlights: [],
+              narrative: ""
+            },
+            null,
+            2
+          )}
+        />
+        <ContentEditor
+          contentKey="practicePage"
+          title="Practice page"
+          initialTitle={practicePage?.title ?? "Practice Page"}
+          initialContent={JSON.stringify(
+            practicePage?.content ?? {
+              eyebrow: "Practice",
+              title: "Practice areas and service design",
+              description:
+                "The practice combines one-to-one support, educational facilitation, and digital resources. Each offering is meant to be useful, direct, and appropriate to the client's context.",
+              services: [],
+              process: []
             },
             null,
             2
@@ -39,12 +81,6 @@ export default async function CmsPage() {
           title="FAQs"
           initialTitle={faqs?.title ?? "FAQs"}
           initialContent={JSON.stringify(faqs?.content ?? [], null, 2)}
-        />
-        <ContentEditor
-          contentKey="services"
-          title="Services"
-          initialTitle={services?.title ?? "Services"}
-          initialContent={JSON.stringify(services?.content ?? [], null, 2)}
         />
       </div>
       <Card>

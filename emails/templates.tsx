@@ -21,10 +21,10 @@ function shell(title: string, body: string) {
 export const emailTemplates = {
   intakeRequest: ({ name, intakeUrl, to }: { name: string; intakeUrl: string; to: string }): TemplatePayload => ({
     to,
-    subject: "Complete your MyRafique intake form",
+    subject: "Complete your Mei by Mithra intake form",
     html: shell(
       "Complete your intake",
-      `<p>Hi ${name},</p><p>Your booking is confirmed. Please complete the intake form before your session.</p><p><a href="${intakeUrl}" style="display:inline-block;background:#b72e09;color:#fff;padding:12px 18px;border-radius:999px;text-decoration:none">Open Intake Form</a></p>`
+      `<p>Hi ${name},</p><p>Your booking is confirmed. Please complete the intake form before your session.</p><p>This process is designed for pre-booked sessions, including international clients viewing availability in their local timezone.</p><p><a href="${intakeUrl}" style="display:inline-block;background:#b72e09;color:#fff;padding:12px 18px;border-radius:999px;text-decoration:none">Open Intake Form</a></p>`
     )
   }),
   invoice: ({
@@ -39,18 +39,18 @@ export const emailTemplates = {
     to: string;
   }): TemplatePayload => ({
     to,
-    subject: "Your MyRafique invoice",
+    subject: "Your Mei by Mithra invoice",
     html: shell(
       "Invoice ready",
-      `<p>Hi ${name},</p><p>Your invoice for <strong>${amount}</strong> is ready.</p><p><a href="${paymentLink}" style="display:inline-block;background:#84a18f;color:#fff;padding:12px 18px;border-radius:999px;text-decoration:none">Pay Now</a></p>`
+      `<p>Hi ${name},</p><p>Your invoice for <strong>${amount}</strong> is ready.</p><p>You can pay using the link below. If this does not work for your region, reply to request a manual invoice alternative.</p><p><a href="${paymentLink}" style="display:inline-block;background:#84a18f;color:#fff;padding:12px 18px;border-radius:999px;text-decoration:none">Pay Now</a></p>`
     )
   }),
   feedbackRequest: ({ name, feedbackUrl, to }: { name: string; feedbackUrl: string; to: string }): TemplatePayload => ({
     to,
-    subject: "How was your session with MyRafique?",
+    subject: "How was your session with Mei by Mithra?",
     html: shell(
       "Share feedback",
-      `<p>Hi ${name},</p><p>Please rate your session and share any feedback.</p><p><a href="${feedbackUrl}" style="display:inline-block;background:#b72e09;color:#fff;padding:12px 18px;border-radius:999px;text-decoration:none">Open Feedback Form</a></p>`
+      `<p>Hi ${name},</p><p>Please share a short rating and open-ended feedback about your experience.</p><p>If you consent, a short portion may later be considered for a testimonial after moderation.</p><p><a href="${feedbackUrl}" style="display:inline-block;background:#b72e09;color:#fff;padding:12px 18px;border-radius:999px;text-decoration:none">Open Feedback Form</a></p>`
     )
   }),
   productDelivery: ({

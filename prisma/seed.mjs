@@ -118,13 +118,13 @@ async function main() {
     update: {
       subject: "Complete your Mei by Mithra intake form",
       body:
-        "<div style=\"font-family:Arial,sans-serif;line-height:1.7\"><p>Hi {{name}},</p><p>Your booking is confirmed. Please complete the intake form before your session.</p><p><a href=\"{{intakeUrl}}\">Open Intake Form</a></p></div>"
+        "<div style=\"font-family:Arial,sans-serif;line-height:1.7\"><p>Hi {{name}},</p><p>Your booking is confirmed. Please complete the intake form before your session.</p><p>This is part of the pre-booking workflow and helps tailor support in advance.</p><p><a href=\"{{intakeUrl}}\">Open Intake Form</a></p></div>"
     },
     create: {
       key: "intakeRequest",
       subject: "Complete your Mei by Mithra intake form",
       body:
-        "<div style=\"font-family:Arial,sans-serif;line-height:1.7\"><p>Hi {{name}},</p><p>Your booking is confirmed. Please complete the intake form before your session.</p><p><a href=\"{{intakeUrl}}\">Open Intake Form</a></p></div>"
+        "<div style=\"font-family:Arial,sans-serif;line-height:1.7\"><p>Hi {{name}},</p><p>Your booking is confirmed. Please complete the intake form before your session.</p><p>This is part of the pre-booking workflow and helps tailor support in advance.</p><p><a href=\"{{intakeUrl}}\">Open Intake Form</a></p></div>"
     }
   });
 
@@ -133,13 +133,13 @@ async function main() {
     update: {
       subject: "Your Mei by Mithra invoice",
       body:
-        "<div style=\"font-family:Arial,sans-serif;line-height:1.7\"><p>Hi {{name}},</p><p>Your invoice for <strong>{{amount}}</strong> is ready.</p><p><a href=\"{{paymentLink}}\">Pay Now</a></p></div>"
+        "<div style=\"font-family:Arial,sans-serif;line-height:1.7\"><p>Hi {{name}},</p><p>Your invoice for <strong>{{amount}}</strong> is ready.</p><p>If the payment link does not work for your region, reply for a manual invoice alternative.</p><p><a href=\"{{paymentLink}}\">Pay Now</a></p></div>"
     },
     create: {
       key: "invoice",
       subject: "Your Mei by Mithra invoice",
       body:
-        "<div style=\"font-family:Arial,sans-serif;line-height:1.7\"><p>Hi {{name}},</p><p>Your invoice for <strong>{{amount}}</strong> is ready.</p><p><a href=\"{{paymentLink}}\">Pay Now</a></p></div>"
+        "<div style=\"font-family:Arial,sans-serif;line-height:1.7\"><p>Hi {{name}},</p><p>Your invoice for <strong>{{amount}}</strong> is ready.</p><p>If the payment link does not work for your region, reply for a manual invoice alternative.</p><p><a href=\"{{paymentLink}}\">Pay Now</a></p></div>"
     }
   });
 
@@ -148,13 +148,13 @@ async function main() {
     update: {
       subject: "How was your session with Mei by Mithra?",
       body:
-        "<div style=\"font-family:Arial,sans-serif;line-height:1.7\"><p>Hi {{name}},</p><p>Please rate your session and share any feedback.</p><p><a href=\"{{feedbackUrl}}\">Open Feedback Form</a></p></div>"
+        "<div style=\"font-family:Arial,sans-serif;line-height:1.7\"><p>Hi {{name}},</p><p>Please rate your session and share short, open-ended feedback.</p><p>If you consent, part of your response may later be considered for a testimonial after moderation.</p><p><a href=\"{{feedbackUrl}}\">Open Feedback Form</a></p></div>"
     },
     create: {
       key: "feedbackRequest",
       subject: "How was your session with Mei by Mithra?",
       body:
-        "<div style=\"font-family:Arial,sans-serif;line-height:1.7\"><p>Hi {{name}},</p><p>Please rate your session and share any feedback.</p><p><a href=\"{{feedbackUrl}}\">Open Feedback Form</a></p></div>"
+        "<div style=\"font-family:Arial,sans-serif;line-height:1.7\"><p>Hi {{name}},</p><p>Please rate your session and share short, open-ended feedback.</p><p>If you consent, part of your response may later be considered for a testimonial after moderation.</p><p><a href=\"{{feedbackUrl}}\">Open Feedback Form</a></p></div>"
     }
   });
 
@@ -214,66 +214,135 @@ async function main() {
   });
 
   await prisma.siteContent.upsert({
-    where: { key: "hero" },
+    where: { key: "homeHero" },
     update: {
-      title: "Hero",
+      title: "Homepage Hero",
       content: {
-        eyebrow: "Calm, confidential support",
-        headline: "Mithra Krishnamoorthy with the human touch behind Mei by Mithra",
+        eyebrow: "Mithra Krishnamoorthy",
+        title: "A professional brand website for counselling, sexuality education, and practical support.",
         description:
-          "A grounded support practice for parents, teachers, adults, and young people who want clarity, structure, and practical next steps.",
-        ctas: ["Book a Session", "View Playbooks"]
+          "Mei by Mithra presents Mithra Krishnamoorthy's practice, portfolio, and digital resources through a calm, premium experience designed for individuals, parents, educators, and institutions.",
+        primaryCtaLabel: "Book a Session",
+        primaryCtaHref: "/book",
+        secondaryCtaLabel: "Explore the Store",
+        secondaryCtaHref: "/store"
       }
     },
     create: {
-      key: "hero",
-      title: "Hero",
+      key: "homeHero",
+      title: "Homepage Hero",
       content: {
-        eyebrow: "Calm, confidential support",
-        headline: "Mithra Krishnamoorthy with the human touch behind Mei by Mithra",
+        eyebrow: "Mithra Krishnamoorthy",
+        title: "A professional brand website for counselling, sexuality education, and practical support.",
         description:
-          "A grounded support practice for parents, teachers, adults, and young people who want clarity, structure, and practical next steps.",
-        ctas: ["Book a Session", "View Playbooks"]
+          "Mei by Mithra presents Mithra Krishnamoorthy's practice, portfolio, and digital resources through a calm, premium experience designed for individuals, parents, educators, and institutions.",
+        primaryCtaLabel: "Book a Session",
+        primaryCtaHref: "/book",
+        secondaryCtaLabel: "Explore the Store",
+        secondaryCtaHref: "/store"
       }
     }
   });
 
   await prisma.siteContent.upsert({
-    where: { key: "services" },
+    where: { key: "aboutPage" },
     update: {
-      title: "Services",
-      content: [
-        {
-          title: "1:1 support",
-          description: "For emotional regulation, relationship clarity, parenting questions, and overwhelm."
-        },
-        {
-          title: "Purpose coaching",
-          description: "For people who want direction, structure, and a grounded way forward."
-        },
-        {
-          title: "Sexuality education",
-          description: "For schools, colleges, and communities that need clear, respectful facilitation."
-        }
-      ]
+      title: "About Page",
+      content: {
+        eyebrow: "About",
+        title: "Mithra Krishnamoorthy",
+        description:
+          "Mithra Krishnamoorthy works across counselling psychology, sexuality education, facilitation, and practical support design. Her work combines academic grounding with human-centered clarity.",
+        highlights: [
+          "MSc in Counselling Psychology from Madras School of Social Work",
+          "BSc in Psychology from PSG College of Arts & Science",
+          "Freelance sex educator collaborating with schools, colleges, and communities",
+          "Practice informed by DBT, Transactional Analysis, mindfulness, and positive psychology"
+        ],
+        narrative:
+          "The brand is designed to feel thoughtful, responsible, and emotionally intelligent. It reflects Mithra's work with individuals, families, and institutions while creating a clear pathway into booking, intake, and resources."
+      }
     },
     create: {
-      key: "services",
-      title: "Services",
-      content: [
-        {
-          title: "1:1 support",
-          description: "For emotional regulation, relationship clarity, parenting questions, and overwhelm."
-        },
-        {
-          title: "Purpose coaching",
-          description: "For people who want direction, structure, and a grounded way forward."
-        },
-        {
-          title: "Sexuality education",
-          description: "For schools, colleges, and communities that need clear, respectful facilitation."
-        }
-      ]
+      key: "aboutPage",
+      title: "About Page",
+      content: {
+        eyebrow: "About",
+        title: "Mithra Krishnamoorthy",
+        description:
+          "Mithra Krishnamoorthy works across counselling psychology, sexuality education, facilitation, and practical support design. Her work combines academic grounding with human-centered clarity.",
+        highlights: [
+          "MSc in Counselling Psychology from Madras School of Social Work",
+          "BSc in Psychology from PSG College of Arts & Science",
+          "Freelance sex educator collaborating with schools, colleges, and communities",
+          "Practice informed by DBT, Transactional Analysis, mindfulness, and positive psychology"
+        ],
+        narrative:
+          "The brand is designed to feel thoughtful, responsible, and emotionally intelligent. It reflects Mithra's work with individuals, families, and institutions while creating a clear pathway into booking, intake, and resources."
+      }
+    }
+  });
+
+  await prisma.siteContent.upsert({
+    where: { key: "practicePage" },
+    update: {
+      title: "Practice Page",
+      content: {
+        eyebrow: "Practice",
+        title: "Practice areas and service design",
+        description:
+          "The practice combines one-to-one support, educational facilitation, and digital resources. Each offering is meant to be useful, direct, and appropriate to the client's context.",
+        services: [
+          {
+            title: "Counselling support",
+            description: "Structured one-to-one sessions for emotional regulation, relationships, boundaries, stress, and life transitions."
+          },
+          {
+            title: "Sexuality education",
+            description: "Evidence-based educational work for adolescents, young adults, schools, colleges, and communities."
+          },
+          {
+            title: "Workshops and facilitation",
+            description: "Learning experiences and guided conversations designed for groups, institutions, and developmental contexts."
+          }
+        ],
+        process: [
+          "Clients book through Calendly using fixed India-based availability.",
+          "The first intake form is sent automatically after booking.",
+          "Support may proceed as a single session or as a multi-session package depending on need.",
+          "Invoices and follow-up are handled through the admin workflow."
+        ]
+      }
+    },
+    create: {
+      key: "practicePage",
+      title: "Practice Page",
+      content: {
+        eyebrow: "Practice",
+        title: "Practice areas and service design",
+        description:
+          "The practice combines one-to-one support, educational facilitation, and digital resources. Each offering is meant to be useful, direct, and appropriate to the client's context.",
+        services: [
+          {
+            title: "Counselling support",
+            description: "Structured one-to-one sessions for emotional regulation, relationships, boundaries, stress, and life transitions."
+          },
+          {
+            title: "Sexuality education",
+            description: "Evidence-based educational work for adolescents, young adults, schools, colleges, and communities."
+          },
+          {
+            title: "Workshops and facilitation",
+            description: "Learning experiences and guided conversations designed for groups, institutions, and developmental contexts."
+          }
+        ],
+        process: [
+          "Clients book through Calendly using fixed India-based availability.",
+          "The first intake form is sent automatically after booking.",
+          "Support may proceed as a single session or as a multi-session package depending on need.",
+          "Invoices and follow-up are handled through the admin workflow."
+        ]
+      }
     }
   });
 

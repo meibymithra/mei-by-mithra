@@ -34,9 +34,9 @@ export function HeroVisual() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-4">
-                <Badge className="mb-3 bg-background/90 text-foreground">Portfolio portrait</Badge>
+                <Badge className="mb-3 bg-background/90 text-foreground">Brand portrait</Badge>
                 <p className="max-w-[18rem] text-sm text-white/90">
-                  Human-centered work, framed with calm, editorial composition.
+                  A composed visual language for a serious public-facing practice.
                 </p>
               </div>
             </div>
@@ -56,9 +56,9 @@ export function HeroVisual() {
           </div>
           <div className="mt-3 grid gap-3 sm:grid-cols-3">
             {[
-              { label: "Confidential flow", value: "Admin-only" },
-              { label: "Conversion design", value: "2 clicks" },
-              { label: "Support model", value: "Bookings + playbooks" }
+              { label: "Practice flow", value: "Booking + intake + follow-up" },
+              { label: "Store layer", value: "Guided digital resources" },
+              { label: "Brand focus", value: "People, education, and care" }
             ].map((item) => (
               <div key={item.label} className="rounded-2xl border border-border bg-background/80 px-4 py-3">
                 <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">{item.label}</p>
@@ -78,7 +78,7 @@ export function HeroVisual() {
         <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Brand note</p>
         <p className="mt-2 text-sm font-semibold">Mei by Mithra</p>
         <p className="mt-1 text-xs leading-6 text-muted-foreground">
-          Calm, confidential, and easy to navigate.
+          Professional, calm, and designed for trust.
         </p>
       </motion.div>
     </motion.div>

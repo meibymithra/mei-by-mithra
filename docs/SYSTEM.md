@@ -1,135 +1,209 @@
 # Mei by Mithra System Docs
 
-## What this is
+## What this repo is
 
-This repository is a portfolio-cum-operations website for `Mithra Krishnamoorthy`, with `Mei by Mithra` as the coaching/therapy service layer.
+This repository is the brand website and operations layer for `Mithra Krishnamoorthy`.
 
-The public site does three jobs:
+Publicly, it acts as:
 
-- Presents Mithra as a portfolio-grade brand
-- Converts visitors into bookings and intake submissions
-- Runs the service workflow through admin-only operations
+- a brand website
+- a portfolio for Mithra's work
+- a booking surface
+- an intake surface
+- a digital storefront for playbooks
 
-## Stack
+Operationally, it acts as:
 
-- Next.js 14 App Router
-- TypeScript strict
-- Tailwind CSS
-- Prisma ORM
-- PostgreSQL on Supabase
-- Supabase Auth for admin login
-- Vercel-hosted frontend, API routes, and server actions
-- Resend for transactional email
-- Calendly for booking
+- a client intake system
+- a booking tracker
+- an invoice trigger point
+- a feedback and testimonial moderation system
+- a small CMS/store admin
 
-## Routes
+## Core product model
 
-- `/` landing page
-- `/book` Calendly booking embed
-- `/intake` intake form
-- `/feedback/[token]` feedback form
-- `/store` digital playbooks storefront
-- `/products` redirect alias for the store
-- `/admin/*` protected admin dashboard
+The public site and admin are one product, but they serve different audiences.
 
-## Seeded admin
+### Public
 
-The repo seeds one admin account:
+- Homepage: brand and portfolio narrative
+- About: profile, qualifications, and brand background
+- Practice: services, process, and operating model
+- Book: Calendly booking flow
+- Intake: booking-linked structured intake
+- Store: digital resource storefront
+- Product pages: product details and payment intent
+- Feedback: tokenized post-session feedback
+- Terms: public expectations for booking, intake, packages, and testimonial moderation
 
-- Email: `meibymithra@gmail.com`
-- Password: supplied through `ADMIN_SEED_PASSWORD`
-- Recovery email: `meibymithra.recovery@gmail.com`
+### Admin
 
-The seed script:
+- Dashboard
+- Clients
+- Bookings
+- Invoices
+- Feedback moderation
+- CMS
+- Store management
+- Email templates
+- Calendly logs
 
-- Creates or updates the Supabase Auth user
-- Stores the `AdminUser` row in PostgreSQL
-- Stores a password hash and recovery email in `AdminUser`
+## Business rules captured in the app
 
-Run it with:
+### Brand
 
-```bash
-npm run prisma:seed
-```
+- Customer-facing brand name: `Mei by Mithra`
+- Person behind the brand: `Mithra Krishnamoorthy`
+- Visual system follows the documented earth-tone palette and Bantayog/Playpen Sans typography
 
-Required env vars for auth sync:
+### Booking
 
-- `NEXT_PUBLIC_SUPABASE_URL`
-- `SUPABASE_SERVICE_ROLE_KEY`
-- `ADMIN_SEED_PASSWORD`
+- Booking is handled in Calendly
+- Availability is fixed to:
+  - Mon-Sat `7:30 PM - 8:30 PM` IST
+  - Sun `8:30 AM - 8:30 PM` IST
+- The booking surface is meant to work for Indians living abroad by allowing Calendly to render in the visitor's timezone
 
-## Environment variables
+### Intake
 
-Required:
+- Intake is linked to a booking token
+- Intake covers:
+  - name
+  - age
+  - mobile number
+  - email
+  - emergency contact
+  - concern
+  - goals
+  - prior support context
+  - single session vs package preference
+  - requested package size
+  - timezone
+  - confidentiality acceptance
+  - terms acceptance
+- Intake is the first automatic email triggered after a Calendly booking
 
-- `DATABASE_URL`
-- `DIRECT_URL`
-- `NEXT_PUBLIC_SUPABASE_URL`
-- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-- `SUPABASE_SERVICE_ROLE_KEY`
-- `RESEND_API_KEY`
-- `RESEND_FROM_EMAIL`
-- `SITE_URL`
+### Sessions and packages
 
-Supabase connection pattern:
+- Sessions are pre-booked
+- Clients can indicate package intent
+- Invoices support multiple sessions per client using `sessionCount`
+- Admin can use invoice creation for bulk-session or package handling
 
-- `DATABASE_URL` should point to the Supabase pooler endpoint for app runtime.
-- `DIRECT_URL` should point to the direct database endpoint for migrations and `prisma migrate`.
+### Payments
 
-Booking:
+- Payment is invoice-driven
+- Payment links can be direct or manual
+- Store products can also fall back to manual invoice handling
 
-- `CALENDLY_EVENT_TYPE_URL`
-- `NEXT_PUBLIC_CALENDLY_URL`
-- `CALENDLY_WEBHOOK_SECRET`
+### Feedback and testimonials
 
-Payments:
+- Feedback is tokenized and post-session
+- Feedback uses short, open-ended responses
+- Feedback can optionally propose a short testimonial line
+- Testimonials are always moderation-controlled and never auto-published
 
-- `RAZORPAY_PAYMENT_LINK`
-- `STRIPE_PAYMENT_LINK`
+## Route map
 
-## Operational flow
+- `/`: brand homepage
+- `/about`: profile page
+- `/practice`: service and process page
+- `/store`: public storefront
+- `/products/[slug]`: individual playbook page
+- `/book`: Calendly booking
+- `/intake`: structured intake
+- `/feedback/[token]`: feedback page
+- `/terms`: public terms
+- `/admin/*`: protected admin surface
 
-1. Visitor books on Calendly.
-2. Calendly webhook creates or updates a client and booking.
-3. Webhook payload is logged in the Calendly operations table.
-4. Intake email is sent automatically.
-5. Client submits intake.
-6. Admin creates invoice and sends payment link.
-7. Session completes.
-8. Feedback email is sent.
-9. Admin approves feedback and publishes testimonial if allowed.
+## Data model highlights
 
-## Admin workflow
+### Client
 
-- Login with Supabase Auth at `/admin/login`
-- The user must also exist in the `AdminUser` table
-- Manage clients, bookings, invoices, feedback, CMS, templates, and analytics from `/admin/*`
-- Store content and product controls live at `/admin/store`
-- Calendly logs and upcoming booking tracking live at `/admin/calendly`
+Stores core contact info, notes, tags, and relationships to bookings, invoices, intake forms, feedback, and testimonials.
 
-## Deployment notes
+### Booking
 
-- Deploy on Vercel.
-- Vercel runs the full app layer, including the backend routes and webhook handlers.
-- Connect Supabase PostgreSQL and Supabase Auth.
-- Use [`docs/DEPLOYMENT.md`](DEPLOYMENT.md) for the exact runtime and seed-only environment variable split.
-- Run Prisma migrations on deploy:
+Stores Calendly linkage, scheduled time, status, intake token, feedback token, and session type.
 
-```bash
-npm run prisma:deploy
-```
+### IntakeForm
 
-## Frontend design system
+Stores the booking-linked intake payload.
 
-- Palette: cream, rust, sage, sand, coral, beige, brown
-- Typography: Bantayog for headings, Playpen Sans for body
-- Layout direction: airy, editorial, premium, trust-first
-- Public copy: calm, concise, and conversion-oriented
+### Invoice
 
-## Future extension points
+Stores session count, amount, currency, payment link, notes, and status.
 
-- Customer portal
-- WhatsApp automation
-- Subscription plans
-- AI-assisted intake analysis
-- AI session summaries
+### Feedback
+
+Stores rating, open-ended feedback text, and testimonial consent.
+
+### Testimonial
+
+Stores moderated, publishable quote content.
+
+### Product
+
+Stores product metadata, pricing, payment link, and delivery URL.
+
+## Operational flows
+
+### Booking to intake
+
+1. Visitor books through Calendly
+2. Calendly webhook is received
+3. Webhook log is written
+4. Client record is created or updated
+5. Booking record is created or updated
+6. Intake email is sent automatically
+
+### Intake to service
+
+1. Client opens intake email
+2. Client submits the tokenized intake form
+3. Booking is updated with session type
+4. Admin is notified
+5. Admin prepares the next service step and invoice
+
+### Invoice flow
+
+1. Admin creates invoice from `/admin/invoices`
+2. Session count can represent single or bulk bookings
+3. Payment link email can be sent
+4. Manual invoice fallback remains available
+
+### Feedback flow
+
+1. Admin marks a booking completed
+2. Feedback request email is sent automatically
+3. Client submits short feedback with open-ended fields
+4. Admin reviews the submission
+5. If appropriate, admin approves and publishes a testimonial
+
+## Key implementation files
+
+- `app/page.tsx`
+- `app/store/page.tsx`
+- `app/about/page.tsx`
+- `app/practice/page.tsx`
+- `app/book/page.tsx`
+- `app/intake/page.tsx`
+- `app/feedback/[token]/page.tsx`
+- `app/terms/page.tsx`
+- `app/api/webhooks/calendly/route.ts`
+- `app/api/intake/route.ts`
+- `app/api/feedback/route.ts`
+- `app/api/admin/invoices/route.ts`
+- `components/forms/intake-form.tsx`
+- `components/forms/feedback-form.tsx`
+- `emails/templates.tsx`
+- `lib/constants.ts`
+- `lib/validators.ts`
+
+## Known design and product stance
+
+- The public website must foreground Mithra and the brand, not admin mechanics
+- Homepage should remain concise and route visitors into dedicated pages
+- The store must feel like part of the brand ecosystem, not a disconnected catalogue
+- The website should remain strong on mobile
+- Motion should be memorable but should not compromise legibility or trust
