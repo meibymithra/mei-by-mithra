@@ -18,7 +18,7 @@ export default async function IntakePage({
           <SectionHeading
             eyebrow="Intake"
             title="Share the context before your session"
-            description="This form helps the first conversation start with clarity. It is sent after booking and stored for review as part of the support workflow."
+            description="Your answers become part of the conversation thread, so nothing needs to be repeated. Start with what matters most."
           />
           <div className="grid gap-4">
             <Card className="surface">

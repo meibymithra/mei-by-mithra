@@ -82,7 +82,7 @@ export default async function PracticePage() {
                 <SectionHeading
                   eyebrow="Process"
                   title="How the practice operates"
-                  description="This page clarifies the real operating model behind booking, intake, packages, and invoices."
+                  description="A transparent view of the workflow from booking through follow-up, so you understand each step."
                 />
                 <div className="space-y-3">
                   {(content.process ?? practicePageFallback.process).map((item, index) => (
@@ -121,7 +121,7 @@ export default async function PracticePage() {
                 <SectionHeading
                   eyebrow="FAQ"
                   title="Practice questions"
-                  description="These are surfaced here instead of making the homepage carry the entire support narrative."
+                  description="Answers to questions about booking, packages, sessions, and how the practice actually works."
                 />
                 <div className="space-y-3">
                   {faqs.map((item: any) => (
@@ -140,7 +140,7 @@ export default async function PracticePage() {
                 <SectionHeading
                   eyebrow="Ready"
                   title="Proceed to booking or start with a resource"
-                  description="This page is meant to answer process questions before someone commits."
+                  description="Choose your next step: reserve time with Mei, or explore a playbook to start now."
                 />
                 <div className="flex flex-col gap-3 sm:flex-row">
                   <Button asChild variant="secondary">

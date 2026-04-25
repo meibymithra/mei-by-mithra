@@ -154,8 +154,8 @@ export default async function HomePage() {
               <div className="space-y-4">
                 <SectionHeading
                   eyebrow="Who this is for"
-                    title="A brand website built around real people and real contexts"
-                  description="Mei by Mithra is not framed as a generic portfolio. It is designed to help visitors quickly understand whether the work fits their life, family, classroom, or institution."
+                    title="Grounded in the specifics of real contexts"
+                  description="This practice works with families, educators, and institutions navigating change together. The work is particular, not templated."
                 />
               </div>
               <div className="grid gap-4 md:grid-cols-3">

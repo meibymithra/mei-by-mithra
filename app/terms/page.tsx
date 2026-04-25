@@ -33,7 +33,7 @@ export default function TermsPage() {
         <SectionHeading
           eyebrow="Terms"
           title="Service expectations for booking, intake, confidentiality, and payment"
-          description="This page sets the public expectations for how sessions, packages, feedback, and invoice-led payment are handled."
+          description="Clear boundaries and processes so you know exactly how sessions, packages, confidentiality, feedback, and payment work."
         />
         <div className="grid gap-4 md:grid-cols-2">
           {terms.map((item) => (

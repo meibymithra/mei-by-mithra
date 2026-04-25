@@ -35,11 +35,13 @@ export function CalendlyEmbed({ calendlyUrl }: { calendlyUrl?: string }) {
           Availability is shown in <strong className="text-foreground">{timezone}</strong>. Mithra's base availability is Mon-Sat 7:30 PM - 8:30 PM IST and Sunday 8:30 AM - 8:30 PM IST.
         </div>
         {hasBookingUrl && isValidBookingUrl ? (
-          <div className="min-h-[720px]">
+          <div className="min-h-[720px] w-full overflow-hidden">
             <iframe
               title="Cal.com booking"
               src={calendlyUrl}
-              className="h-[780px] w-full"
+              className="h-[780px] w-full border-0"
+              style={{ border: "none", overflow: "hidden" }}
+              allowFullScreen
             />
           </div>
         ) : hasBookingUrl ? (
