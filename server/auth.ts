@@ -3,6 +3,8 @@ import { redirect } from "next/navigation";
 import { createServerClient } from "@supabase/ssr";
 import { hasSupabaseConfig } from "@/lib/config";
 
+type CookieToSet = { name: string; value: string; options?: Record<string, unknown> };
+
 export async function getSupabaseServerClient() {
   if (!hasSupabaseConfig()) return null;
   const cookieStore = cookies();
@@ -12,15 +14,14 @@ export async function getSupabaseServerClient() {
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
       cookies: {
-        get(name: string) {
-          return cookieStore.get(name)?.value;
+        getAll() {
+          return cookieStore.getAll();
         },
-        set(name: string, value: string, options: Record<string, unknown>) {
-          cookieStore.set({ name, value, ...options });
+        setAll(cookiesToSet: CookieToSet[]) {
+          cookiesToSet.forEach(({ name, value, options }) => {
+            cookieStore.set(name, value, options);
+          });
         },
-        remove(name: string, options: Record<string, unknown>) {
-          cookieStore.set({ name, value: "", ...options, maxAge: 0 });
-        }
       }
     }
   );
@@ -35,16 +36,28 @@ export async function requireAdmin() {
 export async function getCurrentAdmin() {
   const supabase = await getSupabaseServerClient();
   if (!supabase) return null;
-  const {
-    data: { user }
-  } = await supabase.auth.getUser();
-  if (!user) return null;
 
-  const { prisma } = await import("@/server/db");
-  const admin = await prisma.adminUser.findUnique({
-    where: { supabaseUserId: user.id }
-  });
+  const { data: { session } } = await supabase.auth.getSession();
+  if (!session) return null;
 
+  const { data: { user }, error } = await supabase.auth.getUser();
+  if (error || !user) {
+    const { data: refreshData } = await supabase.auth.refreshSession();
+    if (!refreshData.session) return null;
+    return {
+      user: refreshData.user,
+      admin: await getAdminFromUser(refreshData.user!.id)
+    };
+  }
+
+  const admin = await getAdminFromUser(user.id);
   if (!admin || !admin.active) return null;
   return { user, admin };
+}
+
+async function getAdminFromUser(supabaseUserId: string) {
+  const { prisma } = await import("@/server/db");
+  return prisma.adminUser.findUnique({
+    where: { supabaseUserId }
+  });
 }

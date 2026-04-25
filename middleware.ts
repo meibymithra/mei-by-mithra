@@ -2,6 +2,8 @@ import { NextResponse, type NextRequest } from "next/server";
 import { createServerClient } from "@supabase/ssr";
 import { hasSupabaseConfig } from "@/lib/config";
 
+type CookieToSet = { name: string; value: string; options?: Record<string, unknown> };
+
 export async function middleware(request: NextRequest) {
   const response = NextResponse.next();
 
@@ -14,20 +16,18 @@ export async function middleware(request: NextRequest) {
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
       cookies: {
-        get(name: string) {
-          return request.cookies.get(name)?.value;
+        getAll() {
+          return request.cookies.getAll();
         },
-        set(name: string, value: string, options: Record<string, unknown>) {
-          response.cookies.set({ name, value, ...options });
+        setAll(cookiesToSet: CookieToSet[]) {
+          cookiesToSet.forEach(({ name, value, options }) => {
+            request.cookies.set(name, value);
+            response.cookies.set(name, value, options);
+          });
         },
-        remove(name: string, options: Record<string, unknown>) {
-          response.cookies.set({ name, value: "", ...options, maxAge: 0 });
-        }
       }
     }
   );
-
-  await supabase.auth.getUser();
 
   if (request.nextUrl.pathname.startsWith("/admin") && request.nextUrl.pathname !== "/admin/login") {
     const {
@@ -35,9 +35,12 @@ export async function middleware(request: NextRequest) {
     } = await supabase.auth.getUser();
 
     if (!user) {
-      const url = request.nextUrl.clone();
-      url.pathname = "/admin/login";
-      return NextResponse.redirect(url);
+      const { data: refreshData } = await supabase.auth.refreshSession();
+      if (!refreshData.session) {
+        const url = request.nextUrl.clone();
+        url.pathname = "/admin/login";
+        return NextResponse.redirect(url);
+      }
     }
   }
 
