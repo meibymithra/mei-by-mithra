@@ -56,23 +56,25 @@ export function FeedbackForm({ token }: { token: string }) {
     >
       <input type="hidden" {...form.register("token")} />
 
-      <div className="space-y-2">
-        <Label>Rating</Label>
-        <div className="flex flex-wrap gap-2">
-          {[1, 2, 3, 4, 5].map((rating) => (
-            <button
-              key={rating}
-              type="button"
-              onClick={() => form.setValue("rating", rating, { shouldValidate: true })}
-              className={`h-11 w-11 rounded-full border text-sm font-semibold transition-transform hover:-translate-y-0.5 ${
-                form.watch("rating") === rating ? "border-primary bg-primary text-primary-foreground" : "bg-background"
-              }`}
-            >
-              {rating}
-            </button>
-          ))}
-        </div>
-      </div>
+       <div className="space-y-3">
+         <div className="flex items-center gap-2">
+           <Label className="text-sm font-medium text-foreground">Rating</Label>
+         </div>
+         <div className="flex flex-wrap gap-3">
+           {[1, 2, 3, 4, 5].map((rating) => (
+             <button
+               key={rating}
+               type="button"
+               onClick={() => form.setValue("rating", rating, { shouldValidate: true })}
+               className={`h-12 w-12 rounded-xl border border-transparent bg-transparent text-sm font-medium transition-all duration-200 ${
+                 form.watch("rating") === rating ? "border-primary bg-primary/10 text-primary" : "hover:bg-muted/50"
+               }`}
+             >
+               {rating}
+             </button>
+           ))}
+         </div>
+       </div>
 
       <div className="space-y-2">
         <Label>What are you giving feedback on?</Label>
@@ -84,10 +86,25 @@ export function FeedbackForm({ token }: { token: string }) {
         </Select>
       </div>
 
-      <div className="space-y-2">
-        <Label>What helped most?</Label>
-        <Textarea {...form.register("whatHelped")} placeholder="Share what felt useful, clear, supportive, or memorable." />
-      </div>
+       <div className="space-y-3">
+         <div className="flex items-center gap-2">
+           <Label className="text-sm font-medium text-foreground">Rating</Label>
+         </div>
+         <div className="flex flex-wrap gap-3">
+           {[1, 2, 3, 4, 5].map((rating) => (
+             <button
+               key={rating}
+               type="button"
+               onClick={() => form.setValue("rating", rating, { shouldValidate: true })}
+               className={`h-12 w-12 rounded-xl border border-transparent bg-transparent text-sm font-medium transition-all duration-200 ${
+                 form.watch("rating") === rating ? "border-primary bg-primary/10 text-primary" : "hover:bg-muted/50"
+               }`}
+             >
+               {rating}
+             </button>
+           ))}
+         </div>
+       </div>
 
       <div className="space-y-2">
         <Label>What could be improved?</Label>
@@ -102,15 +119,17 @@ export function FeedbackForm({ token }: { token: string }) {
         />
       </div>
 
-      <label className="flex items-start gap-3 rounded-2xl border border-border bg-background px-4 py-3 text-sm">
-        <Checkbox {...form.register("consentToTestimonial")} />
-        <span>I consent to this being considered for a testimonial after moderation and approval.</span>
-      </label>
+       <div className="space-y-3">
+         <label className="flex items-start gap-3 rounded-[1.75rem] border border-border bg-background/80 px-4 py-3 text-sm">
+           <Checkbox {...form.register("consentToTestimonial")} />
+           <span>I consent to this being considered for a testimonial after moderation and approval.</span>
+         </label>
 
-      <label className="flex items-start gap-3 rounded-2xl border border-border bg-background px-4 py-3 text-sm">
-        <Checkbox {...form.register("termsAccepted")} />
-        <span>I understand feedback may be reviewed, edited for length, and published only if it aligns with the website terms.</span>
-      </label>
+         <label className="flex items-start gap-3 rounded-[1.75rem] border border-border bg-background/80 px-4 py-3 text-sm">
+           <Checkbox {...form.register("termsAccepted")} />
+           <span>I understand feedback may be reviewed, edited for length, and published only if it aligns with the website terms.</span>
+         </label>
+       </div>
 
       <Button type="submit" className="w-full">
         Submit Feedback

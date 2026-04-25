@@ -1,9 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { homeHeroFallback } from "@/lib/constants";
 
 const photos = [
   "/showcase/portrait-1.jpg",
@@ -12,80 +13,58 @@ const photos = [
   "/showcase/portrait-4.jpg"
 ];
 
-export function HeroVisual() {
+type HomeHeroCopy = {
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  primaryCtaLabel?: string;
+  primaryCtaHref?: string;
+  secondaryCtaLabel?: string;
+  secondaryCtaHref?: string;
+};
+
+export function HeroVisual({ content }: { content: HomeHeroCopy }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7, ease: "easeOut" }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
       className="relative"
     >
-      <Card className="surface relative overflow-hidden">
-        <CardContent className="p-4 sm:p-5">
-          <div className="grid gap-3 sm:grid-cols-[1.08fr_.92fr]">
-            <div className="relative min-h-[420px] overflow-hidden rounded-3xl">
-              <Image
-                src={photos[0]}
-                alt="Mithra portrait"
-                fill
-                priority
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-4">
-                <Badge className="mb-3 bg-background/90 text-foreground">Editorial portrait</Badge>
-                <p className="max-w-[18rem] text-sm leading-6 text-white/90">
-                  Built to feel calm, credible, and unmistakably human from the first screen.
-                </p>
-              </div>
-            </div>
-            <div className="grid gap-3">
-              <div className="grid gap-3 sm:grid-cols-2">
-                {photos.slice(1, 3).map((photo, index) => (
-                  <motion.div
-                    key={photo}
-                    initial={{ opacity: 0, x: 18 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.12 * index, duration: 0.6 }}
-                    className="relative min-h-[180px] overflow-hidden rounded-3xl"
-                  >
-                    <Image src={photo} alt={`Gallery ${index + 2}`} fill className="object-cover" sizes="(max-width: 1024px) 50vw, 20vw" />
-                  </motion.div>
-                ))}
-              </div>
-              <div className="rounded-3xl border border-border bg-background/80 p-5">
-                <p className="text-xs uppercase tracking-[0.18em] text-primary">How the brand reads</p>
-                <p className="mt-3 text-lg font-semibold">Professional enough for institutions, gentle enough for sensitive work</p>
-                <p className="mt-2 text-sm leading-7 text-muted-foreground">
-                  The visual direction stays warm and soft, but it still carries seriousness, authorship, and a clear point of view.
-                </p>
-              </div>
-              <motion.div
-                initial={{ opacity: 0, x: 18 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.24, duration: 0.6 }}
-                className="relative min-h-[120px] overflow-hidden rounded-3xl"
-              >
-                <Image src={photos[3]} alt="Gallery 4" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 20vw" />
-              </motion.div>
+      <div className="relative min-h-[520px] overflow-hidden rounded-[2rem]">
+        <Image
+          src={photos[0]}
+          alt="Mithra portrait"
+          fill
+          priority
+          className="object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-transparent via-rust/10 to-rust/30" />
+        <div className="absolute bottom-6 left-6 right-6">
+          <div className="space-y-4">
+            <p className="text-sm uppercase tracking-[0.28em] text-muted-foreground">{content.eyebrow}</p>
+            <h2 className="font-heading text-3xl font-bold text-white/90 sm:text-4xl">
+              {content.title}
+            </h2>
+            <p className="text-base leading-relaxed text-white/80 max-w-[32rem]">
+              {content.description}
+            </p>
+            <div className="flex gap-3">
+              <Button asChild size="lg" className="px-8 py-3">
+                <Link href={content.primaryCtaHref ?? homeHeroFallback.primaryCtaHref}>
+                  {content.primaryCtaLabel ?? homeHeroFallback.primaryCtaLabel}
+                </Link>
+              </Button>
+              <Button asChild variant="outline" size="lg" className="px-8 py-3 border border-white/20 hover:border-white/30">
+                <Link href={content.secondaryCtaHref ?? homeHeroFallback.secondaryCtaHref}>
+                  {content.secondaryCtaLabel ?? homeHeroFallback.secondaryCtaLabel}
+                </Link>
+              </Button>
             </div>
           </div>
-          <div className="mt-3 grid gap-3 sm:grid-cols-3">
-            {[
-              { label: "How it works", value: "Book a time, complete intake, begin" },
-              { label: "Resource layer", value: "Playbooks for parents, teachers, and children" },
-              { label: "Practice stance", value: "Rights, respect, responsibility, and education" }
-            ].map((item) => (
-              <div key={item.label} className="rounded-2xl border border-border bg-background/80 px-4 py-3">
-                <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">{item.label}</p>
-                <p className="mt-1 text-sm font-semibold">{item.value}</p>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-
+        </div>
+      </div>
+      
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}

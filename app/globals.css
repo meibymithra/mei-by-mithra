@@ -12,11 +12,11 @@
     --popover-foreground: 18 22% 15%;
     --primary: 10 91% 38%;
     --primary-foreground: 40 60% 98%;
-    --secondary: 143 18% 62%;
+    --secondary: 143 12% 57%;
     --secondary-foreground: 18 22% 15%;
     --muted: 40 32% 90%;
     --muted-foreground: 20 10% 38%;
-    --accent: 16 74% 70%;
+    --accent: 16 51% 70%;
     --accent-foreground: 18 22% 15%;
     --destructive: 0 75% 55%;
     --destructive-foreground: 40 60% 98%;
@@ -60,7 +60,7 @@
       linear-gradient(180deg, rgba(255, 250, 240, 0.78), rgba(255, 250, 240, 0.62)),
       radial-gradient(circle at top right, rgba(237, 141, 117, 0.11), transparent 38%);
     box-shadow:
-      0 24px 60px -28px rgba(55, 45, 36, 0.38),
+      0 24px 60px -28px rgba(55, 45, 36, 0.28),
       inset 0 1px 0 rgba(255, 255, 255, 0.45);
   }
 
@@ -135,12 +135,20 @@
 }
 
 @keyframes floatOrb {
-  0%,
-  100% {
+  0%, 100% {
     transform: translate3d(0, 0, 0) scale(1);
   }
   50% {
     transform: translate3d(0, 18px, 0) scale(1.05);
+  }
+}
+
+@keyframes floatOrbSlow {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(0, 12px, 0) scale(1.03);
   }
 }
 

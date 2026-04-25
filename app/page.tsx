@@ -94,59 +94,46 @@ export default async function HomePage() {
   return (
     <SiteShell>
       <main className="overflow-hidden pb-24 md:pb-0">
-        <section className="relative">
-          <div className="absolute inset-0 -z-10 bg-hero-radial" />
-          <div className="container-wide grid gap-10 py-12 lg:grid-cols-[1.02fr_.98fr] lg:items-center lg:py-20">
-            <Reveal>
-              <div className="space-y-7">
-                <div className="flex flex-wrap gap-2">
-                  <Badge variant="outline" className="bg-background/70 backdrop-blur">
-                    {brand.name}
-                  </Badge>
-                  <Badge className="bg-primary text-primary-foreground">Counselling and education practice</Badge>
-                </div>
-                <div className="space-y-4">
-                  <p className="text-sm uppercase tracking-[0.28em] text-muted-foreground">{content.eyebrow}</p>
-                  <h1 className="font-heading max-w-4xl text-5xl font-semibold tracking-tight text-foreground sm:text-6xl lg:text-7xl">
-                    {content.title}
-                  </h1>
-                  <p className="max-w-2xl text-base leading-8 text-muted-foreground sm:text-lg">
-                    {content.description}
-                  </p>
-                </div>
-                <div className="flex flex-col gap-3 sm:flex-row">
-                  <Button asChild size="lg">
-                    <Link href={content.primaryCtaHref ?? homeHeroFallback.primaryCtaHref}>
-                      {content.primaryCtaLabel ?? homeHeroFallback.primaryCtaLabel}
-                    </Link>
-                  </Button>
-                  <Button asChild variant="outline" size="lg">
-                    <Link href={content.secondaryCtaHref ?? homeHeroFallback.secondaryCtaHref}>
-                      {content.secondaryCtaLabel ?? homeHeroFallback.secondaryCtaLabel}
-                    </Link>
-                  </Button>
-                  <Button asChild variant="ghost" size="lg" className="justify-start">
-                    <Link href="/portfolio">
-                      View Portfolio
-                      <ArrowRight className="h-4 w-4" />
-                    </Link>
-                  </Button>
-                </div>
-                <div className="grid gap-3 sm:grid-cols-3">
-                  {homeBrandSignals.map((item) => (
-                    <div key={item} className="rounded-3xl border border-border bg-background/80 p-4 text-sm leading-6">
-                      {item}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </Reveal>
+         <section className="relative">
+           <div className="absolute inset-0 -z-10 bg-hero-radial" />
+           <div className="container-wide grid gap-10 py-16 lg:grid-cols-[1.05fr_.95fr] lg:items-center lg:py-24">
+             <Reveal>
+               <div className="space-y-6">
+                 <div className="flex flex-wrap gap-3">
+                   <Badge variant="outline" className="bg-background/70 backdrop-blur">
+                     {brand.name}
+                   </Badge>
+                   <Badge className="bg-primary text-primary-foreground">Counselling and education practice</Badge>
+                 </div>
+                 <div className="space-y-5">
+                   <p className="text-sm uppercase tracking-[0.28em] text-muted-foreground">{content.eyebrow}</p>
+                   <h1 className="font-heading max-w-3xl text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+                     {content.title}
+                   </h1>
+                   <p className="max-w-xl text-lg leading-relaxed text-muted-foreground">
+                     {content.description}
+                   </p>
+                 </div>
+                 <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
+                   <Button asChild size="lg" className="px-8 py-3">
+                     <Link href={content.primaryCtaHref ?? homeHeroFallback.primaryCtaHref}>
+                       {content.primaryCtaLabel ?? homeHeroFallback.primaryCtaLabel}
+                     </Link>
+                   </Button>
+                   <Button asChild variant="outline" size="lg" className="px-8 py-3">
+                     <Link href={content.secondaryCtaHref ?? homeHeroFallback.secondaryCtaHref}>
+                       {content.secondaryCtaLabel ?? homeHeroFallback.secondaryCtaLabel}
+                     </Link>
+                   </Button>
+                 </div>
+               </div>
+             </Reveal>
 
-            <Reveal delay={0.12}>
-              <HeroVisual />
-            </Reveal>
-          </div>
-        </section>
+             <Reveal delay={0.12}>
+               <HeroVisual content={content} />
+             </Reveal>
+           </div>
+         </section>
 
         <section className="container-wide py-8">
           <Reveal>

@@ -44,7 +44,8 @@ export const metadata: Metadata = {
     title: "Mithra Krishnamoorthy | Mei by Mithra",
     description:
       "Portfolio, practice, store, and booking experience for Mithra Krishnamoorthy."
-  }
+  },
+  viewport: 'width=device-width, initial-scale=1'
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

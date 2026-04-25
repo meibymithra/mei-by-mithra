@@ -233,10 +233,13 @@ function Field({
   children: React.ReactNode;
 }) {
   return (
-    <div className="space-y-2">
-      <Label>{label}</Label>
+    <div className="space-y-3">
+      <div className="flex items-center gap-2">
+        <Label className="text-sm font-medium text-foreground">{label}</Label>
+        {error && <span className="h-3 w-3 rounded-full bg-destructive/20" aria-hidden="true" />}
+      </div>
       {children}
-      {error ? <p className="text-sm text-destructive">{error}</p> : null}
+      {error ? <p className="mt-2 text-sm text-destructive">{error}</p> : null}
     </div>
   );
 }
