@@ -1,5 +1,6 @@
 export const dynamic = 'force-dynamic';
 
+import type { Client, Invoice } from "@prisma/client";
 import { prisma } from "@/server/db";
 import { SectionHeading } from "@/components/site/section-heading";
 import { Card, CardContent } from "@/components/ui/card";
@@ -14,6 +15,7 @@ export default async function InvoicesPage() {
       orderBy: { createdAt: "desc" }
     })
   ]);
+  const invoiceRows: Array<Invoice & { client: Client }> = invoices;
 
   return (
     <div className="space-y-6">
@@ -35,7 +37,7 @@ export default async function InvoicesPage() {
               </TR>
             </THead>
             <TBody>
-              {invoices.map((invoice) => (
+              {invoiceRows.map((invoice: Invoice & { client: Client }) => (
                 <TR key={invoice.id}>
                   <TD>{invoice.client.fullName}</TD>
                   <TD>{invoice.sessionCount}</TD>

@@ -1,6 +1,7 @@
 export const dynamic = 'force-dynamic';
 
 import Link from "next/link";
+import type { Booking, CalendlyWebhookLog, Client } from "@prisma/client";
 import { prisma } from "@/server/db";
 import { SectionHeading } from "@/components/site/section-heading";
 import { Card, CardContent } from "@/components/ui/card";
@@ -48,9 +49,10 @@ export default async function AdminCalendlyPage({
     })
   ]);
 
-  const received = logs.filter((log) => log.status === "RECEIVED").length;
-  const processed = logs.filter((log) => log.status === "PROCESSED").length;
-  const duplicates = logs.filter((log) => log.status === "DUPLICATE").length;
+  const received = logs.filter((log: CalendlyWebhookLog) => log.status === "RECEIVED").length;
+  const processed = logs.filter((log: CalendlyWebhookLog) => log.status === "PROCESSED").length;
+  const duplicates = logs.filter((log: CalendlyWebhookLog) => log.status === "DUPLICATE").length;
+  const bookingRows: Array<Booking & { client: Client }> = upcomingBookings;
 
   return (
     <div className="space-y-6">
@@ -77,7 +79,7 @@ export default async function AdminCalendlyPage({
               </TR>
             </THead>
             <TBody>
-              {upcomingBookings.map((booking) => (
+              {bookingRows.map((booking: Booking & { client: Client }) => (
                 <TR key={booking.id}>
                   <TD>
                     <p className="font-medium">{booking.client.fullName}</p>
@@ -122,7 +124,7 @@ export default async function AdminCalendlyPage({
               </TR>
             </THead>
             <TBody>
-              {logs.map((log) => (
+              {logs.map((log: CalendlyWebhookLog) => (
                 <TR key={log.id}>
                   <TD>
                     <p className="font-medium">{log.eventType}</p>

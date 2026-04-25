@@ -9,8 +9,8 @@ export function Footer() {
           <p className="font-semibold text-foreground">{owner.name}</p>
           <p className="mt-1 text-xs uppercase tracking-[0.18em] text-primary">{brand.name}</p>
           <p className="mt-2 max-w-sm text-muted-foreground">
-            A calm, editorial brand website for counselling, sexuality education, guided support, and practical
-            digital resources.
+            Counselling, sexuality education, workshops, and practical resources presented through a calm, editorial,
+            business-ready public experience.
           </p>
           <p className="mt-3 text-muted-foreground">{contact.location}</p>
           <Link className="mt-1 block text-foreground underline-offset-4 hover:underline" href={`mailto:${contact.email}`}>
@@ -27,7 +27,7 @@ export function Footer() {
           <Link className="block" href="/store">Store</Link>
         </div>
         <div className="space-y-2 text-muted-foreground">
-          <p className="font-medium text-foreground">Resources</p>
+          <p className="font-medium text-foreground">Client Journey</p>
           <Link className="block" href="/intake">Client Intake</Link>
           <Link className="block" href="/terms">Terms</Link>
           <Link className="block" href={contact.resumeUrl} target="_blank">

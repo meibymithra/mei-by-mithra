@@ -1,8 +1,37 @@
 import crypto from "crypto";
+import fs from "fs";
 import { createClient } from "@supabase/supabase-js";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
+
+function parseEnvFile(path) {
+  if (!fs.existsSync(path)) return;
+
+  const content = fs.readFileSync(path, "utf8");
+  for (const line of content.split(/\r?\n/)) {
+    if (!line || line.trim().startsWith("#")) continue;
+
+    const match = line.match(/^([A-Z0-9_]+)=(.*)$/);
+    if (!match) continue;
+
+    const [, key, rawValue] = match;
+    if (process.env[key]) continue;
+
+    let value = rawValue.trim();
+    if (
+      (value.startsWith('"') && value.endsWith('"')) ||
+      (value.startsWith("'") && value.endsWith("'"))
+    ) {
+      value = value.slice(1, -1);
+    }
+
+    process.env[key] = value;
+  }
+}
+
+parseEnvFile(".env");
+parseEnvFile(".env.local");
 
 const seed = {
   name: "Mithra Krishnamoorthy",
@@ -97,7 +126,7 @@ async function main() {
     where: { slug: "teachers-playbook" },
     update: {
       name: "Teachers Playbook",
-      description: "Practical classroom and student-support guidance for educators.",
+      description: "A classroom-ready guide for educators who want clearer routines, stronger boundaries, and calmer student support.",
       price: 1299,
       currency: "INR",
       provider: "MANUAL",
@@ -106,7 +135,7 @@ async function main() {
     create: {
       slug: "teachers-playbook",
       name: "Teachers Playbook",
-      description: "Practical classroom and student-support guidance for educators.",
+      description: "A classroom-ready guide for educators who want clearer routines, stronger boundaries, and calmer student support.",
       price: 1299,
       currency: "INR",
       provider: "MANUAL"
@@ -177,7 +206,7 @@ async function main() {
     where: { slug: "parents-playbook" },
     update: {
       name: "Parents Playbook",
-      description: "Clear, usable support for home routines, boundaries, and communication.",
+      description: "A practical home guide for boundaries, communication, repair, and calmer conflict.",
       price: 1499,
       currency: "INR",
       provider: "MANUAL",
@@ -186,7 +215,7 @@ async function main() {
     create: {
       slug: "parents-playbook",
       name: "Parents Playbook",
-      description: "Clear, usable support for home routines, boundaries, and communication.",
+      description: "A practical home guide for boundaries, communication, repair, and calmer conflict.",
       price: 1499,
       currency: "INR",
       provider: "MANUAL"
@@ -197,7 +226,7 @@ async function main() {
     where: { slug: "kids-playbook" },
     update: {
       name: "Kids Playbook",
-      description: "Simple tools and printable routines built for children and caregivers.",
+      description: "Simple routines, co-regulation tools, and printable supports for children and caregivers.",
       price: 999,
       currency: "INR",
       provider: "MANUAL",
@@ -206,7 +235,7 @@ async function main() {
     create: {
       slug: "kids-playbook",
       name: "Kids Playbook",
-      description: "Simple tools and printable routines built for children and caregivers.",
+      description: "Simple routines, co-regulation tools, and printable supports for children and caregivers.",
       price: 999,
       currency: "INR",
       provider: "MANUAL"
@@ -219,12 +248,12 @@ async function main() {
       title: "Homepage Hero",
       content: {
         eyebrow: "Mithra Krishnamoorthy",
-        title: "A professional brand website for counselling, sexuality education, and practical support.",
+        title: "Counselling, sexuality education, and practical guidance delivered with clarity and care.",
         description:
-          "Mei by Mithra presents Mithra Krishnamoorthy's practice, portfolio, and digital resources through a calm, premium experience designed for individuals, parents, educators, and institutions.",
+          "Mei by Mithra brings together one-to-one support, facilitation, and digital resources for people, families, educators, and institutions who want grounded, usable guidance.",
         primaryCtaLabel: "Book a Session",
         primaryCtaHref: "/book",
-        secondaryCtaLabel: "Explore the Store",
+        secondaryCtaLabel: "Explore Resources",
         secondaryCtaHref: "/store"
       }
     },
@@ -233,12 +262,12 @@ async function main() {
       title: "Homepage Hero",
       content: {
         eyebrow: "Mithra Krishnamoorthy",
-        title: "A professional brand website for counselling, sexuality education, and practical support.",
+        title: "Counselling, sexuality education, and practical guidance delivered with clarity and care.",
         description:
-          "Mei by Mithra presents Mithra Krishnamoorthy's practice, portfolio, and digital resources through a calm, premium experience designed for individuals, parents, educators, and institutions.",
+          "Mei by Mithra brings together one-to-one support, facilitation, and digital resources for people, families, educators, and institutions who want grounded, usable guidance.",
         primaryCtaLabel: "Book a Session",
         primaryCtaHref: "/book",
-        secondaryCtaLabel: "Explore the Store",
+        secondaryCtaLabel: "Explore Resources",
         secondaryCtaHref: "/store"
       }
     }
@@ -252,7 +281,7 @@ async function main() {
         eyebrow: "About",
         title: "Mithra Krishnamoorthy",
         description:
-          "Mithra Krishnamoorthy works across counselling psychology, sexuality education, facilitation, and practical support design. Her work combines academic grounding with human-centered clarity.",
+          "Mithra Krishnamoorthy works across counselling psychology, sexuality education, facilitation, and practical support design. Her approach combines academic grounding with direct, emotionally safe communication.",
         highlights: [
           "MSc in Counselling Psychology from Madras School of Social Work",
           "BSc in Psychology from PSG College of Arts & Science",
@@ -260,7 +289,7 @@ async function main() {
           "Practice informed by DBT, Transactional Analysis, mindfulness, and positive psychology"
         ],
         narrative:
-          "The brand is designed to feel thoughtful, responsible, and emotionally intelligent. It reflects Mithra's work with individuals, families, and institutions while creating a clear pathway into booking, intake, and resources."
+          "Mei by Mithra is built as a public-facing practice brand: warm enough for sensitive work, structured enough for institutions, and clear enough for people who need to decide whether support is the right fit."
       }
     },
     create: {
@@ -270,7 +299,7 @@ async function main() {
         eyebrow: "About",
         title: "Mithra Krishnamoorthy",
         description:
-          "Mithra Krishnamoorthy works across counselling psychology, sexuality education, facilitation, and practical support design. Her work combines academic grounding with human-centered clarity.",
+          "Mithra Krishnamoorthy works across counselling psychology, sexuality education, facilitation, and practical support design. Her approach combines academic grounding with direct, emotionally safe communication.",
         highlights: [
           "MSc in Counselling Psychology from Madras School of Social Work",
           "BSc in Psychology from PSG College of Arts & Science",
@@ -278,7 +307,7 @@ async function main() {
           "Practice informed by DBT, Transactional Analysis, mindfulness, and positive psychology"
         ],
         narrative:
-          "The brand is designed to feel thoughtful, responsible, and emotionally intelligent. It reflects Mithra's work with individuals, families, and institutions while creating a clear pathway into booking, intake, and resources."
+          "Mei by Mithra is built as a public-facing practice brand: warm enough for sensitive work, structured enough for institutions, and clear enough for people who need to decide whether support is the right fit."
       }
     }
   });
@@ -289,28 +318,28 @@ async function main() {
       title: "Practice Page",
       content: {
         eyebrow: "Practice",
-        title: "Practice areas and service design",
+        title: "Support designed for real life, not abstract wellbeing language",
         description:
-          "The practice combines one-to-one support, educational facilitation, and digital resources. Each offering is meant to be useful, direct, and appropriate to the client's context.",
+          "The practice combines one-to-one sessions, educational facilitation, and practical resources. Each offering is designed to be clear, usable, and appropriate to the client's context.",
         services: [
           {
-            title: "Counselling support",
-            description: "Structured one-to-one sessions for emotional regulation, relationships, boundaries, stress, and life transitions."
+            title: "One-to-one counselling support",
+            description: "Structured conversations for emotional regulation, relationships, boundaries, stress, and life transitions."
           },
           {
-            title: "Sexuality education",
-            description: "Evidence-based educational work for adolescents, young adults, schools, colleges, and communities."
+            title: "Sexuality education and facilitation",
+            description: "Evidence-based sessions for adolescents, young adults, schools, colleges, and community contexts."
           },
           {
-            title: "Workshops and facilitation",
-            description: "Learning experiences and guided conversations designed for groups, institutions, and developmental contexts."
+            title: "Workshops, programmes, and guided resources",
+            description: "Support for institutions and families through workshops, playbooks, and structured follow-through."
           }
         ],
         process: [
-          "Clients book through Calendly using fixed India-based availability.",
-          "The first intake form is sent automatically after booking.",
-          "Support may proceed as a single session or as a multi-session package depending on need.",
-          "Invoices and follow-up are handled through the admin workflow."
+          "Choose a session slot through Calendly using fixed India-based availability rendered in your local timezone.",
+          "Receive the intake form automatically after booking so the first conversation begins with context.",
+          "Proceed as a single session or indicate package preference if ongoing support is needed.",
+          "Receive an invoice or payment link, followed by session or resource delivery as appropriate."
         ]
       }
     },
@@ -319,28 +348,28 @@ async function main() {
       title: "Practice Page",
       content: {
         eyebrow: "Practice",
-        title: "Practice areas and service design",
+        title: "Support designed for real life, not abstract wellbeing language",
         description:
-          "The practice combines one-to-one support, educational facilitation, and digital resources. Each offering is meant to be useful, direct, and appropriate to the client's context.",
+          "The practice combines one-to-one sessions, educational facilitation, and practical resources. Each offering is designed to be clear, usable, and appropriate to the client's context.",
         services: [
           {
-            title: "Counselling support",
-            description: "Structured one-to-one sessions for emotional regulation, relationships, boundaries, stress, and life transitions."
+            title: "One-to-one counselling support",
+            description: "Structured conversations for emotional regulation, relationships, boundaries, stress, and life transitions."
           },
           {
-            title: "Sexuality education",
-            description: "Evidence-based educational work for adolescents, young adults, schools, colleges, and communities."
+            title: "Sexuality education and facilitation",
+            description: "Evidence-based sessions for adolescents, young adults, schools, colleges, and community contexts."
           },
           {
-            title: "Workshops and facilitation",
-            description: "Learning experiences and guided conversations designed for groups, institutions, and developmental contexts."
+            title: "Workshops, programmes, and guided resources",
+            description: "Support for institutions and families through workshops, playbooks, and structured follow-through."
           }
         ],
         process: [
-          "Clients book through Calendly using fixed India-based availability.",
-          "The first intake form is sent automatically after booking.",
-          "Support may proceed as a single session or as a multi-session package depending on need.",
-          "Invoices and follow-up are handled through the admin workflow."
+          "Choose a session slot through Calendly using fixed India-based availability rendered in your local timezone.",
+          "Receive the intake form automatically after booking so the first conversation begins with context.",
+          "Proceed as a single session or indicate package preference if ongoing support is needed.",
+          "Receive an invoice or payment link, followed by session or resource delivery as appropriate."
         ]
       }
     }
@@ -353,15 +382,15 @@ async function main() {
       content: [
         {
           question: "How does booking work?",
-          answer: "Book a slot, complete the intake form, and wait for the next-step email."
+          answer: "Book through Calendly, complete the intake form from the follow-up email, and then receive the next payment or preparation step."
         },
         {
           question: "Is this confidential?",
-          answer: "Yes. The intake and follow-up process is designed to be private and secure."
+          answer: "Yes. Intake covers confidentiality and terms acceptance, and the workflow is designed for private, moderation-safe handling."
         },
         {
-          question: "Can I buy a playbook instead of booking?",
-          answer: "Yes. The store offers practical resources for teachers, parents, and children."
+          question: "Can I request more than one session?",
+          answer: "Yes. You can indicate package preference in intake, and multiple sessions can be handled through the invoice workflow."
         }
       ]
     },
@@ -371,15 +400,15 @@ async function main() {
       content: [
         {
           question: "How does booking work?",
-          answer: "Book a slot, complete the intake form, and wait for the next-step email."
+          answer: "Book through Calendly, complete the intake form from the follow-up email, and then receive the next payment or preparation step."
         },
         {
           question: "Is this confidential?",
-          answer: "Yes. The intake and follow-up process is designed to be private and secure."
+          answer: "Yes. Intake covers confidentiality and terms acceptance, and the workflow is designed for private, moderation-safe handling."
         },
         {
-          question: "Can I buy a playbook instead of booking?",
-          answer: "Yes. The store offers practical resources for teachers, parents, and children."
+          question: "Can I request more than one session?",
+          answer: "Yes. You can indicate package preference in intake, and multiple sessions can be handled through the invoice workflow."
         }
       ]
     }
@@ -391,10 +420,10 @@ async function main() {
       title: "Store",
       content: {
         eyebrow: "Digital resources",
-        title: "Practical playbooks for daily life",
+        title: "Practical playbooks for home, classroom, and guided follow-through",
         description:
           "Clear guides for teachers, parents, and young people. Purchase directly or request a manual invoice.",
-        note: "These listings can be edited from the admin dashboard."
+        note: "Each playbook is positioned around a real use case so buyers can tell quickly whether it fits."
       }
     },
     create: {
@@ -402,10 +431,10 @@ async function main() {
       title: "Store",
       content: {
         eyebrow: "Digital resources",
-        title: "Practical playbooks for daily life",
+        title: "Practical playbooks for home, classroom, and guided follow-through",
         description:
           "Clear guides for teachers, parents, and young people. Purchase directly or request a manual invoice.",
-        note: "These listings can be edited from the admin dashboard."
+        note: "Each playbook is positioned around a real use case so buyers can tell quickly whether it fits."
       }
     }
   });

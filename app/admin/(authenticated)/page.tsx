@@ -1,5 +1,6 @@
 export const dynamic = "force-dynamic";
 
+import type { Booking, CalendlyWebhookLog, Client } from "@prisma/client";
 import { hasDatabaseConfig } from "@/lib/config";
 import { requireAdmin } from "@/server/auth";
 import { Card, CardContent } from "@/components/ui/card";
@@ -37,6 +38,8 @@ export default async function AdminHomePage() {
       _count: { _all: true }
     })
   ]);
+  const bookingRows: Array<Booking & { client: Client }> = recentBookings;
+  const calendlyStatusCounts: Array<Pick<CalendlyWebhookLog, "status"> & { _count: { _all: number } }> = calendlyCounts;
 
   return (
     <div className="space-y-6">
@@ -48,7 +51,7 @@ export default async function AdminHomePage() {
           { label: "Revenue", value: metrics.revenue },
           { label: "Feedback", value: metrics.feedback },
           { label: "Testimonials", value: metrics.testimonials }
-        ].map((item) => (
+        ].map((item: { label: string; value: number }) => (
           <Card key={item.label}>
             <CardContent className="p-5">
               <p className="text-sm text-muted-foreground">{item.label}</p>
@@ -65,7 +68,7 @@ export default async function AdminHomePage() {
       </div>
 
       <div className="grid gap-4 md:grid-cols-3">
-        {calendlyCounts.map((item) => (
+        {calendlyStatusCounts.map((item) => (
           <Card key={item.status}>
             <CardContent className="p-5">
               <p className="text-sm text-muted-foreground">Calendly {item.status}</p>
@@ -81,7 +84,7 @@ export default async function AdminHomePage() {
             <p className="font-semibold">Recent bookings</p>
           </div>
           <div className="divide-y divide-border">
-            {recentBookings.map((booking) => (
+            {bookingRows.map((booking: Booking & { client: Client }) => (
               <div key={booking.id} className="flex flex-col gap-2 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
                 <div>
                   <p className="font-medium">{booking.client.fullName}</p>

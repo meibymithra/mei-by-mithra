@@ -33,7 +33,11 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       <main className="container-wide py-10 pb-24 md:pb-10">
         <Card className="surface max-w-4xl">
           <CardContent className="space-y-6 p-6">
-            <SectionHeading eyebrow="Playbook" title={product.name} description={product.description} />
+            <SectionHeading
+              eyebrow="Playbook"
+              title={product.name}
+              description={`${product.description} This resource is positioned for immediate practical use, not generic inspiration.`}
+            />
             <div className="grid gap-4 sm:grid-cols-3">
               <div className="rounded-3xl border border-border bg-background p-4">
                 <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Price</p>
@@ -45,7 +49,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               </div>
               <div className="rounded-3xl border border-border bg-background p-4">
                 <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Delivery</p>
-                <p className="mt-2 text-sm leading-6">Payment confirmation followed by download access or manual fulfilment.</p>
+                <p className="mt-2 text-sm leading-6">Payment confirmation followed by download access or manual fulfilment where required.</p>
               </div>
             </div>
             {profile ? (
@@ -91,7 +95,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               <Link href={`mailto:${contact.email}`} className="underline underline-offset-4">
                 {contact.email}
               </Link>
-              . Admin can still confirm payment and send the download link after verification.
+              . Manual verification and fulfilment remain available for buyers who need it.
             </p>
           </CardContent>
         </Card>

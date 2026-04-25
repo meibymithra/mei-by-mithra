@@ -1,3 +1,4 @@
+import type { AdminUser } from "@prisma/client";
 import { prisma } from "@/server/db";
 
 export async function getAdminEmails() {
@@ -10,5 +11,5 @@ export async function getAdminEmails() {
     select: { email: true }
   });
 
-  return admins.map((admin) => admin.email);
+  return admins.map((admin: Pick<AdminUser, "email">) => admin.email);
 }

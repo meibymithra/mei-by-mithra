@@ -5,12 +5,12 @@ import { Card, CardContent } from "@/components/ui/card";
 
 const terms = [
   {
-    title: "Pre-booking and intake",
-    text: "Sessions are scheduled through pre-booking. After a booking is made, the first intake form is sent automatically by email and should be completed before the session."
+    title: "Booking and preparation",
+    text: "Sessions are pre-booked. After a booking is made, the intake form is sent automatically by email and should be completed before the session wherever possible."
   },
   {
     title: "Packages and session credits",
-    text: "Clients may request multiple sessions. Package size can be indicated in intake and is confirmed through the invoice or admin workflow."
+    text: "Clients may request multiple sessions. Package preference can be indicated in intake and is confirmed through the invoice workflow."
   },
   {
     title: "Confidentiality",
@@ -18,11 +18,11 @@ const terms = [
   },
   {
     title: "Feedback and testimonials",
-    text: "Feedback can include open-ended responses and a short testimonial suggestion. Publication is always moderated and never automatic."
+    text: "Feedback may include open-ended responses and a short testimonial suggestion. Publication is always moderated and never automatic."
   },
   {
     title: "Payments",
-    text: "Payments can be handled through invoice links or manual invoicing, depending on the service and client context."
+    text: "Payments can be handled through invoice links or manual invoicing, depending on the service, region, and client context."
   }
 ];
 
@@ -32,8 +32,8 @@ export default function TermsPage() {
       <main className="container-wide space-y-8 py-10 pb-24 md:pb-10">
         <SectionHeading
           eyebrow="Terms"
-          title="Service terms and operating notes"
-          description="This page sets expectations for bookings, intake, confidentiality, packages, feedback, and invoice-based payment."
+          title="Service expectations for booking, intake, confidentiality, and payment"
+          description="This page sets the public expectations for how sessions, packages, feedback, and invoice-led payment are handled."
         />
         <div className="grid gap-4 md:grid-cols-2">
           {terms.map((item) => (

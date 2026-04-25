@@ -15,13 +15,17 @@ export default function AdminLoginPage() {
             <SectionHeading
               eyebrow="Admin only"
               title="Sign in"
-              description="Use your Supabase Auth email and password. Access is further restricted by the AdminUser table."
+              description="Use the seeded Supabase admin account email and password. Access is further restricted by the AdminUser table."
             />
             {!configReady ? (
               <div className="rounded-3xl border border-border bg-background p-4 text-sm leading-7 text-muted-foreground">
                 Admin login is not fully configured yet. Check `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` in Vercel, then reload.
               </div>
-            ) : null}
+            ) : (
+              <div className="rounded-3xl border border-border bg-background p-4 text-sm leading-7 text-muted-foreground">
+                The admin password is created by the seed flow, not by runtime env loading alone. Run `npm run prisma:seed` after setting `ADMIN_SEED_PASSWORD` if this admin has not been created yet.
+              </div>
+            )}
             <AdminLoginForm disabled={!configReady} />
           </CardContent>
         </Card>

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/server/db";
 import { assertAdmin } from "@/server/admin";
+import { adminProductSchema } from "@/lib/validators";
 
 export async function PATCH(request: Request, { params }: { params: Promise<{ id: string }> }) {
   const admin = await assertAdmin();
@@ -8,18 +9,22 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
 
   const { id } = await params;
   const body = await request.json();
+  const parsed = adminProductSchema.safeParse(body);
+  if (!parsed.success) return NextResponse.json({ error: "Invalid product" }, { status: 400 });
+
+  const data = parsed.data;
   const product = await prisma.product.update({
     where: { id },
     data: {
-      slug: typeof body.slug === "string" ? body.slug : undefined,
-      name: body.name,
-      description: body.description,
-      price: Number(body.price),
-      currency: body.currency,
-      downloadUrl: body.downloadUrl || null,
-      paymentLink: body.paymentLink || null,
-      provider: body.provider,
-      active: typeof body.active === "boolean" ? body.active : undefined
+      slug: data.slug,
+      name: data.name,
+      description: data.description,
+      price: data.price,
+      currency: data.currency,
+      downloadUrl: data.downloadUrl || null,
+      paymentLink: data.paymentLink || null,
+      provider: data.provider,
+      active: data.active
     }
   });
 

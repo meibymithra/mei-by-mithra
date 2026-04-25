@@ -80,42 +80,67 @@ export async function POST(request: Request) {
         }
       });
 
-  const intake = await prisma.intakeForm.create({
-    data: {
-      bookingId: booking.id,
-      clientId: client.id,
-      fullName: sanitizeText(input.fullName),
-      age: input.age,
-      phone: sanitizeText(input.phone),
-      email: sanitizeText(input.email),
-      emergencyContactName: sanitizeText(input.emergencyContactName),
-      emergencyContactPhone: sanitizeText(input.emergencyContactPhone),
-      concern: sanitizeText(input.concern),
-      goals: input.goals,
-      goalsNote:
-        sanitizeText(
-          [
-            input.goalsNote || "",
-            `Support format: ${input.sessionType}`,
-            input.sessionType === "package" ? `Requested package sessions: ${input.packageSessions}` : "",
-            input.timezone ? `Timezone: ${input.timezone}` : ""
-          ]
-            .filter(Boolean)
-            .join("\n")
-        ) || null,
-      priorExperience: input.priorExperience === "yes",
-      priorExperienceDetails: sanitizeText(input.priorExperienceDetails || "") || null,
-      confidentialityAccepted: input.confidentialityAccepted,
-      termsAccepted: input.termsAccepted
-    }
-  });
+  const goalsNote =
+    sanitizeText(
+      [
+        input.goalsNote || "",
+        `Support format: ${input.sessionType}`,
+        input.sessionType === "package" ? `Requested package sessions: ${input.packageSessions}` : "",
+        input.timezone ? `Timezone: ${input.timezone}` : ""
+      ]
+        .filter(Boolean)
+        .join("\n")
+    ) || null;
 
-  await prisma.booking.update({
-    where: { id: booking.id },
-    data: {
-      status: "BOOKED",
-      sessionType: input.sessionType
-    }
+  const intake = await prisma.$transaction(async (tx) => {
+    const savedIntake = await tx.intakeForm.upsert({
+      where: { bookingId: booking.id },
+      update: {
+        clientId: client.id,
+        fullName: sanitizeText(input.fullName),
+        age: input.age,
+        phone: sanitizeText(input.phone),
+        email: sanitizeText(input.email),
+        emergencyContactName: sanitizeText(input.emergencyContactName),
+        emergencyContactPhone: sanitizeText(input.emergencyContactPhone),
+        concern: sanitizeText(input.concern),
+        goals: input.goals,
+        goalsNote,
+        priorExperience: input.priorExperience === "yes",
+        priorExperienceDetails: sanitizeText(input.priorExperienceDetails || "") || null,
+        confidentialityAccepted: input.confidentialityAccepted,
+        termsAccepted: input.termsAccepted
+      },
+      create: {
+        bookingId: booking.id,
+        clientId: client.id,
+        fullName: sanitizeText(input.fullName),
+        age: input.age,
+        phone: sanitizeText(input.phone),
+        email: sanitizeText(input.email),
+        emergencyContactName: sanitizeText(input.emergencyContactName),
+        emergencyContactPhone: sanitizeText(input.emergencyContactPhone),
+        concern: sanitizeText(input.concern),
+        goals: input.goals,
+        goalsNote,
+        priorExperience: input.priorExperience === "yes",
+        priorExperienceDetails: sanitizeText(input.priorExperienceDetails || "") || null,
+        confidentialityAccepted: input.confidentialityAccepted,
+        termsAccepted: input.termsAccepted
+      }
+    });
+
+    await tx.booking.update({
+      where: { id: booking.id },
+      data: {
+        clientId: client.id,
+        status: "BOOKED",
+        sessionType: input.sessionType,
+        timezone: sanitizeText(input.timezone) || booking.timezone
+      }
+    });
+
+    return savedIntake;
   });
 
   const admins = await getAdminEmails();

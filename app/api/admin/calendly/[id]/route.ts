@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/server/db";
 import { assertAdmin } from "@/server/admin";
+import { calendlyLogUpdateSchema } from "@/lib/validators";
 
 export async function PATCH(request: Request, { params }: { params: Promise<{ id: string }> }) {
   const admin = await assertAdmin();
@@ -8,14 +9,16 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
 
   const { id } = await params;
   const body = await request.json();
-  const status = body.status as "RECEIVED" | "PROCESSED" | "DUPLICATE" | "FAILED" | undefined;
-  const notes = typeof body.notes === "string" ? body.notes : undefined;
+  const parsed = calendlyLogUpdateSchema.safeParse(body);
+  if (!parsed.success) return NextResponse.json({ error: "Invalid Calendly log update" }, { status: 400 });
+
+  const { status, notes } = parsed.data;
 
   const log = await prisma.calendlyWebhookLog.update({
     where: { id },
     data: {
       status,
-      notes
+      notes: notes ?? undefined
     }
   });
 

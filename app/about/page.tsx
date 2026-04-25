@@ -21,9 +21,9 @@ type AboutCopy = {
 };
 
 const values = [
-  { title: "Professional grounding", text: "A public brand backed by formal training, experience, and structured care.", icon: GraduationCap },
-  { title: "Human sensitivity", text: "The tone remains warm, clear, and suitable for emotionally complex subjects.", icon: HandHeart },
-  { title: "Quiet distinction", text: "The work is presented with enough polish to feel premium without feeling theatrical.", icon: Sparkles }
+  { title: "Professional grounding", text: "A public practice backed by formal training, facilitation experience, and structured care.", icon: GraduationCap },
+  { title: "Human sensitivity", text: "The tone remains warm, direct, and suitable for emotionally complex conversations.", icon: HandHeart },
+  { title: "Quiet distinction", text: "The work is presented with enough polish to feel premium without becoming performative.", icon: Sparkles }
 ];
 
 export default async function AboutPage() {
@@ -110,7 +110,7 @@ export default async function AboutPage() {
                   <h2 className="text-xl font-semibold">Brand intent</h2>
                   <p className="text-sm leading-7 text-muted-foreground">
                     Mei by Mithra is built to represent a serious practice with a distinctive visual identity. It should
-                    feel finished, trustworthy, and appropriate for both individual clients and institutional audiences.
+                    feel finished, trustworthy, and appropriate for both private clients and institutional audiences.
                   </p>
                 </CardContent>
               </Card>

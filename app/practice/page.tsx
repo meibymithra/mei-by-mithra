@@ -22,17 +22,17 @@ type PracticeCopy = {
 const supportNotes = [
   {
     title: "Pre-booked sessions",
-    text: "Sessions begin with booking first and intake second, so the public journey stays structured.",
+    text: "Sessions begin with booking first and intake second, so the public journey stays structured and calm.",
     icon: CalendarDays
   },
   {
     title: "Package support",
-    text: "Clients may indicate interest in multiple sessions and admin can invoice session bundles accordingly.",
+    text: "Clients may indicate interest in multiple sessions and session bundles can be invoiced accordingly.",
     icon: Users
   },
   {
     title: "Invoice-led payment",
-    text: "The system supports payment links and manual invoice handling rather than hard-coded checkout assumptions.",
+    text: "The system supports payment links and manual invoicing rather than hard-coded checkout assumptions.",
     icon: CircleDollarSign
   },
   {
@@ -140,7 +140,7 @@ export default async function PracticePage() {
                 <SectionHeading
                   eyebrow="Ready"
                   title="Proceed to booking or start with a resource"
-                  description="The practice page is meant to answer process questions before someone commits."
+                  description="This page is meant to answer process questions before someone commits."
                 />
                 <div className="flex flex-col gap-3 sm:flex-row">
                   <Button asChild variant="secondary">

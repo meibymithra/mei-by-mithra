@@ -21,6 +21,8 @@ Set these in Vercel Project Settings. Use the same names in local `.env.local`.
 
 - `SUPABASE_SERVICE_ROLE_KEY`
 - `ADMIN_EMAILS`
+- `ADMIN_SEED_PASSWORD`
+- `ADMIN_RECOVERY_EMAIL`
 
 ### Booking and intake
 
@@ -39,12 +41,12 @@ Set these in Vercel Project Settings. Use the same names in local `.env.local`.
 - `WHATSAPP_API_KEY`
 - `WHATSAPP_SENDER`
 
-### Seed-only values
+### Deploy-time seed values
 
 - `ADMIN_SEED_PASSWORD`
 - `ADMIN_RECOVERY_EMAIL`
 
-These are used by `npm run prisma:seed` and do not need to exist for normal app runtime unless you are re-seeding.
+These are required in production because deployment now runs the seed automatically after migrations.
 
 ## Admin seed model
 
@@ -84,7 +86,7 @@ Optional in production:
 - `WHATSAPP_API_KEY`
 - `WHATSAPP_SENDER`
 
-Seed-only values are not needed for normal runtime:
+Automatic deployment seeding also requires:
 
 - `ADMIN_SEED_PASSWORD`
 - `ADMIN_RECOVERY_EMAIL`
@@ -102,7 +104,7 @@ Use the same keys in the Vercel Preview scope.
 Copy the same keys into `.env.local`.
 
 - Use a local or Supabase database URL in `DATABASE_URL`.
-- Keep `ADMIN_SEED_PASSWORD` populated only when you intend to run the seed script.
+- Keep `ADMIN_SEED_PASSWORD` and `ADMIN_RECOVERY_EMAIL` populated locally if you want to run the same deploy-time seed flow as production.
 - Keep `SITE_URL` on `http://localhost:3000`.
 
 ## Copy-paste table
@@ -127,8 +129,8 @@ Use this as the Vercel checklist. `Required` means the app needs it to function 
 | `STRIPE_PAYMENT_LINK` | live payment link | test link | test link | No | International fallback |
 | `WHATSAPP_API_KEY` | optional | optional | optional | No | Future integration |
 | `WHATSAPP_SENDER` | optional | optional | optional | No | Future integration |
-| `ADMIN_SEED_PASSWORD` | seed-only secret | seed-only secret | seed-only secret | Seed only | Do not use as runtime env |
-| `ADMIN_RECOVERY_EMAIL` | seed-only recovery email | seed-only recovery email | seed-only recovery email | Seed only | Stored on admin row |
+| `ADMIN_SEED_PASSWORD` | deploy-time seed secret | deploy-time seed secret | seed secret | Yes for deploy seed | Creates or updates seeded admin auth |
+| `ADMIN_RECOVERY_EMAIL` | deploy-time seed recovery email | deploy-time seed recovery email | seed recovery email | Yes for deploy seed | Stored on admin row |
 
 ## Exact Vercel values
 
@@ -158,7 +160,7 @@ WHATSAPP_API_KEY="[WHATSAPP_API_KEY]"
 WHATSAPP_SENDER="[WHATSAPP_SENDER]"
 ```
 
-Seed-only values for a local or CI seed run:
+Deploy-time seed values:
 
 ```bash
 ADMIN_SEED_PASSWORD="[ADMIN_SEED_PASSWORD]"
@@ -171,29 +173,25 @@ ADMIN_RECOVERY_EMAIL="meibymithra.recovery@gmail.com"
 2. Add the environment variables above to Vercel.
 3. Set `SITE_URL` to the production domain, for example `https://mei-by-mithra.vercel.app` or your custom domain.
 4. Deploy the app from the GitHub repo. No separate backend host is required.
-5. Run Prisma migrations against production:
+5. The production build command runs generate, migrations, seed, and `next build` automatically:
 
 ```bash
-npm run prisma:deploy
+npm run build
 ```
 
-6. Seed the admin account from a local machine or CI runner that has:
+During the `next build` step, the script prefers `DIRECT_URL` for build-time database reads when that variable is present. Runtime traffic still uses `DATABASE_URL`.
 
-- `NEXT_PUBLIC_SUPABASE_URL`
-- `SUPABASE_SERVICE_ROLE_KEY`
-- `ADMIN_SEED_PASSWORD`
-
-Example:
+6. If you want to verify the seeded admin after deployment or locally, run:
 
 ```bash
-set ADMIN_SEED_PASSWORD=your-secret-password
-npm run prisma:seed
+npm run prisma:verify-admin
 ```
 
 ## Email and auth flow
 
 - Supabase Auth handles admin sign-in.
 - Prisma stores the matching `AdminUser` row.
+- The deployment seed creates or refreshes both records on every deploy using idempotent upserts.
 - Resend sends intake, invoice, and feedback emails.
 - If `RESEND_API_KEY` is missing, the app still runs locally and records mock email logs.
 
@@ -215,4 +213,4 @@ npm run prisma:seed
 - Missing `DATABASE_URL` in production will now fail fast.
 - Missing Supabase env vars will break admin auth.
 - Missing `SITE_URL` will make email links fall back to `http://localhost:3000`.
-- Missing `ADMIN_SEED_PASSWORD` will block the admin seed script.
+- Missing `ADMIN_SEED_PASSWORD` or `ADMIN_RECOVERY_EMAIL` will block the deployment seed step.

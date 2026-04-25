@@ -1,5 +1,6 @@
 export const dynamic = 'force-dynamic';
 
+import type { Product } from "@prisma/client";
 import { prisma } from "@/server/db";
 import { SectionHeading } from "@/components/site/section-heading";
 import { Card, CardContent } from "@/components/ui/card";
@@ -87,7 +88,7 @@ export default async function CmsPage() {
         <CardContent className="space-y-3">
           <p className="font-medium">Playbooks</p>
           <div className="grid gap-4 lg:grid-cols-2">
-            {products.map((product) => (
+            {products.map((product: Product) => (
               <ProductEditor
                 key={product.id}
                 productId={product.id}

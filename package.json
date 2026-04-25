@@ -4,13 +4,16 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "next dev",
-    "build": "prisma migrate deploy && next build",
+    "postinstall": "prisma generate",
+    "build": "npm run deploy:prepare && node scripts/run-with-env.mjs --prefer-direct-url next build",
     "start": "next start",
     "lint": "next lint",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "prisma:deploy": "prisma migrate deploy",
-    "prisma:seed": "node prisma/seed.mjs"
+    "prisma:seed": "node prisma/seed.mjs",
+    "prisma:verify-admin": "node scripts/verify-admin.mjs",
+    "deploy:prepare": "node scripts/run-with-env.mjs prisma migrate deploy && npm run prisma:seed"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

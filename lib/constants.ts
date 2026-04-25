@@ -3,7 +3,7 @@ export const brand = {
   slug: "meibymithra",
   ownerName: "Mithra Krishnamoorthy",
   portfolioLabel: "Portfolio + Support Practice",
-  tagline: "Calm, confidential support for parenting, teaching, relationships, and personal growth.",
+  tagline: "Counselling, sexuality education, and practical guidance for individuals, families, educators, and institutions.",
   primary: "#B72E09",
   cream: "#F5EEDC",
   sage: "#84A18F"
@@ -13,7 +13,7 @@ export const owner = {
   name: "Mithra Krishnamoorthy",
   role: "Counsellor, sex educator, and purpose coach",
   summary:
-    "Mithra works at the intersection of counselling psychology, sexuality education, and practical support for everyday life."
+    "Mithra works at the intersection of counselling psychology, sexuality education, and practical support design for everyday life."
 } as const;
 
 export const contact = {
@@ -24,12 +24,12 @@ export const contact = {
 
 export const homeHeroFallback = {
   eyebrow: "Mithra Krishnamoorthy",
-  title: "A professional brand website for counselling, sexuality education, and practical support.",
+  title: "Counselling, sexuality education, and practical guidance delivered with clarity and care.",
   description:
-    "Mei by Mithra presents Mithra Krishnamoorthy's practice, portfolio, and digital resources through a calm, premium experience designed for individuals, parents, educators, and institutions.",
+    "Mei by Mithra brings together one-to-one support, facilitation, and digital resources for people, families, educators, and institutions who want grounded, usable guidance.",
   primaryCtaLabel: "Book a Session",
   primaryCtaHref: "/book",
-  secondaryCtaLabel: "Explore the Store",
+  secondaryCtaLabel: "Explore Resources",
   secondaryCtaHref: "/store"
 } as const;
 
@@ -37,7 +37,7 @@ export const aboutPageFallback = {
   eyebrow: "About",
   title: "Mithra Krishnamoorthy",
   description:
-    "Mithra Krishnamoorthy works across counselling psychology, sexuality education, facilitation, and practical support design. Her work combines academic grounding with calm, human-centered clarity.",
+    "Mithra Krishnamoorthy works across counselling psychology, sexuality education, facilitation, and practical support design. Her approach combines academic grounding with direct, emotionally safe communication.",
   highlights: [
     "MSc in Counselling Psychology from Madras School of Social Work",
     "BSc in Psychology from PSG College of Arts & Science",
@@ -45,16 +45,16 @@ export const aboutPageFallback = {
     "Practice informed by DBT, Transactional Analysis, mindfulness, and positive psychology"
   ],
   narrative:
-    "Mei by Mithra is designed to feel thoughtful, responsible, and emotionally intelligent. It reflects Mithra's work with individuals, families, and institutions while creating a clear pathway into booking, intake, and resources."
+    "Mei by Mithra is built as a public-facing practice brand: warm enough for sensitive work, structured enough for institutions, and clear enough for people who need to decide whether support is the right fit."
 } as const;
 
 export const portfolioPageFallback = {
   eyebrow: "Portfolio",
   title: "Selected experience, education, and institutional work",
   description:
-    "A dedicated overview of Mithra's work experience, facilitation background, formal training, and selected leadership roles. The homepage stays brand-led; this page carries the portfolio depth.",
+    "A dedicated overview of Mithra's work experience, facilitation background, formal training, and selected leadership roles for individual and institutional review.",
   summary:
-    "Mithra's work sits across one-to-one support, sexuality education, purpose-led facilitation, and practical programme design. The through-line is emotionally safe communication with clear structure.",
+    "Mithra's work spans one-to-one support, sexuality education, purpose-led facilitation, and practical programme design. The through-line is emotionally safe communication backed by structure and follow-through.",
   experience: [
     {
       role: "Counsellor",
@@ -114,28 +114,28 @@ export const portfolioPageFallback = {
 
 export const practicePageFallback = {
   eyebrow: "Practice",
-  title: "Practice areas and service design",
+  title: "Support designed for real life, not abstract wellbeing language",
   description:
-    "The practice combines one-to-one support, educational facilitation, and digital resources. Each offering is meant to be useful, direct, and appropriate to the client's context.",
+    "The practice combines one-to-one sessions, educational facilitation, and practical resources. Each offering is designed to be clear, usable, and appropriate to the client's context.",
   services: [
     {
-      title: "Counselling support",
-      description: "Structured one-to-one sessions for emotional regulation, relationships, boundaries, stress, and life transitions."
+      title: "One-to-one counselling support",
+      description: "Structured conversations for emotional regulation, relationships, boundaries, stress, and life transitions."
     },
     {
-      title: "Sexuality education",
-      description: "Evidence-based educational work for adolescents, young adults, schools, colleges, and communities."
+      title: "Sexuality education and facilitation",
+      description: "Evidence-based sessions for adolescents, young adults, schools, colleges, and community contexts."
     },
     {
-      title: "Workshops and facilitation",
-      description: "Learning experiences and guided conversations designed for groups, institutions, and developmental contexts."
+      title: "Workshops, programmes, and guided resources",
+      description: "Support for institutions and families through workshops, playbooks, and structured follow-through."
     }
   ],
   process: [
-    "Clients book through Calendly using fixed India-based availability.",
-    "The first intake form is sent automatically after booking.",
-    "Support may proceed as a single session or as a multi-session package depending on need.",
-    "Invoices and follow-up are handled through the admin workflow."
+    "Choose a session slot through Calendly using fixed India-based availability rendered in your local timezone.",
+    "Receive the intake form automatically after booking so the first conversation begins with context.",
+    "Proceed as a single session or indicate package preference if ongoing support is needed.",
+    "Receive an invoice or payment link, followed by session or resource delivery as appropriate."
   ]
 } as const;
 
@@ -171,19 +171,19 @@ export const productDefaults = [
   {
     slug: "teachers-playbook",
     name: "Teachers Playbook",
-    description: "Practical classroom support for educators who want clearer routines, boundaries, and student care.",
+    description: "A classroom-ready guide for educators who want clearer routines, stronger boundaries, and calmer student support.",
     price: 1299
   },
   {
     slug: "parents-playbook",
     name: "Parents Playbook",
-    description: "Clear, usable support for home routines, boundaries, communication, and calmer conflict.",
+    description: "A practical home guide for boundaries, communication, repair, and calmer conflict.",
     price: 1499
   },
   {
     slug: "kids-playbook",
     name: "Kids Playbook",
-    description: "Simple tools and printable routines built for children and caregivers at home.",
+    description: "Simple routines, co-regulation tools, and printable supports for children and caregivers.",
     price: 999
   }
 ] as const;
@@ -219,17 +219,17 @@ export const faqDefaults = [
   {
     question: "How does booking work?",
     answer:
-      "Book through Calendly, complete intake from the automatic email, and receive the invoice link after review."
+      "Book through Calendly, complete the intake form from the follow-up email, and then receive the next payment or preparation step."
   },
   {
-    question: "Do you offer confidentiality?",
+    question: "Is this confidential?",
     answer:
-      "Yes. Intake includes confidentiality and terms acceptance, and all submissions are stored securely in the database."
+      "Yes. Intake covers confidentiality and terms acceptance, and the workflow is designed for private, moderation-safe handling."
   },
   {
-    question: "Can I book a package?",
+    question: "Can I request more than one session?",
     answer:
-      "Yes. You can choose a single session or ask for a bulk package, and credits are tracked on the client record."
+      "Yes. You can indicate package preference in intake, and multiple sessions can be handled through the invoice workflow."
   }
 ] as const;
 
@@ -240,25 +240,25 @@ export const homeBrandAudiences = [
   },
   {
     title: "Parents and caregivers",
-    description: "For calmer routines, communication support, and practical guidance that can carry into daily life."
+    description: "For calmer routines, communication support, behaviour concerns, and guidance that translates into daily life."
   },
   {
     title: "Educators and institutions",
-    description: "For sexuality education, workshops, facilitation, and developmental conversations handled with care."
+    description: "For sexuality education, workshops, facilitation, and developmental conversations handled with maturity and care."
   }
 ] as const;
 
 export const homeBrandSignals = [
   "MSc in Counselling Psychology",
-  "Sexuality education across 10+ institutions",
-  "Booking, intake, and invoicing designed as one calm journey"
+  "Sexuality education delivered across 10+ institutions",
+  "Booking, intake, invoicing, and feedback handled as one calm workflow"
 ] as const;
 
 export const playbookFaqs = [
   {
     type: "Teachers",
     question: "What does the Teachers Playbook actually help with?",
-    answer: "It focuses on classroom routines, behaviour support, emotional safety, and language educators can use in difficult situations."
+    answer: "It focuses on routines, behaviour support, emotional safety, and usable language for difficult classroom situations."
   },
   {
     type: "Parents",

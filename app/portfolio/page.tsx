@@ -30,7 +30,7 @@ type PortfolioCopy = {
 
 const proofCards = [
   {
-    title: "Practice + education",
+    title: "Practice and education",
     description: "A portfolio that combines one-to-one support work with classroom, college, and community facilitation.",
     icon: BriefcaseBusiness
   },

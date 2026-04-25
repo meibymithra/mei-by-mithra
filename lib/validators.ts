@@ -54,6 +54,23 @@ export const adminInvoiceSchema = z.object({
   notes: z.string().trim().max(2000).optional().or(z.literal(""))
 });
 
+export const adminProductSchema = z.object({
+  slug: z
+    .string()
+    .trim()
+    .min(3)
+    .max(120)
+    .regex(/^[a-z0-9-]+$/, "Use lowercase letters, numbers, and hyphens only"),
+  name: z.string().trim().min(2).max(160),
+  description: z.string().trim().min(20).max(4000),
+  price: z.coerce.number().min(1).max(1000000),
+  currency: z.enum(["INR", "USD"]).default("INR"),
+  downloadUrl: z.string().trim().url().optional().or(z.literal("")),
+  paymentLink: z.string().trim().url().optional().or(z.literal("")),
+  provider: z.enum(["RAZORPAY", "STRIPE", "MANUAL"]).default("MANUAL"),
+  active: z.boolean().default(true)
+});
+
 export const noteSchema = z.object({
   note: z.string().trim().max(5000)
 });
@@ -62,6 +79,17 @@ export const templateSchema = z.object({
   key: z.string().trim().min(2).max(100),
   subject: z.string().trim().min(2).max(200),
   body: z.string().trim().min(10).max(20000)
+});
+
+export const feedbackModerationSchema = z.object({
+  publishStatus: z.enum(["PENDING", "APPROVED", "REJECTED"]).default("PENDING"),
+  quote: z.string().trim().max(2000).optional().or(z.literal("")),
+  name: z.string().trim().max(120).optional().or(z.literal(""))
+});
+
+export const calendlyLogUpdateSchema = z.object({
+  status: z.enum(["RECEIVED", "PROCESSED", "DUPLICATE", "FAILED"]).optional(),
+  notes: z.string().trim().max(2000).optional().or(z.literal(""))
 });
 
 export const siteContentSchema = z.object({

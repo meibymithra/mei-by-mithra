@@ -53,8 +53,11 @@ npm install
 
 4. Seed the admin account
 
+This app does not create the admin login just because `ADMIN_SEED_PASSWORD` exists in `.env.local`. You must run the seed once so Supabase Auth and Prisma are both populated.
+
 ```bash
 npm run prisma:seed
+npm run prisma:verify-admin
 ```
 
 5. Run the app
@@ -76,6 +79,11 @@ The password is never committed to source control and must be supplied through:
 The recovery email is controlled by:
 
 - `ADMIN_RECOVERY_EMAIL`
+
+The login only works after the seed has created or updated:
+
+- the Supabase Auth user for `meibymithra@gmail.com`
+- the matching active `AdminUser` row
 
 ## Public routes
 
@@ -111,6 +119,8 @@ The recovery email is controlled by:
 
 ## Notes
 
+- `npm run build` now runs migrations, seed, and `next build` automatically so production deploys create or refresh the seeded admin automatically.
+- The build wrapper prefers `DIRECT_URL` during prerender/build-time database reads, which avoids local pooler reachability issues while keeping runtime `DATABASE_URL` unchanged.
 - Local development can still run with the mock Prisma layer if `DATABASE_URL` is absent.
 - Production requires a real database and proper Supabase configuration.
 - Public content is split into dedicated pages and managed through the CMS plus seed fallbacks.

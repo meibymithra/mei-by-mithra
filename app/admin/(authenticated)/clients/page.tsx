@@ -1,5 +1,6 @@
 export const dynamic = 'force-dynamic';
 
+import type { Booking, Client, IntakeForm, Invoice } from "@prisma/client";
 import { prisma } from "@/server/db";
 import { SectionHeading } from "@/components/site/section-heading";
 import { Card, CardContent } from "@/components/ui/card";
@@ -15,6 +16,13 @@ export default async function ClientsPage() {
     },
     orderBy: { updatedAt: "desc" }
   });
+  const clientRows: Array<
+    Client & {
+      intakeForms: IntakeForm[];
+      bookings: Booking[];
+      invoices: Invoice[];
+    }
+  > = clients;
 
   return (
     <div className="space-y-6">
@@ -32,7 +40,7 @@ export default async function ClientsPage() {
               </TR>
             </THead>
             <TBody>
-              {clients.map((client) => (
+              {clientRows.map((client) => (
                 <TR key={client.id}>
                   <TD>
                     <p className="font-medium">{client.fullName}</p>
@@ -43,9 +51,9 @@ export default async function ClientsPage() {
                     <p className="text-xs text-muted-foreground">{client.phone}</p>
                   </TD>
                   <TD>
-                    <p className="font-medium">{client.invoices.reduce((sum, invoice) => sum + invoice.sessionCount, 0)} sessions invoiced</p>
+                    <p className="font-medium">{client.invoices.reduce((sum: number, invoice: Invoice) => sum + invoice.sessionCount, 0)} sessions invoiced</p>
                     <p className="text-xs text-muted-foreground">
-                      {client.bookings.map((booking) => booking.sessionType).join(", ") || "No bookings yet"}
+                      {client.bookings.map((booking: Booking) => booking.sessionType).join(", ") || "No bookings yet"}
                     </p>
                   </TD>
                   <TD>

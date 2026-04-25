@@ -55,10 +55,10 @@ export function HeroVisual() {
                 ))}
               </div>
               <div className="rounded-3xl border border-border bg-background/80 p-5">
-                <p className="text-xs uppercase tracking-[0.18em] text-primary">Brand mood</p>
-                <p className="mt-3 text-lg font-semibold">Quiet confidence over generic wellness language</p>
+                <p className="text-xs uppercase tracking-[0.18em] text-primary">How the brand reads</p>
+                <p className="mt-3 text-lg font-semibold">Professional enough for institutions, gentle enough for sensitive work</p>
                 <p className="mt-2 text-sm leading-7 text-muted-foreground">
-                  The visual direction stays warm and soft, but it still carries seriousness, authorship, and a point of view.
+                  The visual direction stays warm and soft, but it still carries seriousness, authorship, and a clear point of view.
                 </p>
               </div>
               <motion.div
@@ -73,9 +73,9 @@ export function HeroVisual() {
           </div>
           <div className="mt-3 grid gap-3 sm:grid-cols-3">
             {[
-              { label: "Practice flow", value: "Booking, intake, and calm follow-through" },
-              { label: "Store layer", value: "Guided digital resources with context" },
-              { label: "Brand focus", value: "People, education, and care" }
+              { label: "Session flow", value: "Book, complete intake, then begin with context" },
+              { label: "Resource layer", value: "Playbooks for parents, teachers, and children" },
+              { label: "Practice stance", value: "Rights, respect, responsibility, and education" }
             ].map((item) => (
               <div key={item.label} className="rounded-2xl border border-border bg-background/80 px-4 py-3">
                 <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">{item.label}</p>
@@ -95,7 +95,7 @@ export function HeroVisual() {
         <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Brand note</p>
         <p className="mt-2 text-sm font-semibold">Mei by Mithra</p>
         <p className="mt-1 text-xs leading-6 text-muted-foreground">
-          Professional, calm, and designed for trust.
+          Distinctive, composed, and designed for trust.
         </p>
       </motion.div>
     </motion.div>

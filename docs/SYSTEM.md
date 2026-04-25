@@ -158,6 +158,7 @@ Stores product metadata, pricing, payment link, and delivery URL.
 4. Client record is created or updated
 5. Booking record is created or updated
 6. Intake email is sent automatically
+7. Cancellation events mark the booking as `CANCELLED` without triggering intake
 
 ### Intake to service
 
@@ -198,7 +199,7 @@ Stores product metadata, pricing, payment link, and delivery URL.
 - `app/api/admin/invoices/route.ts`
 - `components/forms/intake-form.tsx`
 - `components/forms/feedback-form.tsx`
-- `emails/templates.tsx`
+- `emails/templates.ts`
 - `lib/constants.ts`
 - `lib/validators.ts`
 
@@ -208,5 +209,6 @@ Stores product metadata, pricing, payment link, and delivery URL.
 - Homepage should remain concise, editorial, and route visitors into dedicated pages
 - Portfolio depth should live on its own page instead of dominating the homepage
 - The store must feel like part of the brand ecosystem, not a disconnected catalogue
+- Public copy should describe the actual client journey and offer value, not the internal implementation
 - The website should remain strong on mobile
 - Motion should be memorable but should not compromise legibility or trust

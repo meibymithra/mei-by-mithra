@@ -34,26 +34,26 @@ type HomeHeroCopy = {
 
 const pathwayCards = [
   {
-    title: "Brand story",
-    text: "Understand Mithra's voice, philosophy, and the thinking behind Mei as a public-facing brand.",
+    title: "Meet Mithra",
+    text: "Understand Mithra's voice, philosophy, and how the practice is positioned for sensitive, real-world work.",
     href: "/about",
     icon: Sparkles
   },
   {
-    title: "Portfolio",
-    text: "Selected work experience, academic grounding, facilitation background, and credentials in one place.",
+    title: "Review credentials",
+    text: "See work experience, academic grounding, facilitation background, and institutional credibility in one place.",
     href: "/portfolio",
     icon: GraduationCap
   },
   {
-    title: "Practice",
-    text: "Services, process, and the structure behind bookings, intake, and packages.",
+    title: "Understand the process",
+    text: "See the services, booking model, intake flow, invoicing approach, and how packages are handled.",
     href: "/practice",
     icon: BriefcaseBusiness
   },
   {
-    title: "Store",
-    text: "Digital playbooks for teachers, parents, children, and guided support use cases.",
+    title: "Browse resources",
+    text: "Explore digital playbooks for teachers, parents, children, and guided support use cases.",
     href: "/store",
     icon: BookOpen
   }
@@ -62,19 +62,19 @@ const pathwayCards = [
 const ecosystemCards = [
   {
     title: "Book with clarity",
-    text: "Calendly handles scheduling in the visitor's local timezone while preserving fixed India-based availability.",
+    text: "Calendly handles scheduling in the visitor's local timezone while preserving Mithra's fixed India-based availability.",
     href: "/book",
     icon: CalendarDays
   },
   {
     title: "Begin with context",
-    text: "The intake flow arrives after booking so the conversation starts with useful, respectful context rather than forms up front.",
+    text: "The intake flow arrives after booking so the first conversation starts with useful, respectful context rather than paperwork up front.",
     href: "/terms",
     icon: HeartHandshake
   },
   {
     title: "Continue with support",
-    text: "Sessions, packages, invoices, and playbooks all sit inside one calm client journey rather than separate disconnected tools.",
+    text: "Sessions, packages, invoices, and playbooks sit inside one calm client journey rather than separate disconnected steps.",
     href: "/practice",
     icon: Users
   }
@@ -103,7 +103,7 @@ export default async function HomePage() {
                   <Badge variant="outline" className="bg-background/70 backdrop-blur">
                     {brand.name}
                   </Badge>
-                  <Badge className="bg-primary text-primary-foreground">Brand website</Badge>
+                  <Badge className="bg-primary text-primary-foreground">Counselling and education practice</Badge>
                 </div>
                 <div className="space-y-4">
                   <p className="text-sm uppercase tracking-[0.28em] text-muted-foreground">{content.eyebrow}</p>
@@ -154,7 +154,7 @@ export default async function HomePage() {
               <div className="space-y-4">
                 <SectionHeading
                   eyebrow="Who this is for"
-                  title="A brand website built around real people and real contexts"
+                    title="A brand website built around real people and real contexts"
                   description="Mei by Mithra is not framed as a generic portfolio. It is designed to help visitors quickly understand whether the work fits their life, family, classroom, or institution."
                 />
               </div>
@@ -204,14 +204,14 @@ export default async function HomePage() {
               <CardContent className="space-y-5 p-6">
                 <SectionHeading
                   eyebrow="Brand proposition"
-                  title="The public experience now leads with identity, not just qualifications"
-                  description="The site is structured like an editorial brand front door: clear enough to convert, thoughtful enough to build trust, and grounded enough for sensitive work."
+                  title="A public front door that explains the work before asking for trust"
+                  description="The homepage is designed to convert without sounding transactional: direct enough to orient visitors, calm enough for sensitive work, and structured enough for serious review."
                 />
                 <div className="space-y-4">
                   {[
-                    "Portrait-led storytelling that establishes Mithra as the center of the brand",
-                    "A dedicated portfolio page for experience, credentials, and institutional review",
-                    "Store, booking, intake, and follow-through treated as one connected ecosystem"
+                    "Portrait-led storytelling that establishes Mithra rather than hiding behind generic wellness language",
+                    "A dedicated portfolio page for experience, credentials, and institutional due diligence",
+                    "Store, booking, intake, invoicing, and follow-through treated as one connected ecosystem"
                   ].map((item) => (
                     <div key={item} className="flex gap-3 rounded-3xl border border-border bg-background p-4">
                       <Sparkles className="mt-1 h-4 w-4 text-primary" />
@@ -228,10 +228,10 @@ export default async function HomePage() {
               <Card className="surface">
                 <CardContent className="space-y-5 p-6">
                   <SectionHeading
-                    eyebrow="Brand pillars"
-                    title="Professional, composed, and human"
-                    description="The visual and content system stays warm and grounded while avoiding startup polish or generic wellness cues."
-                  />
+                  eyebrow="Brand pillars"
+                  title="Professional, composed, and human"
+                  description="The visual and content system stays warm and grounded while avoiding startup polish, therapy-template sameness, or vague self-help language."
+                />
                   <div className="grid gap-3">
                     {["Rights", "Respect", "Responsibility", "Educate"].map((item) => (
                       <div key={item} className="rounded-3xl border border-border bg-background p-4 text-sm font-medium">
@@ -252,7 +252,7 @@ export default async function HomePage() {
                 <SectionHeading
                   eyebrow="Service ecosystem"
                   title="A smoother path from discovery to actual support"
-                  description="The public site introduces the brand, then gently moves visitors toward the right next step without forcing everything into the first screen."
+                  description="The public site introduces the brand, then moves visitors toward the right next step without forcing every detail into the first screen."
                 />
                 <div className="space-y-4">
                   {ecosystemCards.map((item) => {
@@ -282,7 +282,7 @@ export default async function HomePage() {
                 <SectionHeading
                   eyebrow="FAQ"
                   title="Important questions answered early"
-                  description="The homepage keeps this short. Deeper details still live on the dedicated practice and store pages."
+                  description="The homepage keeps this short. Deeper details still live on the dedicated practice, booking, and store pages."
                 />
                 <div className="space-y-3">
                   {homepageFaqs.map((item: any) => (
@@ -303,10 +303,10 @@ export default async function HomePage() {
               <Card className="surface">
                 <CardContent className="space-y-4 p-6">
                   <SectionHeading
-                    eyebrow="Approved testimonials"
-                    title="Trust stays moderated and human"
-                    description="Testimonials remain review-led and never auto-published, preserving the seriousness of the work."
-                  />
+                  eyebrow="Approved testimonials"
+                  title="Trust stays moderated and human"
+                  description="Testimonials remain review-led and never auto-published, preserving the seriousness and safety of the work."
+                />
                   <div className="space-y-3">
                     {featuredTestimonials.length ? (
                       featuredTestimonials.map((item: any) => (
@@ -330,10 +330,10 @@ export default async function HomePage() {
               <Card className="surface">
                 <CardContent className="space-y-4 p-6">
                   <SectionHeading
-                    eyebrow="Conversion paths"
-                    title="Three clear next steps"
-                    description="Different visitors arrive with different needs, so the homepage gives them immediate direction."
-                  />
+                  eyebrow="Conversion paths"
+                  title="Three clear next steps"
+                  description="Different visitors arrive with different needs, so the homepage gives them immediate direction."
+                />
                   <div className="grid gap-3">
                     {[
                       "Book a session if you already know you want direct support.",
@@ -358,7 +358,7 @@ export default async function HomePage() {
                 <div>
                   <p className="text-sm uppercase tracking-[0.2em]">Next step</p>
                   <h2 className="mt-2 text-3xl font-semibold">
-                    Explore the brand, review the portfolio, or begin with booking.
+                    Review the work, browse a playbook, or begin with booking.
                   </h2>
                 </div>
                 <div className="flex flex-col gap-3 sm:flex-row">

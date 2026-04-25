@@ -40,10 +40,10 @@ export default async function StorePage() {
   const products = await getPublicProducts();
   const content = (await getSiteSection("store", {
     eyebrow: "Digital resources",
-    title: "Practical playbooks for home, classroom, and growth",
+    title: "Practical playbooks for home, classroom, and guided follow-through",
     description:
       "Clear, usable guides for teachers, parents, and young people. Purchase by payment link or request a manual invoice if needed.",
-    note: "All listings can be edited from the admin dashboard."
+    note: "Each playbook is positioned around a real use case so buyers can tell quickly whether it fits."
   })) as StoreCopy;
 
   return (
@@ -95,6 +95,9 @@ export default async function StorePage() {
                       ))}
                     </ul>
                   ) : null}
+                  <p className="text-sm leading-7 text-muted-foreground">
+                    Use this as a standalone resource or alongside a session when practical guidance is needed between conversations.
+                  </p>
                   <div className="mt-auto flex items-end justify-between gap-3 pt-2">
                     <p className="text-lg font-semibold">{formatCurrency(Number(product.price), product.currency ?? "INR")}</p>
                     <Button asChild>

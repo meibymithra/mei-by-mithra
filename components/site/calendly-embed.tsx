@@ -27,10 +27,10 @@ export function CalendlyEmbed({ calendlyUrl }: { calendlyUrl?: string }) {
         ) : (
           <div className="space-y-3 p-6">
             <p className="text-sm text-muted-foreground">
-              Set `NEXT_PUBLIC_CALENDLY_URL` or `CALENDLY_EVENT_TYPE_URL` to enable the embed.
+              Booking is temporarily unavailable on this page because the Calendly event URL has not been configured yet.
             </p>
             <p className="text-sm">
-              Booking flow is wired for webhook intake automation, admin tagging, and post-booking email handling.
+              Once connected, this flow will handle the booking, intake email, and follow-up steps automatically.
             </p>
           </div>
         )}

@@ -1,5 +1,6 @@
 export const dynamic = 'force-dynamic';
 
+import type { Client, Feedback } from "@prisma/client";
 import { prisma } from "@/server/db";
 import { SectionHeading } from "@/components/site/section-heading";
 import { Card, CardContent } from "@/components/ui/card";
@@ -11,6 +12,7 @@ export default async function FeedbackPage() {
     include: { client: true },
     orderBy: { submittedAt: "desc" }
   });
+  const feedbackRows: Array<Feedback & { client: Client }> = feedback;
 
   return (
     <div className="space-y-6">
@@ -27,7 +29,7 @@ export default async function FeedbackPage() {
               </TR>
             </THead>
             <TBody>
-              {feedback.map((item) => (
+              {feedbackRows.map((item: Feedback & { client: Client }) => (
                 <TR key={item.id}>
                   <TD>{item.client.fullName}</TD>
                   <TD>{item.rating}/5</TD>

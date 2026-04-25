@@ -93,6 +93,8 @@ model Client {
   testimonials    Testimonial[]
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
+
+  @@index([createdByAdminId])
 }
 
 model IntakeForm {
@@ -161,6 +163,8 @@ model Invoice {
   payment        Payment?
 
   @@index([clientId, status])
+  @@index([bookingId])
+  @@index([adminId])
 }
 
 model Payment {
@@ -178,6 +182,8 @@ model Payment {
   updatedAt       DateTime      @updatedAt
   invoice         Invoice       @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
   booking         Booking?      @relation(fields: [bookingId], references: [id], onDelete: SetNull)
+
+  @@index([bookingId])
 }
 
 model Feedback {
@@ -196,6 +202,7 @@ model Feedback {
   testimonial        Testimonial?         @relation("FeedbackToTestimonial")
 
   @@index([clientId, publishStatus])
+  @@index([bookingId])
 }
 
 model Testimonial {
@@ -211,6 +218,8 @@ model Testimonial {
   updatedAt   DateTime @updatedAt
   client      Client   @relation(fields: [clientId], references: [id], onDelete: Cascade)
   feedback    Feedback? @relation("FeedbackToTestimonial", fields: [feedbackId], references: [id], onDelete: SetNull)
+
+  @@index([clientId])
 }
 
 model Product {

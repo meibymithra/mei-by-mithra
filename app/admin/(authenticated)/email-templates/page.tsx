@@ -1,12 +1,15 @@
 export const dynamic = 'force-dynamic';
 
+import type { EmailTemplate } from "@prisma/client";
 import { prisma } from "@/server/db";
 import { SectionHeading } from "@/components/site/section-heading";
 import { TemplateEditor } from "@/components/admin/template-editor";
 
 export default async function EmailTemplatesPage() {
   const templates = await prisma.emailTemplate.findMany();
-  const byKey = Object.fromEntries(templates.map((template) => [template.key, template]));
+  const byKey: Record<string, EmailTemplate> = Object.fromEntries(
+    templates.map((template: EmailTemplate) => [template.key, template])
+  );
 
   return (
     <div className="space-y-6">

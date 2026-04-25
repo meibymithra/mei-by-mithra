@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/server/db";
 import { assertAdmin } from "@/server/admin";
+import { feedbackModerationSchema } from "@/lib/validators";
 
 export async function PATCH(request: Request, { params }: { params: Promise<{ id: string }> }) {
   const admin = await assertAdmin();
@@ -8,9 +9,10 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
 
   const { id } = await params;
   const body = await request.json();
-  const publishStatus = (body.publishStatus as "PENDING" | "APPROVED" | "REJECTED" | undefined) ?? "PENDING";
-  const quote = typeof body.quote === "string" ? body.quote : undefined;
-  const name = typeof body.name === "string" ? body.name : undefined;
+  const parsed = feedbackModerationSchema.safeParse(body);
+  if (!parsed.success) return NextResponse.json({ error: "Invalid feedback moderation payload" }, { status: 400 });
+
+  const { publishStatus, quote, name } = parsed.data;
 
   const feedback = await prisma.feedback.update({
     where: { id },

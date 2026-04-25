@@ -4,6 +4,7 @@ import { Footer } from "@/components/site/footer";
 import { StickyCta } from "@/components/site/sticky-cta";
 import { SectionHeading } from "@/components/site/section-heading";
 import { Card, CardContent } from "@/components/ui/card";
+import { schedule } from "@/lib/constants";
 
 export default function BookPage() {
   const calendlyUrl = process.env.CALENDLY_EVENT_TYPE_URL ?? process.env.NEXT_PUBLIC_CALENDLY_URL ?? "";
@@ -14,23 +15,31 @@ export default function BookPage() {
         <section className="grid gap-6 lg:grid-cols-[1fr_.95fr] lg:items-end">
           <SectionHeading
             eyebrow="Booking"
-            title="Choose a time that fits your day"
-            description="Pick a slot in your timezone, book through Calendly, and you'll receive the next-step email with intake and session details."
+            title="Choose a time, then move into a clear next-step workflow"
+            description="Pick a slot in your timezone, book through Calendly, and receive the intake email automatically so the first conversation begins with context."
           />
-          <div className="grid gap-3 sm:grid-cols-2">
+          <div className="grid gap-3 sm:grid-cols-3">
             <Card className="surface">
               <CardContent className="space-y-2 p-5">
                 <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Availability</p>
-                <p className="text-sm leading-7">Mon-Sat 7:30 PM - 8:30 PM IST</p>
-                <p className="text-sm leading-7">Sunday 8:30 AM - 8:30 PM IST</p>
+                <p className="text-sm leading-7">{schedule.weekdays}</p>
+                <p className="text-sm leading-7">{schedule.sunday}</p>
               </CardContent>
             </Card>
             <Card className="surface">
               <CardContent className="space-y-2 p-5">
-                <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">For Indians abroad</p>
+                <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Timezone handling</p>
                 <p className="text-sm leading-7 text-muted-foreground">
                   Calendly should render in the visitor's local timezone while preserving Mithra's fixed India-based
                   availability.
+                </p>
+              </CardContent>
+            </Card>
+            <Card className="surface">
+              <CardContent className="space-y-2 p-5">
+                <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">After booking</p>
+                <p className="text-sm leading-7 text-muted-foreground">
+                  Intake arrives by email, followed by invoicing or package follow-through as needed.
                 </p>
               </CardContent>
             </Card>

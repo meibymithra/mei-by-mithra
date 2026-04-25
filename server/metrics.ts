@@ -1,3 +1,4 @@
+import type { Invoice } from "@prisma/client";
 import { prisma } from "@/server/db";
 
 export async function getAdminMetrics() {
@@ -10,8 +11,8 @@ export async function getAdminMetrics() {
   ]);
 
   const revenue = invoices
-    .filter((invoice) => invoice.status === "PAID")
-    .reduce((total, invoice) => total + Number(invoice.amount), 0);
+    .filter((invoice: Pick<Invoice, "status">) => invoice.status === "PAID")
+    .reduce((total: number, invoice: Pick<Invoice, "amount">) => total + Number(invoice.amount), 0);
 
   return {
     clients,
