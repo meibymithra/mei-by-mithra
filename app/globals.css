@@ -2,87 +2,104 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: 40 60% 94%;
-  --foreground: 18 22% 15%;
-  --card: 43 75% 97%;
-  --card-foreground: 18 22% 15%;
-  --popover: 43 75% 97%;
-  --popover-foreground: 18 22% 15%;
-  --primary: 10 91% 38%;
-  --primary-foreground: 40 60% 98%;
-  --secondary: 143 18% 62%;
-  --secondary-foreground: 18 22% 15%;
-  --muted: 40 32% 90%;
-  --muted-foreground: 20 10% 38%;
-  --accent: 16 74% 70%;
-  --accent-foreground: 18 22% 15%;
-  --destructive: 0 75% 55%;
-  --destructive-foreground: 40 60% 98%;
-  --border: 36 25% 82%;
-  --input: 36 25% 82%;
-  --ring: 10 91% 38%;
+@layer base {
+  :root {
+    --background: 40 60% 94%;
+    --foreground: 18 22% 15%;
+    --card: 43 75% 97%;
+    --card-foreground: 18 22% 15%;
+    --popover: 43 75% 97%;
+    --popover-foreground: 18 22% 15%;
+    --primary: 10 91% 38%;
+    --primary-foreground: 40 60% 98%;
+    --secondary: 143 18% 62%;
+    --secondary-foreground: 18 22% 15%;
+    --muted: 40 32% 90%;
+    --muted-foreground: 20 10% 38%;
+    --accent: 16 74% 70%;
+    --accent-foreground: 18 22% 15%;
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 40 60% 98%;
+    --border: 36 25% 82%;
+    --input: 36 25% 82%;
+    --ring: 10 91% 38%;
+    --radius: 1.75rem;
+  }
+
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background:
+      radial-gradient(circle at top left, rgba(183, 46, 9, 0.14), transparent 24%),
+      radial-gradient(circle at 85% 18%, rgba(132, 161, 143, 0.16), transparent 20%),
+      linear-gradient(180deg, rgba(245, 238, 220, 1) 0%, rgba(252, 249, 241, 0.96) 46%, rgba(245, 238, 220, 1) 100%);
+    color: hsl(var(--foreground));
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
 }
 
-* {
-  border-color: hsl(var(--border));
-}
+@layer utilities {
+  ::selection {
+    background: rgba(183, 46, 9, 0.18);
+    color: hsl(var(--foreground));
+  }
 
-html {
-  scroll-behavior: smooth;
-}
+  .container-wide {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
 
-body {
-  background:
-    radial-gradient(circle at top left, rgba(183, 46, 9, 0.14), transparent 24%),
-    radial-gradient(circle at 85% 18%, rgba(132, 161, 143, 0.16), transparent 20%),
-    linear-gradient(180deg, rgba(245, 238, 220, 1) 0%, rgba(252, 249, 241, 0.96) 46%, rgba(245, 238, 220, 1) 100%);
-  color: hsl(var(--foreground));
-  font-feature-settings: "rlig" 1, "calt" 1;
-}
+  .surface {
+    @apply border border-border/80 bg-card/85 backdrop-blur-xl;
+    background-image:
+      linear-gradient(180deg, rgba(255, 250, 240, 0.78), rgba(255, 250, 240, 0.62)),
+      radial-gradient(circle at top right, rgba(237, 141, 117, 0.11), transparent 38%);
+    box-shadow:
+      0 24px 60px -28px rgba(55, 45, 36, 0.38),
+      inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  }
 
-::selection {
-  background: rgba(183, 46, 9, 0.18);
-  color: hsl(var(--foreground));
-}
+  .section-frame {
+    position: relative;
+    overflow: hidden;
+  }
 
-a {
-  color: inherit;
-}
+  .section-frame::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 2rem;
+    border: 1px solid rgba(232, 220, 195, 0.7);
+    pointer-events: none;
+  }
 
-.container-wide {
-  @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
-}
+  .link-underline {
+    @apply underline decoration-border/60 underline-offset-4 transition-colors hover:decoration-primary hover:text-primary;
+  }
 
-.surface {
-  @apply border border-border/80 bg-card/85 backdrop-blur-xl;
-  background-image:
-    linear-gradient(180deg, rgba(255, 250, 240, 0.78), rgba(255, 250, 240, 0.62)),
-    radial-gradient(circle at top right, rgba(237, 141, 117, 0.11), transparent 38%);
-  box-shadow:
-    0 24px 60px -28px rgba(55, 45, 36, 0.38),
-    inset 0 1px 0 rgba(255, 255, 255, 0.45);
-}
+  .animate-in {
+    animation: animate-in 0.2s ease-out;
+  }
 
-.subtle-grid {
-  background-image:
-    linear-gradient(rgba(132, 161, 143, 0.09) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(132, 161, 143, 0.09) 1px, transparent 1px);
-  background-size: 24px 24px;
-}
+  .slide-in-from-top-2 {
+    --tw-enter-translate-y: -0.5rem;
+  }
 
-.section-frame {
-  position: relative;
-  overflow: hidden;
-}
-
-.section-frame::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 2rem;
-  border: 1px solid rgba(232, 220, 195, 0.7);
-  pointer-events: none;
+  @keyframes animate-in {
+    from {
+      opacity: 0;
+      transform: translateY(var(--tw-enter-translate-y, 0));
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 }
 
 .grain-overlay {

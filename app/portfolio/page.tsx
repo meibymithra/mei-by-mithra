@@ -105,7 +105,7 @@ export default async function PortfolioPage() {
                 <SectionHeading
                   eyebrow="Experience"
                   title="Selected roles"
-                  description="A curated view of the roles and work that give this practice credibility without diluting the public brand."
+                  description="A curated view of the roles and work that build this practice."
                 />
                 <div className="space-y-4">
                   {(content.experience ?? portfolioPageFallback.experience).map((item) => (
@@ -195,9 +195,9 @@ export default async function PortfolioPage() {
               <CardContent className="space-y-4 p-6">
                 <Sparkles className="h-5 w-5" />
                 <SectionHeading
-                  eyebrow="Brand fit"
-                  title="Portfolio depth without losing the warmth of the public experience"
-                  description="The portfolio is here for due diligence, institutional review, and trust. The rest of the site can stay grounded, calm, and people-first."
+                  eyebrow="Ready"
+                  title="Ready to explore further"
+                  description="The rest of the site stays grounded, calm, and people-first."
                 />
                 <div className="flex flex-col gap-3 sm:flex-row">
                   <Button asChild variant="secondary">

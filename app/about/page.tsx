@@ -107,10 +107,9 @@ export default async function AboutPage() {
               <Card className="surface">
                 <CardContent className="space-y-3 p-6">
                   <Award className="h-5 w-5 text-primary" />
-                  <h2 className="text-xl font-semibold">Brand intent</h2>
+                  <h2 className="text-xl font-semibold">Approach</h2>
                   <p className="text-sm leading-7 text-muted-foreground">
-                    Mei by Mithra is built to represent a serious practice with a distinctive visual identity. It should
-                    feel finished, trustworthy, and appropriate for both private clients and institutional audiences.
+                    The practice stays grounded, structured, and focused on what actually works in everyday life. Both individual sessions and institutional work are handled with the same level of care and professionalism.
                   </p>
                 </CardContent>
               </Card>

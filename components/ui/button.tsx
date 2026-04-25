@@ -9,16 +9,16 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 
 const variants: Record<NonNullable<ButtonProps["variant"]>, string> = {
   default:
-    "bg-primary text-primary-foreground shadow-[0_18px_40px_-18px_rgba(183,46,9,0.6)] hover:-translate-y-0.5 hover:bg-primary/90",
+    "bg-primary text-primary-foreground shadow-[0_18px_40px_-18px_rgba(183,46,9,0.6)] hover:-translate-y-0.5 hover:bg-primary/90 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background",
   secondary:
-    "bg-secondary text-secondary-foreground shadow-[0_16px_32px_-18px_rgba(132,161,143,0.7)] hover:-translate-y-0.5 hover:bg-secondary/90",
-  outline: "border border-border bg-background/80 hover:-translate-y-0.5 hover:bg-muted/70",
-  ghost: "bg-transparent hover:bg-muted/70",
-  destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90"
+    "bg-secondary text-secondary-foreground shadow-[0_16px_32px_-18px_rgba(132,161,143,0.7)] hover:-translate-y-0.5 hover:bg-secondary/90 focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+  outline: "border border-border bg-background/80 hover:-translate-y-0.5 hover:bg-muted/70 focus-visible:ring-2 focus-visible:ring-border focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+  ghost: "bg-transparent hover:bg-muted/70 focus-visible:ring-2 focus-visible:ring-border focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+  destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90 focus-visible:ring-2 focus-visible:ring-destructive focus-visible:ring-offset-2 focus-visible:ring-offset-background"
 };
 
 const sizes: Record<NonNullable<ButtonProps["size"]>, string> = {
-  sm: "h-9 px-3 text-sm",
+  sm: "h-9 px-3.5 text-sm",
   default: "h-11 px-5",
   lg: "h-12 px-6 text-base"
 };

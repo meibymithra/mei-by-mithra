@@ -205,7 +205,7 @@ export default async function HomePage() {
                 <SectionHeading
                   eyebrow="Brand proposition"
                   title="A public front door that explains the work before asking for trust"
-                  description="The homepage is designed to convert without sounding transactional: direct enough to orient visitors, calm enough for sensitive work, and structured enough for serious review."
+                  description="The homepage is designed to convert without sounding transactional: direct enough to orient visitors, calm enough for sensitive work."
                 />
                 <div className="space-y-4">
                   {[

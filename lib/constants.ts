@@ -116,7 +116,7 @@ export const practicePageFallback = {
   eyebrow: "Practice",
   title: "Support designed for real life, not abstract wellbeing language",
   description:
-    "The practice combines one-to-one sessions, educational facilitation, and practical resources. Each offering is designed to be clear, usable, and appropriate to the client's context.",
+    "The practice combines one-to-one sessions, educational facilitation, and practical resources. Each offering is designed to be clear, usable, and appropriate to your context.",
   services: [
     {
       title: "One-to-one counselling support",
@@ -132,10 +132,10 @@ export const practicePageFallback = {
     }
   ],
   process: [
-    "Choose a session slot through Cal.com using fixed India-based availability rendered in your local timezone.",
-    "Receive the intake form automatically after booking so the first conversation begins with context.",
-    "Proceed as a single session or indicate package preference if ongoing support is needed.",
-    "Receive an invoice or payment link, followed by session or resource delivery as appropriate."
+    "Choose a session slot using the booking calendar rendered in your local timezone.",
+    "Complete the intake form after booking so the first session begins with useful context.",
+    "Choose a single session or indicate if ongoing support is needed.",
+    "Receive an invoice or payment link, then proceed to your session or resource delivery."
   ]
 } as const;
 
@@ -219,17 +219,17 @@ export const faqDefaults = [
   {
     question: "How does booking work?",
     answer:
-      "Book through Cal.com, complete the intake form from the follow-up email, and then receive the next payment or preparation step."
+      "Book through the calendar, complete the intake form from the follow-up email, and then proceed to payment or prepare for your first session."
   },
   {
     question: "Is this confidential?",
     answer:
-      "Yes. Intake covers confidentiality and terms acceptance, and the workflow is designed for private, moderation-safe handling."
+      "Yes. Intake covers confidentiality and terms acceptance, and all information is handled privately."
   },
   {
     question: "Can I request more than one session?",
     answer:
-      "Yes. You can indicate package preference in intake, and multiple sessions can be handled through the invoice workflow."
+      "Yes. You can indicate package preference in the intake form, and multiple sessions can be arranged as needed."
   }
 ] as const;
 
@@ -251,7 +251,7 @@ export const homeBrandAudiences = [
 export const homeBrandSignals = [
   "MSc in Counselling Psychology",
   "Sexuality education delivered across 10+ institutions",
-  "Booking, intake, invoicing, and feedback handled as one calm workflow"
+  "One-to-one sessions, packages, and practical resources"
 ] as const;
 
 export const playbookFaqs = [

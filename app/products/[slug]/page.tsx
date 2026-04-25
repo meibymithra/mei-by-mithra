@@ -49,7 +49,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               </div>
               <div className="rounded-3xl border border-border bg-background p-4">
                 <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Delivery</p>
-                <p className="mt-2 text-sm leading-6">Payment confirmation followed by download access or manual fulfilment where required.</p>
+                <p className="mt-2 text-sm leading-6">Secure payment followed by download access.</p>
               </div>
             </div>
             {profile ? (
@@ -91,11 +91,11 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               )}
             </div>
             <p className="text-sm text-muted-foreground">
-              If online payment is not available, request a manual invoice or write to{" "}
+              If online payment is not available, request an invoice by writing to{" "}
               <Link href={`mailto:${contact.email}`} className="underline underline-offset-4">
                 {contact.email}
               </Link>
-              . Manual verification and fulfilment remain available for buyers who need it.
+              .
             </p>
           </CardContent>
         </Card>

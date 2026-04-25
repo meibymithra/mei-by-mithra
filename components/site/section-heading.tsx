@@ -10,10 +10,14 @@ export function SectionHeading({
   description?: string;
 }) {
   return (
-    <div className="max-w-2xl space-y-3">
-      {eyebrow ? <Badge variant="outline">{eyebrow}</Badge> : null}
-      <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">{title}</h2>
-      {description ? <p className="text-sm leading-7 text-muted-foreground sm:text-base">{description}</p> : null}
+    <div className="max-w-2xl space-y-2.5">
+      {eyebrow ? <Badge variant="outline" className="text-xs">{eyebrow}</Badge> : null}
+      <h2 className="font-heading text-2xl font-semibold tracking-tight text-foreground sm:text-3xl lg:text-4xl">
+        {title}
+      </h2>
+      {description ? (
+        <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">{description}</p>
+      ) : null}
     </div>
   );
 }
