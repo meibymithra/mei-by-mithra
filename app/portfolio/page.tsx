@@ -105,7 +105,7 @@ export default async function PortfolioPage() {
                 <SectionHeading
                   eyebrow="Experience"
                   title="Selected roles"
-                  description="This page carries the professional depth so the homepage can stay focused on brand, trust, and conversion."
+                  description="A curated view of the roles and work that give this practice credibility without diluting the public brand."
                 />
                 <div className="space-y-4">
                   {(content.experience ?? portfolioPageFallback.experience).map((item) => (

@@ -122,10 +122,12 @@ Use this as the Vercel checklist. `Required` means the app needs it to function 
 | `RESEND_API_KEY` | real Resend key | optional | optional | No | Email sending |
 | `SITE_URL` | production domain | preview domain | `http://localhost:3000` | Yes | Absolute email links |
 | `ADMIN_EMAILS` | comma-separated admin emails | same | same | No | Admin notification list |
-| `CAL_BOOKING_URL` | production Cal.com URL | preview/testing URL | local testing URL | No | Booking embed |
+| `CAL_BOOKING_URL` | production Cal.com URL (booking page) | preview/testing URL | local testing URL | No | Booking embed |
 | `NEXT_PUBLIC_CAL_BOOKING_URL` | fallback Cal.com URL | fallback Cal.com URL | fallback URL | No | Booking embed fallback |
 | `CAL_WEBHOOK_SECRET` | webhook secret | same or test secret | local secret | No | Cal.com webhook auth |
 | `RAZORPAY_PAYMENT_LINK` | live payment link | test link | test link | No | India payments |
+
+> Note: `CAL_BOOKING_URL` and `NEXT_PUBLIC_CAL_BOOKING_URL` must point to your Cal.com scheduling page or event type URL. Do not set them to the webhook endpoint (`/webhook` or `/api/webhooks/calendly`).
 | `STRIPE_PAYMENT_LINK` | live payment link | test link | test link | No | International fallback |
 | `WHATSAPP_API_KEY` | optional | optional | optional | No | Future integration |
 | `WHATSAPP_SENDER` | optional | optional | optional | No | Future integration |

@@ -77,7 +77,7 @@ export default async function AboutPage() {
                 <SectionHeading
                   eyebrow="Credentials"
                   title="Selected qualifications and experience"
-                  description="This page carries the depth that should not be compressed into a single hero section."
+                  description="Lean into the training, roles, and service history that shape Mei’s grounded, thoughtful approach."
                 />
                 <div className="space-y-3">
                   {(content.highlights ?? aboutPageFallback.highlights).map((item) => (
