@@ -37,7 +37,7 @@ export const aboutPageFallback = {
   eyebrow: "About",
   title: "Mithra Krishnamoorthy",
   description:
-    "Mithra Krishnamoorthy works across counselling psychology, sexuality education, facilitation, and practical support design. Her work combines academic grounding with human-centered clarity.",
+    "Mithra Krishnamoorthy works across counselling psychology, sexuality education, facilitation, and practical support design. Her work combines academic grounding with calm, human-centered clarity.",
   highlights: [
     "MSc in Counselling Psychology from Madras School of Social Work",
     "BSc in Psychology from PSG College of Arts & Science",
@@ -45,7 +45,71 @@ export const aboutPageFallback = {
     "Practice informed by DBT, Transactional Analysis, mindfulness, and positive psychology"
   ],
   narrative:
-    "The brand is designed to feel thoughtful, responsible, and emotionally intelligent. It reflects Mithra's work with individuals, families, and institutions while creating a clear pathway into booking, intake, and resources."
+    "Mei by Mithra is designed to feel thoughtful, responsible, and emotionally intelligent. It reflects Mithra's work with individuals, families, and institutions while creating a clear pathway into booking, intake, and resources."
+} as const;
+
+export const portfolioPageFallback = {
+  eyebrow: "Portfolio",
+  title: "Selected experience, education, and institutional work",
+  description:
+    "A dedicated overview of Mithra's work experience, facilitation background, formal training, and selected leadership roles. The homepage stays brand-led; this page carries the portfolio depth.",
+  summary:
+    "Mithra's work sits across one-to-one support, sexuality education, purpose-led facilitation, and practical programme design. The through-line is emotionally safe communication with clear structure.",
+  experience: [
+    {
+      role: "Counsellor",
+      period: "Recent practice",
+      organisation: "Individual support practice",
+      location: "Tamil Nadu, India",
+      points: [
+        "Worked with clients using person-centred, CBT, and Gestalt-informed approaches.",
+        "Integrated Transactional Analysis, mindfulness practices, and positive psychology into support plans.",
+        "Conducted assessments, shaped personalised interventions, and tracked meaningful client progress.",
+        "Maintained ethical, confidential, and culturally sensitive practice across diverse client groups."
+      ]
+    },
+    {
+      role: "Sex Educator",
+      period: "Mar 2022 - Present",
+      organisation: "Freelance",
+      location: "Coimbatore and Chennai, India",
+      points: [
+        "Delivered comprehensive sexuality education for adolescents and young adults across schools, colleges, and community forums.",
+        "Facilitated sessions on consent, boundaries, safe relationships, digital safety, and emotional wellbeing.",
+        "Collaborated with 10+ institutions to design age-appropriate, evidence-based learning modules.",
+        "Created non-judgmental spaces where young people could ask questions and build healthier attitudes toward gender and relationships."
+      ]
+    },
+    {
+      role: "Purpose Coach (Externship)",
+      period: "Jun 2023 - Aug 2023",
+      organisation: "SPI EDGE",
+      location: "Chennai, India",
+      points: [
+        "Worked on a business development project supporting internship programmes for 30+ college students.",
+        "Designed industry-aligned curriculum and intern experience pathways.",
+        "Coordinated between companies, colleges, and interns to keep programme delivery smooth.",
+        "Supported documentation and feedback loops to improve participant and client outcomes."
+      ]
+    }
+  ],
+  education: [
+    "MSc in Counselling Psychology, Madras School of Social Work, Chennai",
+    "BSc in Psychology, PSG College of Arts & Science, Coimbatore",
+    "HSC in Commerce, Accountancy, Economics, and Business Maths, Bharathi Vidya Bhavan, Erode"
+  ],
+  certifications: [
+    "Comprehensive Sexuality Education and Effective Facilitation for Adolescents, Tata Institute of Social Sciences",
+    "Dialectical Behaviour Therapy, Madras School of Social Work",
+    "Transactional Analysis, Madras School of Social Work",
+    "Diploma in Storytelling Therapy, East-West Centre for Counselling",
+    "Effective Public Speaking, JCI India"
+  ],
+  leadership: [
+    "Elected Student Representative of ICC, Madras School of Social Work",
+    "Elected Secretary of the Psychology Association, PSG College of Arts & Science",
+    "Editor of the student-run magazine Psylens, PSG College of Arts & Science"
+  ]
 } as const;
 
 export const practicePageFallback = {
@@ -167,6 +231,27 @@ export const faqDefaults = [
     answer:
       "Yes. You can choose a single session or ask for a bulk package, and credits are tracked on the client record."
   }
+] as const;
+
+export const homeBrandAudiences = [
+  {
+    title: "Individuals",
+    description: "For emotional regulation, relationship clarity, boundaries, stress, and life transitions."
+  },
+  {
+    title: "Parents and caregivers",
+    description: "For calmer routines, communication support, and practical guidance that can carry into daily life."
+  },
+  {
+    title: "Educators and institutions",
+    description: "For sexuality education, workshops, facilitation, and developmental conversations handled with care."
+  }
+] as const;
+
+export const homeBrandSignals = [
+  "MSc in Counselling Psychology",
+  "Sexuality education across 10+ institutions",
+  "Booking, intake, and invoicing designed as one calm journey"
 ] as const;
 
 export const playbookFaqs = [

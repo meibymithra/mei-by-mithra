@@ -1,7 +1,16 @@
 import Link from "next/link";
-import { ArrowRight, BookOpen, BriefcaseBusiness, GraduationCap, ShieldCheck, Sparkles } from "lucide-react";
+import {
+  ArrowRight,
+  BookOpen,
+  BriefcaseBusiness,
+  CalendarDays,
+  GraduationCap,
+  HeartHandshake,
+  Sparkles,
+  Users
+} from "lucide-react";
 import { getPublicFaqs, getPublicTestimonials, getSiteSection } from "@/server/content";
-import { brand, homeHeroFallback } from "@/lib/constants";
+import { brand, faqDefaults, homeBrandAudiences, homeBrandSignals, homeHeroFallback } from "@/lib/constants";
 import { SiteShell } from "@/components/site/site-shell";
 import { Footer } from "@/components/site/footer";
 import { StickyCta } from "@/components/site/sticky-cta";
@@ -25,9 +34,15 @@ type HomeHeroCopy = {
 
 const pathwayCards = [
   {
-    title: "About Mithra",
-    text: "Professional background, qualifications, and the thinking behind the brand.",
+    title: "Brand story",
+    text: "Understand Mithra's voice, philosophy, and the thinking behind Mei as a public-facing brand.",
     href: "/about",
+    icon: Sparkles
+  },
+  {
+    title: "Portfolio",
+    text: "Selected work experience, academic grounding, facilitation background, and credentials in one place.",
+    href: "/portfolio",
     icon: GraduationCap
   },
   {
@@ -44,6 +59,27 @@ const pathwayCards = [
   }
 ];
 
+const ecosystemCards = [
+  {
+    title: "Book with clarity",
+    text: "Calendly handles scheduling in the visitor's local timezone while preserving fixed India-based availability.",
+    href: "/book",
+    icon: CalendarDays
+  },
+  {
+    title: "Begin with context",
+    text: "The intake flow arrives after booking so the conversation starts with useful, respectful context rather than forms up front.",
+    href: "/terms",
+    icon: HeartHandshake
+  },
+  {
+    title: "Continue with support",
+    text: "Sessions, packages, invoices, and playbooks all sit inside one calm client journey rather than separate disconnected tools.",
+    href: "/practice",
+    icon: Users
+  }
+] as const;
+
 export default async function HomePage() {
   const [hero, testimonials, faqs] = await Promise.all([
     getSiteSection("homeHero", homeHeroFallback),
@@ -52,20 +88,22 @@ export default async function HomePage() {
   ]);
 
   const content = hero as HomeHeroCopy;
+  const homepageFaqs = faqs.length ? faqs.slice(0, 3) : faqDefaults;
+  const featuredTestimonials = testimonials.slice(0, 2);
 
   return (
     <SiteShell>
       <main className="overflow-hidden pb-24 md:pb-0">
         <section className="relative">
           <div className="absolute inset-0 -z-10 bg-hero-radial" />
-          <div className="container-wide grid gap-10 py-12 lg:grid-cols-[1.05fr_.95fr] lg:items-center lg:py-20">
+          <div className="container-wide grid gap-10 py-12 lg:grid-cols-[1.02fr_.98fr] lg:items-center lg:py-20">
             <Reveal>
               <div className="space-y-7">
                 <div className="flex flex-wrap gap-2">
                   <Badge variant="outline" className="bg-background/70 backdrop-blur">
                     {brand.name}
                   </Badge>
-                  <Badge className="bg-primary text-primary-foreground">Professional brand website</Badge>
+                  <Badge className="bg-primary text-primary-foreground">Brand website</Badge>
                 </div>
                 <div className="space-y-4">
                   <p className="text-sm uppercase tracking-[0.28em] text-muted-foreground">{content.eyebrow}</p>
@@ -87,13 +125,15 @@ export default async function HomePage() {
                       {content.secondaryCtaLabel ?? homeHeroFallback.secondaryCtaLabel}
                     </Link>
                   </Button>
+                  <Button asChild variant="ghost" size="lg" className="justify-start">
+                    <Link href="/portfolio">
+                      View Portfolio
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  </Button>
                 </div>
                 <div className="grid gap-3 sm:grid-cols-3">
-                  {[
-                    "Brand-led public website",
-                    "Intake-first service workflow",
-                    "Invoice and playbook sales support"
-                  ].map((item) => (
+                  {homeBrandSignals.map((item) => (
                     <div key={item} className="rounded-3xl border border-border bg-background/80 p-4 text-sm leading-6">
                       {item}
                     </div>
@@ -110,7 +150,29 @@ export default async function HomePage() {
 
         <section className="container-wide py-8">
           <Reveal>
-            <div className="grid gap-4 lg:grid-cols-3">
+            <div className="surface grid gap-6 rounded-[2rem] p-6 lg:grid-cols-[.82fr_1.18fr] lg:p-8">
+              <div className="space-y-4">
+                <SectionHeading
+                  eyebrow="Who this is for"
+                  title="A brand website built around real people and real contexts"
+                  description="Mei by Mithra is not framed as a generic portfolio. It is designed to help visitors quickly understand whether the work fits their life, family, classroom, or institution."
+                />
+              </div>
+              <div className="grid gap-4 md:grid-cols-3">
+                {homeBrandAudiences.map((item) => (
+                  <div key={item.title} className="rounded-[1.75rem] border border-border bg-background/80 p-5">
+                    <p className="text-xs uppercase tracking-[0.18em] text-primary">{item.title}</p>
+                    <p className="mt-3 text-sm leading-7 text-muted-foreground">{item.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Reveal>
+        </section>
+
+        <section className="container-wide py-8">
+          <Reveal>
+            <div className="grid gap-4 lg:grid-cols-4">
               {pathwayCards.map((item, index) => {
                 const Icon = item.icon;
                 return (
@@ -124,7 +186,7 @@ export default async function HomePage() {
                       <p className="text-sm leading-7 text-muted-foreground">{item.text}</p>
                       <Button asChild variant="ghost" className="justify-start px-0">
                         <Link href={item.href}>
-                          Open page
+                          Explore
                           <ArrowRight className="h-4 w-4" />
                         </Link>
                       </Button>
@@ -141,18 +203,18 @@ export default async function HomePage() {
             <Card className="surface">
               <CardContent className="space-y-5 p-6">
                 <SectionHeading
-                  eyebrow="Positioning"
-                  title="A calmer, more credible public experience"
-                  description="The website is structured to communicate authority, care, and clarity without defaulting to generic wellness language."
+                  eyebrow="Brand proposition"
+                  title="The public experience now leads with identity, not just qualifications"
+                  description="The site is structured like an editorial brand front door: clear enough to convert, thoughtful enough to build trust, and grounded enough for sensitive work."
                 />
                 <div className="space-y-4">
                   {[
-                    "Dedicated brand pages instead of overloading the homepage",
-                    "Public messaging aligned to Mithra's actual background and work",
-                    "Store, booking, intake, and feedback treated as one service ecosystem"
+                    "Portrait-led storytelling that establishes Mithra as the center of the brand",
+                    "A dedicated portfolio page for experience, credentials, and institutional review",
+                    "Store, booking, intake, and follow-through treated as one connected ecosystem"
                   ].map((item) => (
                     <div key={item} className="flex gap-3 rounded-3xl border border-border bg-background p-4">
-                      <ShieldCheck className="mt-1 h-4 w-4 text-primary" />
+                      <Sparkles className="mt-1 h-4 w-4 text-primary" />
                       <p className="text-sm leading-7 text-muted-foreground">{item}</p>
                     </div>
                   ))}
@@ -166,9 +228,9 @@ export default async function HomePage() {
               <Card className="surface">
                 <CardContent className="space-y-5 p-6">
                   <SectionHeading
-                    eyebrow="Brand tone"
+                    eyebrow="Brand pillars"
                     title="Professional, composed, and human"
-                    description="The visual and content system is designed to feel editorial and premium while remaining approachable enough for sensitive service journeys."
+                    description="The visual and content system stays warm and grounded while avoiding startup polish or generic wellness cues."
                   />
                   <div className="grid gap-3">
                     {["Rights", "Respect", "Responsibility", "Educate"].map((item) => (
@@ -188,20 +250,28 @@ export default async function HomePage() {
             <Card className="surface">
               <CardContent className="space-y-4 p-6">
                 <SectionHeading
-                  eyebrow="Testimonials"
-                  title="Client trust remains approval-led"
-                  description="Only approved testimonials appear publicly. The feedback flow stays separate from testimonial publication."
+                  eyebrow="Service ecosystem"
+                  title="A smoother path from discovery to actual support"
+                  description="The public site introduces the brand, then gently moves visitors toward the right next step without forcing everything into the first screen."
                 />
                 <div className="space-y-4">
-                  {testimonials.slice(0, 3).map((item: any) => (
-                    <div key={item.id} className="rounded-3xl border border-border bg-background p-4">
-                      <div className="flex items-center justify-between">
-                        <p className="font-medium">{item.name}</p>
-                        <p className="text-sm text-primary">{item.rating}/5</p>
+                  {ecosystemCards.map((item) => {
+                    const Icon = item.icon;
+                    return (
+                      <div key={item.title} className="rounded-3xl border border-border bg-background p-4">
+                        <div className="flex items-center justify-between gap-4">
+                          <div className="flex items-center gap-3">
+                            <Icon className="h-5 w-5 text-primary" />
+                            <p className="font-medium">{item.title}</p>
+                          </div>
+                          <Link href={item.href} className="text-sm text-primary underline-offset-4 hover:underline">
+                            Open
+                          </Link>
+                        </div>
+                        <p className="mt-3 text-sm leading-7 text-muted-foreground">{item.text}</p>
                       </div>
-                      <p className="mt-2 text-sm leading-7 text-muted-foreground">{item.quote}</p>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </CardContent>
             </Card>
@@ -212,10 +282,10 @@ export default async function HomePage() {
                 <SectionHeading
                   eyebrow="FAQ"
                   title="Important questions answered early"
-                  description="The homepage keeps this short. Deeper practice and store information now live on dedicated pages."
+                  description="The homepage keeps this short. Deeper details still live on the dedicated practice and store pages."
                 />
                 <div className="space-y-3">
-                  {faqs.slice(0, 3).map((item: any) => (
+                  {homepageFaqs.map((item: any) => (
                     <div key={item.question} className="rounded-3xl border border-border bg-background p-4">
                       <p className="font-medium">{item.question}</p>
                       <p className="mt-2 text-sm leading-7 text-muted-foreground">{item.answer}</p>
@@ -229,17 +299,71 @@ export default async function HomePage() {
 
         <section className="container-wide py-8">
           <Reveal>
+            <div className="grid gap-4 lg:grid-cols-[1.05fr_.95fr]">
+              <Card className="surface">
+                <CardContent className="space-y-4 p-6">
+                  <SectionHeading
+                    eyebrow="Approved testimonials"
+                    title="Trust stays moderated and human"
+                    description="Testimonials remain review-led and never auto-published, preserving the seriousness of the work."
+                  />
+                  <div className="space-y-3">
+                    {featuredTestimonials.length ? (
+                      featuredTestimonials.map((item: any) => (
+                        <div key={item.id} className="rounded-3xl border border-border bg-background p-4">
+                          <div className="flex items-center justify-between">
+                            <p className="font-medium">{item.name}</p>
+                            <p className="text-sm text-primary">{item.rating}/5</p>
+                          </div>
+                          <p className="mt-2 text-sm leading-7 text-muted-foreground">{item.quote}</p>
+                        </div>
+                      ))
+                    ) : (
+                      <div className="rounded-3xl border border-border bg-background p-4 text-sm leading-7 text-muted-foreground">
+                        Public testimonials appear here only after explicit review and approval.
+                      </div>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="surface">
+                <CardContent className="space-y-4 p-6">
+                  <SectionHeading
+                    eyebrow="Conversion paths"
+                    title="Three clear next steps"
+                    description="Different visitors arrive with different needs, so the homepage gives them immediate direction."
+                  />
+                  <div className="grid gap-3">
+                    {[
+                      "Book a session if you already know you want direct support.",
+                      "Browse the store if you want practical resources before or alongside sessions.",
+                      "Review the portfolio if you are assessing experience, collaboration fit, or institutional credibility."
+                    ].map((item) => (
+                      <div key={item} className="rounded-3xl border border-border bg-background p-4 text-sm leading-7 text-muted-foreground">
+                        {item}
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </Reveal>
+        </section>
+
+        <section className="container-wide py-8">
+          <Reveal>
             <Card className="surface overflow-hidden bg-primary text-primary-foreground">
               <CardContent className="flex flex-col gap-4 p-6 sm:flex-row sm:items-center sm:justify-between">
                 <div>
                   <p className="text-sm uppercase tracking-[0.2em]">Next step</p>
                   <h2 className="mt-2 text-3xl font-semibold">
-                    Review the practice, explore the store, or begin with a booking.
+                    Explore the brand, review the portfolio, or begin with booking.
                   </h2>
                 </div>
                 <div className="flex flex-col gap-3 sm:flex-row">
                   <Button asChild variant="secondary" size="lg">
-                    <Link href="/practice">View Practice</Link>
+                    <Link href="/portfolio">View Portfolio</Link>
                   </Button>
                   <Button asChild variant="outline" size="lg">
                     <Link href="/book">Book a Session</Link>

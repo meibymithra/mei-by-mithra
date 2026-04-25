@@ -22,8 +22,8 @@ export function HeroVisual() {
     >
       <Card className="surface relative overflow-hidden">
         <CardContent className="p-4 sm:p-5">
-          <div className="grid gap-3 sm:grid-cols-[1.15fr_.85fr]">
-            <div className="relative min-h-[340px] overflow-hidden rounded-3xl">
+          <div className="grid gap-3 sm:grid-cols-[1.08fr_.92fr]">
+            <div className="relative min-h-[420px] overflow-hidden rounded-3xl">
               <Image
                 src={photos[0]}
                 alt="Mithra portrait"
@@ -32,32 +32,49 @@ export function HeroVisual() {
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-4">
-                <Badge className="mb-3 bg-background/90 text-foreground">Brand portrait</Badge>
-                <p className="max-w-[18rem] text-sm text-white/90">
-                  A composed visual language for a serious public-facing practice.
+                <Badge className="mb-3 bg-background/90 text-foreground">Editorial portrait</Badge>
+                <p className="max-w-[18rem] text-sm leading-6 text-white/90">
+                  Built to feel calm, credible, and unmistakably human from the first screen.
                 </p>
               </div>
             </div>
             <div className="grid gap-3">
-              {photos.slice(1).map((photo, index) => (
-                <motion.div
-                  key={photo}
-                  initial={{ opacity: 0, x: 18 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.12 * index, duration: 0.6 }}
-                  className="relative min-h-[106px] overflow-hidden rounded-3xl"
-                >
-                  <Image src={photo} alt={`Gallery ${index + 2}`} fill className="object-cover" sizes="(max-width: 1024px) 50vw, 20vw" />
-                </motion.div>
-              ))}
+              <div className="grid gap-3 sm:grid-cols-2">
+                {photos.slice(1, 3).map((photo, index) => (
+                  <motion.div
+                    key={photo}
+                    initial={{ opacity: 0, x: 18 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.12 * index, duration: 0.6 }}
+                    className="relative min-h-[180px] overflow-hidden rounded-3xl"
+                  >
+                    <Image src={photo} alt={`Gallery ${index + 2}`} fill className="object-cover" sizes="(max-width: 1024px) 50vw, 20vw" />
+                  </motion.div>
+                ))}
+              </div>
+              <div className="rounded-3xl border border-border bg-background/80 p-5">
+                <p className="text-xs uppercase tracking-[0.18em] text-primary">Brand mood</p>
+                <p className="mt-3 text-lg font-semibold">Quiet confidence over generic wellness language</p>
+                <p className="mt-2 text-sm leading-7 text-muted-foreground">
+                  The visual direction stays warm and soft, but it still carries seriousness, authorship, and a point of view.
+                </p>
+              </div>
+              <motion.div
+                initial={{ opacity: 0, x: 18 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.24, duration: 0.6 }}
+                className="relative min-h-[120px] overflow-hidden rounded-3xl"
+              >
+                <Image src={photos[3]} alt="Gallery 4" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 20vw" />
+              </motion.div>
             </div>
           </div>
           <div className="mt-3 grid gap-3 sm:grid-cols-3">
             {[
-              { label: "Practice flow", value: "Booking + intake + follow-up" },
-              { label: "Store layer", value: "Guided digital resources" },
+              { label: "Practice flow", value: "Booking, intake, and calm follow-through" },
+              { label: "Store layer", value: "Guided digital resources with context" },
               { label: "Brand focus", value: "People, education, and care" }
             ].map((item) => (
               <div key={item.label} className="rounded-2xl border border-border bg-background/80 px-4 py-3">

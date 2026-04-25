@@ -28,6 +28,9 @@ export function SiteShell({
               <Link href="/about" className="transition-colors hover:text-foreground">
                 About
               </Link>
+              <Link href="/portfolio" className="transition-colors hover:text-foreground">
+                Portfolio
+              </Link>
               <Link href="/practice" className="transition-colors hover:text-foreground">
                 Practice
               </Link>
@@ -37,12 +40,9 @@ export function SiteShell({
               <Link href="/book" className="transition-colors hover:text-foreground">
                 Book
               </Link>
-              <Link href="/intake" className="transition-colors hover:text-foreground">
-                Intake
-              </Link>
             </nav>
-            <Link href="/about" className="hidden text-sm font-medium sm:inline-flex lg:hidden">
-              About
+            <Link href="/portfolio" className="hidden text-sm font-medium sm:inline-flex lg:hidden">
+              Portfolio
             </Link>
             <Button asChild>
               <Link href={ctaHref}>Book a Session</Link>

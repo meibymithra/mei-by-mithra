@@ -36,6 +36,7 @@ It should not feel like:
 
 - The first screen should establish Mithra, not abstract service language
 - Homepage should establish brand and route visitors into dedicated pages
+- Portfolio depth should sit on a dedicated page, not inside the primary homepage narrative
 - Booking and store actions should both be visible
 - The site should work equally for local users and Indians abroad
 - Forms should feel calm and guided, not bureaucratic

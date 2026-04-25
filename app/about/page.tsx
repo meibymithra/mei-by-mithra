@@ -55,13 +55,15 @@ export default async function AboutPage() {
               <p className="text-sm leading-8 text-muted-foreground">{content.narrative ?? aboutPageFallback.narrative}</p>
               <div className="flex flex-col gap-3 sm:flex-row">
                 <Button asChild>
+                  <Link href="/portfolio">
+                    View Portfolio
+                  </Link>
+                </Button>
+                <Button asChild variant="outline">
                   <Link href={contact.resumeUrl} target="_blank">
                     <Download className="h-4 w-4" />
                     Download Resume
                   </Link>
-                </Button>
-                <Button asChild variant="outline">
-                  <Link href="/practice">View Practice</Link>
                 </Button>
               </div>
             </div>
